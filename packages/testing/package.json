@@ -1,0 +1,43 @@
+{
+  "name": "@021/spine-testing",
+  "version": "0.1.0",
+  "description": "Shared test helpers: Testcontainers Postgres (worker-shared), Prisma migrator, JWKS mock server, MSW factory, deterministic time + uuid.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./postgres": {
+      "types": "./dist/postgres.d.ts",
+      "import": "./dist/postgres.js"
+    },
+    "./jwks": {
+      "types": "./dist/jwks.d.ts",
+      "import": "./dist/jwks.js"
+    },
+    "./msw": {
+      "types": "./dist/msw.d.ts",
+      "import": "./dist/msw.js"
+    },
+    "./time": {
+      "types": "./dist/time.d.ts",
+      "import": "./dist/time.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup src/index.ts src/postgres.ts src/jwks.ts src/msw.ts src/time.ts --format esm --dts --clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@testcontainers/postgresql": "^10.13.2",
+    "@types/pg": "^8.20.0",
+    "jose": "^5.9.6",
+    "msw": "^2.4.11",
+    "pg": "^8.21.0",
+    "testcontainers": "^10.13.2"
+  }
+}
