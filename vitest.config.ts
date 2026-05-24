@@ -22,6 +22,11 @@ export default defineConfig({
       { find: "@021/spine-webhooks", replacement: resolve(__dirname, "packages/webhooks/src/index.ts") },
       { find: "@021/spine-email", replacement: resolve(__dirname, "packages/email/src/index.ts") },
       { find: "@021/spine-cache", replacement: resolve(__dirname, "packages/cache/src/index.ts") },
+      { find: "@021/spine-i18n/react", replacement: resolve(__dirname, "packages/i18n/src/react.tsx") },
+      { find: "@021/spine-i18n/server", replacement: resolve(__dirname, "packages/i18n/src/server.ts") },
+      { find: "@021/spine-i18n", replacement: resolve(__dirname, "packages/i18n/src/index.ts") },
+      { find: "@021/spine-jobs", replacement: resolve(__dirname, "packages/jobs/src/index.ts") },
+      { find: "@021/spine-query", replacement: resolve(__dirname, "packages/query/src/index.ts") },
     ],
   },
   test: {

@@ -1,0 +1,34 @@
+{
+  "name": "@021/spine-query",
+  "version": "0.1.0",
+  "description": "TanStack Query wrapper with 021 defaults: dedupe, SWR, no auto-refetch, query-key factory pattern. Reduces frontend → backend traffic.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": "^5.100.14",
+    "react": "^19.2.6"
+  },
+  "peerDependenciesMeta": {
+    "@tanstack/react-query": {
+      "optional": false
+    },
+    "react": {
+      "optional": false
+    }
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.15"
+  }
+}
