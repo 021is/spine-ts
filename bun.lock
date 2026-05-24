@@ -35,6 +35,17 @@
         "next",
       ],
     },
+    "packages/cache": {
+      "name": "@021/spine-cache",
+      "version": "0.1.0",
+    },
+    "packages/email": {
+      "name": "@021/spine-email",
+      "version": "0.1.0",
+      "dependencies": {
+        "@021/spine-errors": "workspace:*",
+      },
+    },
     "packages/env": {
       "name": "@021/spine-env",
       "version": "0.1.0",
@@ -59,6 +70,13 @@
         "@021/spine-errors": "workspace:*",
       },
     },
+    "packages/ratelimit": {
+      "name": "@021/spine-ratelimit",
+      "version": "0.1.0",
+      "dependencies": {
+        "@021/spine-errors": "workspace:*",
+      },
+    },
     "packages/telemetry": {
       "name": "@021/spine-telemetry",
       "version": "0.1.0",
@@ -78,11 +96,22 @@
         "testcontainers": "^10.13.2",
       },
     },
+    "packages/webhooks": {
+      "name": "@021/spine-webhooks",
+      "version": "0.1.0",
+      "dependencies": {
+        "@021/spine-errors": "workspace:*",
+      },
+    },
   },
   "packages": {
     "@021/spine-actions": ["@021/spine-actions@workspace:packages/actions"],
 
     "@021/spine-auth": ["@021/spine-auth@workspace:packages/auth"],
+
+    "@021/spine-cache": ["@021/spine-cache@workspace:packages/cache"],
+
+    "@021/spine-email": ["@021/spine-email@workspace:packages/email"],
 
     "@021/spine-env": ["@021/spine-env@workspace:packages/env"],
 
@@ -90,9 +119,13 @@
 
     "@021/spine-http": ["@021/spine-http@workspace:packages/http"],
 
+    "@021/spine-ratelimit": ["@021/spine-ratelimit@workspace:packages/ratelimit"],
+
     "@021/spine-telemetry": ["@021/spine-telemetry@workspace:packages/telemetry"],
 
     "@021/spine-testing": ["@021/spine-testing@workspace:packages/testing"],
+
+    "@021/spine-webhooks": ["@021/spine-webhooks@workspace:packages/webhooks"],
 
     "@ampproject/remapping": ["@ampproject/remapping@2.3.0", "", { "dependencies": { "@jridgewell/gen-mapping": "^0.3.5", "@jridgewell/trace-mapping": "^0.3.24" } }, "sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw=="],
 

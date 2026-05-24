@@ -1,0 +1,14 @@
+{
+  "name": "@021/spine-ratelimit",
+  "version": "0.1.0",
+  "description": "Postgres-backed sliding-window rate limiter. Generalized from elvix's per-API-key bucket pattern. No Redis required.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "files": ["dist"],
+  "scripts": { "build": "tsup src/index.ts --format esm --dts --clean", "typecheck": "tsc --noEmit" },
+  "dependencies": {
+    "@021/spine-errors": "workspace:*"
+  }
+}

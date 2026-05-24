@@ -18,6 +18,10 @@ export default defineConfig({
       { find: "@021/spine-auth", replacement: resolve(__dirname, "packages/auth/src/index.ts") },
       { find: "@021/spine-telemetry", replacement: resolve(__dirname, "packages/telemetry/src/index.ts") },
       { find: "@021/spine-actions", replacement: resolve(__dirname, "packages/actions/src/index.ts") },
+      { find: "@021/spine-ratelimit", replacement: resolve(__dirname, "packages/ratelimit/src/index.ts") },
+      { find: "@021/spine-webhooks", replacement: resolve(__dirname, "packages/webhooks/src/index.ts") },
+      { find: "@021/spine-email", replacement: resolve(__dirname, "packages/email/src/index.ts") },
+      { find: "@021/spine-cache", replacement: resolve(__dirname, "packages/cache/src/index.ts") },
     ],
   },
   test: {
