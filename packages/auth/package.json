@@ -1,0 +1,20 @@
+{
+  "name": "@021/spine-auth",
+  "version": "0.1.0",
+  "description": "JWKS verifier + requireUser/requireRole helpers for Next.js route handlers + server actions. Verifies elvix-issued RS256 tokens.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./next": { "types": "./dist/next.d.ts", "import": "./dist/next.js" }
+  },
+  "files": ["dist"],
+  "scripts": { "build": "tsup src/index.ts src/next.ts --format esm --dts --clean", "typecheck": "tsc --noEmit" },
+  "dependencies": {
+    "@021/spine-errors": "workspace:*",
+    "jose": "^5.9.6"
+  },
+  "peerDependencies": { "next": ">=15 <17" },
+  "peerDependenciesMeta": { "next": { "optional": true } }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@021/spine-http",
+  "version": "0.1.0",
+  "description": "Typed HTTP client base with resilience defaults (timeout, retry, circuit-break). TS twin of dc-rest-kotlin / 021-platform-rest.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "files": ["dist"],
+  "scripts": { "build": "tsup src/index.ts --format esm --dts --clean", "typecheck": "tsc --noEmit" },
+  "dependencies": { "@021/spine-errors": "workspace:*" }
+}

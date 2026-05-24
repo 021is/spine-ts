@@ -1,0 +1,15 @@
+{
+  "name": "@021/spine-actions",
+  "version": "0.1.0",
+  "description": "Type-safe server-action helper: zod input validation + auth check + audit + auto revalidatePath, returning ResponseDto.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "files": ["dist"],
+  "scripts": { "build": "tsup src/index.ts --format esm --dts --clean", "typecheck": "tsc --noEmit" },
+  "dependencies": {
+    "@021/spine-errors": "workspace:*",
+    "zod": "^3.23.8"
+  }
+}
