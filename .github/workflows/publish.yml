@@ -1,0 +1,55 @@
+name: Publish
+
+# Publishes any package whose package.json version was bumped since the last
+# main commit. Run manually via workflow_dispatch, or auto on tag push.
+
+on:
+  workflow_dispatch:
+    inputs:
+      packages:
+        description: "Comma-separated package names to publish (default: all changed)"
+        required: false
+        default: ""
+  push:
+    tags: ["v*"]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@021"
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      - name: Publish changed packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          INPUT_PACKAGES="${{ inputs.packages }}"
+          if [ -n "$INPUT_PACKAGES" ]; then
+            IFS=',' read -ra PKGS <<< "$INPUT_PACKAGES"
+          else
+            # all packages — publish what hasn't been published yet
+            PKGS=()
+            for d in packages/*/; do
+              name=$(jq -r .name "$d/package.json")
+              version=$(jq -r .version "$d/package.json")
+              if ! npm view "$name@$version" --registry https://npm.pkg.github.com >/dev/null 2>&1; then
+                PKGS+=("${d%/}")
+              fi
+            done
+          fi
+          for p in "${PKGS[@]}"; do
+            echo "Publishing $p ..."
+            (cd "$p" && npm publish --access restricted)
+          done
