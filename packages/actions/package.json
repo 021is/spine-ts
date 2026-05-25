@@ -19,7 +19,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@021is/spine-errors": "^0.1.1",
+    "@021is/spine-errors": "^0.2.0",
     "zod": "^3.23.8"
   },
   "repository": {

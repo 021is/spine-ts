@@ -23,7 +23,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@021is/spine-errors": "^0.1.1",
+    "@021is/spine-errors": "^0.2.0",
     "jose": "^5.9.6"
   },
   "peerDependencies": {
