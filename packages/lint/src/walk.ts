@@ -1,4 +1,3 @@
-// biome-ignore lint/suspicious/noExplicitAny: typescript-estree AST is heterogeneous
 type EstreeNode = any;
 
 /**

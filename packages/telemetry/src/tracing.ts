@@ -59,12 +59,10 @@ export async function initTelemetry(options: InitTelemetryOptions): Promise<void
     // pick the right names so this package works with both 1.x and 2.x.
     const NodeSDK =
       sdkNode.NodeSDK ?? (sdkNode as unknown as { default: typeof sdkNode }).default.NodeSDK;
-    const Resource =
-      // biome-ignore lint/suspicious/noExplicitAny: cross-version compat
-      (resourcesPkg as any).Resource ??
-      (resourcesPkg as any).resourceFromAttributes ??
-      (resourcesPkg as any).default?.Resource;
-    // biome-ignore lint/suspicious/noExplicitAny: cross-version compat
+    // biome-ignore lint/suspicious/noExplicitAny: cross-version OTel export compat (1.x vs 2.x reshuffles)
+    const r = resourcesPkg as any;
+    const Resource = r.Resource ?? r.resourceFromAttributes ?? r.default?.Resource;
+    // biome-ignore lint/suspicious/noExplicitAny: cross-version semantic-conventions
     const semAttrs = semconv as any;
     const ATTR_SERVICE_NAME =
       semAttrs.ATTR_SERVICE_NAME ?? semAttrs.SEMRESATTRS_SERVICE_NAME ?? "service.name";
