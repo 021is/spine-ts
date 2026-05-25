@@ -19,10 +19,7 @@
     "./size-limit": "./configs/size-limit.json",
     "./vitest": "./configs/vitest.config.ts"
   },
-  "files": [
-    "dist",
-    "configs"
-  ],
+  "files": ["dist", "configs"],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean",
     "typecheck": "tsc --noEmit"

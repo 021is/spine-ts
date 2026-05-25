@@ -84,7 +84,6 @@ export const enumOverStringRule: Rule = {
   },
 };
 
-
 function isStringLiteralUnion(node: any): boolean {
   if (node.type !== "TSUnionType") return false;
   return node.types.every(

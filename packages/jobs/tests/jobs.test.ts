@@ -11,8 +11,6 @@ describe("@021is/spine-jobs", () => {
   });
 
   it("rejects with a real error when NATS server is unreachable", async () => {
-    await expect(
-      connectJobs({ servers: "nats://127.0.0.1:1" }),
-    ).rejects.toThrow();
+    await expect(connectJobs({ servers: "nats://127.0.0.1:1" })).rejects.toThrow();
   }, 15_000);
 });

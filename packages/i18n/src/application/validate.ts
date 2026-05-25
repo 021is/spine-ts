@@ -226,11 +226,7 @@ function isCamelCaseSegments(key: string): boolean {
   return key.split(".").every((seg) => /^[a-z][a-zA-Z0-9]*$/.test(seg));
 }
 
-function report(
-  findings: Finding[],
-  policy: Policy,
-  partial: Omit<Finding, "level">,
-): void {
+function report(findings: Finding[], policy: Policy, partial: Omit<Finding, "level">): void {
   const level = resolveRule(policy, partial.namespace, partial.code);
   if (level === "off") return;
   findings.push({ ...partial, level });
