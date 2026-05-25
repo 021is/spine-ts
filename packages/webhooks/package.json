@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-webhooks",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Inbound webhook verifier: HMAC signature + replay/idempotency dedupe. Generalized from DC's Resend/Stripe handlers.",
   "type": "module",
   "main": "./dist/index.js",
@@ -17,7 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@021is/spine-errors": "^0.3.0"
+    "@021is/spine-errors": "^0.4.0"
   },
   "repository": {
     "type": "git",

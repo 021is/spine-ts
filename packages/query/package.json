@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-query",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "TanStack Query wrapper with 021 defaults: dedupe, SWR, no auto-refetch, query-key factory pattern. Reduces frontend \u2192 backend traffic.",
   "type": "module",
   "main": "./dist/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-quality",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Shipping configs for the Spine quality gate: biome, tsc, knip, dependency-cruiser (hexagonal layer rules), semgrep OWASP, vitest coverage, size-limit, lighthouse-ci. One install gives every 021 app the same gate.",
   "type": "module",
   "main": "./dist/index.js",

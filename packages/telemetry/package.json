@@ -1,7 +1,7 @@
 {
   "name": "@021is/spine-telemetry",
-  "version": "0.3.0",
-  "description": "Pino structured JSON logger with Loki-friendly base fields (cluster, service, env) + AsyncLocalStorage request context so every log line auto-tags with request_id. OpenTelemetry tracer planned for next release.",
+  "version": "0.4.0",
+  "description": "Pino structured JSON logger + AsyncLocalStorage request context + opt-in OpenTelemetry SDK wire-up (withSpan helper, OTLP HTTP exporter).",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -9,14 +9,19 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./tracing": {
+      "types": "./dist/tracing.d.ts",
+      "import": "./dist/tracing.js"
     }
   },
   "files": ["dist"],
   "scripts": {
-    "build": "tsup src/index.ts --format esm --dts --clean",
+    "build": "tsup src/index.ts src/tracing.ts --format esm --dts --clean",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@opentelemetry/api": "^1.9.1",
     "pino": "^9.5.0"
   },
   "repository": {
@@ -26,5 +31,31 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
+  },
+  "devDependencies": {
+    "@opentelemetry/exporter-trace-otlp-http": "^0.218.0",
+    "@opentelemetry/resources": "^2.7.1",
+    "@opentelemetry/sdk-node": "^0.218.0",
+    "@opentelemetry/semantic-conventions": "^1.41.1"
+  },
+  "peerDependencies": {
+    "@opentelemetry/sdk-node": ">=0.55",
+    "@opentelemetry/exporter-trace-otlp-http": ">=0.55",
+    "@opentelemetry/resources": ">=1.30",
+    "@opentelemetry/semantic-conventions": ">=1.30"
+  },
+  "peerDependenciesMeta": {
+    "@opentelemetry/sdk-node": {
+      "optional": true
+    },
+    "@opentelemetry/exporter-trace-otlp-http": {
+      "optional": true
+    },
+    "@opentelemetry/resources": {
+      "optional": true
+    },
+    "@opentelemetry/semantic-conventions": {
+      "optional": true
+    }
   }
 }
