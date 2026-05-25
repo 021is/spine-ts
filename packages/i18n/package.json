@@ -27,9 +27,7 @@
       "import": "./dist/adapters/driven/fs.js"
     }
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "tsup src/index.ts src/react.tsx src/server.ts src/adapters/driven/r2.ts src/adapters/driven/fs.ts --format esm --dts --clean",
     "typecheck": "tsc --noEmit"

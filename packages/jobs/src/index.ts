@@ -74,7 +74,6 @@ export async function connectJobs(opts: ConnectJobsOptions): Promise<JobsClient>
             msg.ack();
           } catch (e) {
             const err = e instanceof Error ? e : new SomethingWentWrongException(String(e));
-            // biome-ignore lint/suspicious/noConsoleLog: NATS consumer fallback log
             console.error(`[spine-jobs] consumer ${consumerName} failed:`, err.message);
             msg.nak(1000); // retry after 1s
           }
