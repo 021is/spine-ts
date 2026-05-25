@@ -1,0 +1,14 @@
+{
+  "namespaces": {
+    "event": {
+      "not_found": { "other": "Veranstaltung {id} nicht gefunden" },
+      "publish.not_organizer": { "other": "Nur der Veranstalter kann diese Veranstaltung veröffentlichen" },
+      "publish.already_published": { "other": "Veranstaltung bereits veröffentlicht" },
+      "publish.no_poster": { "other": "Bitte ein Plakat hinzufügen, bevor veröffentlicht wird" }
+    },
+    "common": {
+      "loading": { "other": "Lädt..." },
+      "save": { "other": "Speichern" }
+    }
+  }
+}

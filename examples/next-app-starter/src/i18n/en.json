@@ -1,0 +1,14 @@
+{
+  "namespaces": {
+    "event": {
+      "not_found": { "other": "Event {id} not found" },
+      "publish.not_organizer": { "other": "Only the organizer can publish this event" },
+      "publish.already_published": { "other": "Event already published" },
+      "publish.no_poster": { "other": "Add a poster before publishing" }
+    },
+    "common": {
+      "loading": { "other": "Loading..." },
+      "save": { "other": "Save" }
+    }
+  }
+}
