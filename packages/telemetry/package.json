@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-telemetry",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "OpenTelemetry auto-setup + Pino structured JSON logger with Vector/Loki-friendly fields (cluster, service, request_id).",
   "type": "module",
   "main": "./dist/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-testing",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Shared test helpers: Testcontainers Postgres (worker-shared), Prisma migrator, JWKS mock server, MSW factory, deterministic time + uuid.",
   "type": "module",
   "main": "./dist/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-errors",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ResponseDto envelope + typed exception hierarchy + framework-agnostic handler. Lifted from DanceClub's shared-lib.",
   "type": "module",
   "main": "./dist/index.js",

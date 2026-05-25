@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Spine CLI: scaffold 021-shaped projects (spine new), add Spine features to existing repos (spine add), audit (spine doctor). Enforces STRUCTURE.md.",
   "type": "module",
   "main": "./dist/index.js",
