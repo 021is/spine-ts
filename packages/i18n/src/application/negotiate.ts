@@ -1,4 +1,4 @@
-import { makeLocale, type Locale, normalizeTag } from "../domain/locale.js";
+import { type Locale, makeLocale, normalizeTag } from "../domain/locale.js";
 
 /**
  * Pick the best locale for a request, in priority order:
@@ -19,7 +19,7 @@ export function negotiateLocale(input: NegotiateInput): Locale {
   const supportedSet = new Set(input.supported);
   const supportedLangs = new Map<string, Locale>();
   for (const l of input.supported) {
-    const lang = l.split("-")[0]!;
+    const lang = l.split("-")[0] ?? "";
     if (!supportedLangs.has(lang)) supportedLangs.set(lang, l);
   }
 
@@ -27,7 +27,7 @@ export function negotiateLocale(input: NegotiateInput): Locale {
     if (!raw) return undefined;
     const norm = normalizeTag(raw);
     if (supportedSet.has(norm as Locale)) return norm as Locale;
-    const lang = norm.split("-")[0]!;
+    const lang = norm.split("-")[0] ?? "";
     return supportedLangs.get(lang);
   };
 
@@ -57,7 +57,7 @@ function parseAcceptLanguage(header: string): { tag: string; q: number }[] {
       const [tag, ...rest] = p.split(";");
       const qPart = rest.find((r) => r.trim().startsWith("q="));
       const q = qPart ? Number.parseFloat(qPart.split("=")[1] ?? "1") : 1;
-      return { tag: tag!.trim(), q };
+      return { tag: (tag ?? "").trim(), q };
     })
     .sort((a, b) => b.q - a.q);
 }

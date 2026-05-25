@@ -1,4 +1,4 @@
-import { mkdtempSync, writeFileSync, rmSync, mkdirSync } from "node:fs";
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
@@ -39,10 +39,7 @@ function isActive(s: string) {
   });
 
   it("doesn't flag a single-use string comparison", async () => {
-    writeFileSync(
-      join(dir, "src/once.ts"),
-      `function f(x: string) { return x === "hello"; }`,
-    );
+    writeFileSync(join(dir, "src/once.ts"), `function f(x: string) { return x === "hello"; }`);
     const r = await run({ cwd: dir, ruleIds: ["spine/enum-over-string"] });
     expect(r.errorCount).toBe(0);
     expect(r.warningCount).toBe(0);

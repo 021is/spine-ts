@@ -1,4 +1,4 @@
-import { SEVERITY, type Rule } from "../types.js";
+import { type Rule, SEVERITY } from "../types.js";
 
 const HTTP_METHODS = new Set(["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"]);
 
@@ -18,7 +18,11 @@ export const endpointDocumentedRule: Rule = {
 
       if (node.type === "ExportNamedDeclaration") {
         const decl = node.declaration;
-        if (decl?.type === "FunctionDeclaration" && decl.id?.name && HTTP_METHODS.has(decl.id.name)) {
+        if (
+          decl?.type === "FunctionDeclaration" &&
+          decl.id?.name &&
+          HTTP_METHODS.has(decl.id.name)
+        ) {
           methodName = decl.id.name;
           line = node.loc?.start.line ?? 1;
         } else if (decl?.type === "VariableDeclaration") {
@@ -44,15 +48,12 @@ export const endpointDocumentedRule: Rule = {
           line,
           column: 0,
           message: `Route handler ${methodName} has no JSDoc block above it.`,
-          hint:
-            "Add: /**\\n * What it does, who calls it, what it mutates.\\n */ — see knowledge/code.md §0.",
+          hint: "Add: /**\\n * What it does, who calls it, what it mutates.\\n */ — see knowledge/code.md §0.",
         });
       }
     });
   },
 };
-
-// biome-ignore lint/suspicious/noExplicitAny: estree
 function walk(node: any, visit: (n: any) => void): void {
   if (!node || typeof node !== "object") return;
   if (node.type) visit(node);

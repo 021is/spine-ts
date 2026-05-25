@@ -15,10 +15,10 @@ export function normalizeTag(tag: string): string {
   const parts = tag.replace(/_/g, "-").split("-");
   if (parts.length === 0) return tag;
   const [lang, ...rest] = parts;
-  const out = [lang!.toLowerCase()];
+  const out = [(lang ?? "").toLowerCase()];
   for (const p of rest) {
     if (p.length === 2) out.push(p.toUpperCase());
-    else if (p.length === 4) out.push(p[0]!.toUpperCase() + p.slice(1).toLowerCase());
+    else if (p.length === 4) out.push((p[0] ?? "").toUpperCase() + p.slice(1).toLowerCase());
     else if (p.length === 3 && /^\d+$/.test(p)) out.push(p);
     else out.push(p.toLowerCase());
   }
@@ -26,5 +26,5 @@ export function normalizeTag(tag: string): string {
 }
 
 export function languageOf(locale: Locale): string {
-  return locale.split("-")[0]!;
+  return locale.split("-")[0] ?? "";
 }

@@ -1,6 +1,6 @@
-import type { Catalog } from "../domain/catalog.js";
-import type { Locale } from "../domain/locale.js";
-import type { CatalogStore } from "../ports/catalog-store.js";
+import type { Catalog } from "../../domain/catalog.js";
+import type { Locale } from "../../domain/locale.js";
+import type { CatalogStore } from "../../ports/catalog-store.js";
 
 /** In-memory CatalogStore. For tests and small embedded uses. */
 export function makeMemoryCatalogStore(seed: Catalog[] = []): CatalogStore {

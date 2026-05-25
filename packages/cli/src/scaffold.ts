@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync, existsSync } from "node:fs";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 /**
@@ -22,7 +22,10 @@ export interface ScaffoldNextAppInput {
   org?: string;
 }
 
-export function scaffoldNextApp(input: ScaffoldNextAppInput): { created: string[]; skipped: string[] } {
+export function scaffoldNextApp(input: ScaffoldNextAppInput): {
+  created: string[];
+  skipped: string[];
+} {
   const root = input.cwd;
   const created: string[] = [];
   const skipped: string[] = [];
@@ -133,7 +136,9 @@ export function scaffoldNextApp(input: ScaffoldNextAppInput): { created: string[
         $schema: "https://biomejs.dev/schemas/1.9.4/schema.json",
         files: { ignore: [".next/**", "node_modules/**"] },
         formatter: { enabled: true, indentStyle: "space", indentWidth: 2, lineWidth: 100 },
-        javascript: { formatter: { quoteStyle: "double", semicolons: "always", trailingCommas: "all" } },
+        javascript: {
+          formatter: { quoteStyle: "double", semicolons: "always", trailingCommas: "all" },
+        },
         linter: {
           enabled: true,
           rules: {

@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Spine-TS monorepo \u2014 shared TypeScript packages for every 021 product",
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": ["packages/*"],
   "scripts": {
     "build": "bun run build:foundation && bun run build:rest",
     "build:foundation": "bun run --filter @021is/spine-errors --filter @021is/spine-env --filter @021is/spine-testing build",

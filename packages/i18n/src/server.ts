@@ -1,4 +1,4 @@
-import { loadRuntime, type Runtime } from "./application/runtime.js";
+import { type Runtime, loadRuntime } from "./application/runtime.js";
 import type { Locale } from "./domain/locale.js";
 import type { CatalogStore } from "./ports/catalog-store.js";
 

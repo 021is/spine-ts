@@ -1,5 +1,5 @@
-import { describe, expect, it, vi } from "vitest";
 import { freezeTime } from "@021is/spine-testing/time";
+import { describe, expect, it, vi } from "vitest";
 import { makeKey, makeMemoryCache } from "../src/index.js";
 
 describe("makeMemoryCache", () => {

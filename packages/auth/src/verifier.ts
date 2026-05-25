@@ -1,5 +1,5 @@
 import { ForbiddenException, UnauthorizedException } from "@021is/spine-errors";
-import { createRemoteJWKSet, jwtVerify, type JWTPayload } from "jose";
+import { type JWTPayload, createRemoteJWKSet, jwtVerify } from "jose";
 
 /**
  * Verifies RS256 JWTs against a JWKS endpoint (elvix in production, the
@@ -62,12 +62,14 @@ export class JwksVerifier {
    * Extract + verify token from a Headers/Request-like object.
    * Returns the principal or throws UnauthorizedException.
    */
-  async verifyFromHeaders(headers: { get(name: string): string | null }): Promise<VerifiedPrincipal> {
+  async verifyFromHeaders(headers: {
+    get(name: string): string | null;
+  }): Promise<VerifiedPrincipal> {
     const auth = headers.get("authorization") ?? headers.get("Authorization");
     if (!auth) throw new UnauthorizedException("Missing Authorization header");
     const match = /^bearer\s+(.+)$/i.exec(auth);
     if (!match) throw new UnauthorizedException("Authorization header must be 'Bearer <token>'");
-    return this.verify(match[1]!.trim());
+    return this.verify((match[1] ?? "").trim());
   }
 }
 

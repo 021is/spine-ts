@@ -1,7 +1,7 @@
+import { ForbiddenException, UnauthorizedException } from "@021is/spine-errors";
 import { describe, expect, it, vi } from "vitest";
 import { z } from "zod";
 import { defineAction } from "../src/index.js";
-import { ForbiddenException, UnauthorizedException } from "@021is/spine-errors";
 
 describe("defineAction", () => {
   it("returns success ResponseDto on happy path", async () => {

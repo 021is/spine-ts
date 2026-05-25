@@ -100,7 +100,7 @@ describe("runtime", () => {
         namespaces: {
           auth: {
             "signin.title": { other: "Sign in" },
-            "welcome": { other: "Welcome, {name}" },
+            welcome: { other: "Welcome, {name}" },
           },
         },
       },
@@ -128,10 +128,7 @@ describe("runtime", () => {
   });
 
   it("fmtNumber + fmtDate + fmtCurrency respect locale", () => {
-    const r = buildRuntime(
-      { locale: makeLocale("de"), namespaces: {} },
-      null,
-    );
+    const r = buildRuntime({ locale: makeLocale("de"), namespaces: {} }, null);
     expect(r.fmtNumber(1234.5)).toMatch(/1\.234,5/);
     expect(r.fmtCurrency(99, "EUR")).toContain("€");
   });

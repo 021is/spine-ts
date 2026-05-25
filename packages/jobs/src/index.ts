@@ -1,5 +1,5 @@
 import { SomethingWentWrongException } from "@021is/spine-errors";
-import { connect, JSONCodec, type NatsConnection, type ConsumerConfig } from "nats";
+import { type ConsumerConfig, JSONCodec, type NatsConnection, connect } from "nats";
 
 /**
  * NATS JetStream wrapper. One client per process; subjects are typed JSON.

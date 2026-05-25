@@ -43,9 +43,7 @@ export function makeQueryClient(): QueryClient {
  *   queryClient.invalidateQueries({ queryKey: eventKeys.all() });
  */
 export type KeyBuilders<TBuilders extends Record<string, (...args: never[]) => unknown[]>> = {
-  [K in keyof TBuilders]: (
-    ...args: Parameters<TBuilders[K]>
-  ) => readonly unknown[];
+  [K in keyof TBuilders]: (...args: Parameters<TBuilders[K]>) => readonly unknown[];
 };
 
 export function makeKeys<TBuilders extends Record<string, (...args: never[]) => unknown[]>>(
@@ -54,8 +52,9 @@ export function makeKeys<TBuilders extends Record<string, (...args: never[]) => 
 ): KeyBuilders<TBuilders> {
   const out = {} as KeyBuilders<TBuilders>;
   for (const [name, fn] of Object.entries(builders)) {
-    (out as Record<string, (...args: unknown[]) => readonly unknown[]>)[name] = (...args: unknown[]) =>
-      [scope, ...(fn as (...a: unknown[]) => unknown[])(...args)] as const;
+    (out as Record<string, (...args: unknown[]) => readonly unknown[]>)[name] = (
+      ...args: unknown[]
+    ) => [scope, ...(fn as (...a: unknown[]) => unknown[])(...args)] as const;
   }
   return out;
 }

@@ -1,5 +1,5 @@
-import { createServer, type Server } from "node:http";
-import { exportJWK, generateKeyPair, type JWK, type KeyLike, SignJWT } from "jose";
+import { type Server, createServer } from "node:http";
+import { type JWK, type KeyLike, SignJWT, exportJWK, generateKeyPair } from "jose";
 
 /**
  * Spin up an in-process JWKS server that mints + serves test JWTs.
@@ -16,11 +16,16 @@ export interface JwksMockServer {
   url: string;
   keyId: string;
   publicJwk: JWK;
-  signToken(claims: Record<string, unknown>, opts?: { expiresIn?: string | number }): Promise<string>;
+  signToken(
+    claims: Record<string, unknown>,
+    opts?: { expiresIn?: string | number },
+  ): Promise<string>;
   stop(): Promise<void>;
 }
 
-export async function startJwksMockServer(options: { keyId?: string } = {}): Promise<JwksMockServer> {
+export async function startJwksMockServer(
+  options: { keyId?: string } = {},
+): Promise<JwksMockServer> {
   const keyId = options.keyId ?? "spine-test-key-1";
   const { publicKey, privateKey } = (await generateKeyPair("RS256")) as {
     publicKey: KeyLike;

@@ -20,7 +20,6 @@ export interface Violation {
 export interface RuleContext {
   filePath: string;
   source: string;
-  // biome-ignore lint/suspicious/noExplicitAny: typescript-estree AST shape varies per node kind
   ast: any;
   /** Other source files in scope — for cross-file rules like i18n key parity. */
   workspace: WorkspaceContext;

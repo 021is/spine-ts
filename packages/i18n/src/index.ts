@@ -13,7 +13,7 @@ export {
 export type { CatalogStore } from "./ports/catalog-store.js";
 
 // Adapters
-export { makeMemoryCatalogStore } from "./adapters/memory.js";
+export { makeMemoryCatalogStore } from "./adapters/driven/memory.js";
 
 // Application
 export { negotiateLocale, type NegotiateInput } from "./application/negotiate.js";

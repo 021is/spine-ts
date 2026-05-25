@@ -1,13 +1,13 @@
-import { readFileSync, existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join, relative } from "node:path";
-import fg from "fast-glob";
 import { parse } from "@typescript-eslint/typescript-estree";
-import { enumOverStringRule } from "./rules/enum-over-string.js";
-import { routeReturnsResponseDtoRule } from "./rules/route-returns-response-dto.js";
+import fg from "fast-glob";
 import { endpointDocumentedRule } from "./rules/endpoint-documented.js";
+import { enumOverStringRule } from "./rules/enum-over-string.js";
 import { i18nKeyParityRule } from "./rules/i18n-key-parity.js";
 import { noRawSqlRule } from "./rules/no-raw-sql.js";
-import { SEVERITY, type Rule, type Violation, type WorkspaceContext } from "./types.js";
+import { routeReturnsResponseDtoRule } from "./rules/route-returns-response-dto.js";
+import { type Rule, SEVERITY, type Violation, type WorkspaceContext } from "./types.js";
 
 export const ALL_RULES: readonly Rule[] = [
   enumOverStringRule,
@@ -107,7 +107,10 @@ function loadI18nCatalogs(root: string): Map<string, Set<string>> {
   if (!existsSync(dir)) return map;
   const files = fg.sync("*.json", { cwd: dir, absolute: true });
   for (const f of files) {
-    const locale = f.split("/").pop()!.replace(/\.json$/, "");
+    const locale = f
+      .split("/")
+      .pop()!
+      .replace(/\.json$/, "");
     try {
       const json = JSON.parse(readFileSync(f, "utf-8")) as {
         namespaces?: Record<string, Record<string, unknown>>;

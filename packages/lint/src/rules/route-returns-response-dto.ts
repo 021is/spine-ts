@@ -1,4 +1,4 @@
-import { SEVERITY, type Rule } from "../types.js";
+import { type Rule, SEVERITY } from "../types.js";
 
 const HTTP_METHODS = new Set(["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"]);
 
@@ -17,7 +17,9 @@ export const routeReturnsResponseDtoRule: Rule = {
   run(ctx) {
     const source = ctx.source;
     const hasWithErrorHandling = /withErrorHandling\s*\(/.test(source);
-    const hasOkOrErr = /\bfrom\s+["']@021is\/spine-errors(?:\/next)?["']/.test(source) && /\b(ok|err)\s*\(/.test(source);
+    const hasOkOrErr =
+      /\bfrom\s+["']@021is\/spine-errors(?:\/next)?["']/.test(source) &&
+      /\b(ok|err)\s*\(/.test(source);
 
     // Find every `export (async )? function METHOD` or `export const METHOD =`
     walk(ctx.ast, (node) => {
@@ -26,7 +28,11 @@ export const routeReturnsResponseDtoRule: Rule = {
 
       if (node.type === "ExportNamedDeclaration") {
         const decl = node.declaration;
-        if (decl?.type === "FunctionDeclaration" && decl.id?.name && HTTP_METHODS.has(decl.id.name)) {
+        if (
+          decl?.type === "FunctionDeclaration" &&
+          decl.id?.name &&
+          HTTP_METHODS.has(decl.id.name)
+        ) {
           methodName = decl.id.name;
           loc = decl.loc?.start ?? loc;
         } else if (decl?.type === "VariableDeclaration") {
@@ -47,15 +53,12 @@ export const routeReturnsResponseDtoRule: Rule = {
           line: loc.line,
           column: loc.column,
           message: `Route handler ${methodName} doesn't go through withErrorHandling or build a ResponseDto.`,
-          hint:
-            "Wrap with withErrorHandling from @021is/spine-errors/next, or return Response.json(ok(...)) / err(...) explicitly.",
+          hint: "Wrap with withErrorHandling from @021is/spine-errors/next, or return Response.json(ok(...)) / err(...) explicitly.",
         });
       }
     });
   },
 };
-
-// biome-ignore lint/suspicious/noExplicitAny: estree
 function walk(node: any, visit: (n: any) => void): void {
   if (!node || typeof node !== "object") return;
   if (node.type) visit(node);

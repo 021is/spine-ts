@@ -1,4 +1,4 @@
-import { SEVERITY, type Rule } from "../types.js";
+import { type Rule, SEVERITY } from "../types.js";
 
 /**
  * Flag inline string-literal unions (e.g. `: "a" | "b" | "c"`) AND
@@ -24,17 +24,26 @@ export const enumOverStringRule: Rule = {
           line: loc.line,
           column: loc.column,
           message: "Inline string-literal union — promote to const-as-object enum.",
-          hint:
-            'Use: const X = { A: "a", B: "b" } as const; type X = typeof X[keyof typeof X]',
+          hint: 'Use: const X = { A: "a", B: "b" } as const; type X = typeof X[keyof typeof X]',
         });
       }
     });
 
-    const literalCounts = new Map<string, { count: number; firstLoc: { line: number; column: number } }>();
+    const literalCounts = new Map<
+      string,
+      { count: number; firstLoc: { line: number; column: number } }
+    >();
     walk(ctx.ast, (node) => {
-      if (node.type === "BinaryExpression" && (node.operator === "===" || node.operator === "!==")) {
+      if (
+        node.type === "BinaryExpression" &&
+        (node.operator === "===" || node.operator === "!==")
+      ) {
         for (const side of [node.left, node.right]) {
-          if (side?.type === "Literal" && typeof side.value === "string" && side.value.length >= 2) {
+          if (
+            side?.type === "Literal" &&
+            typeof side.value === "string" &&
+            side.value.length >= 2
+          ) {
             const k = side.value;
             const prev = literalCounts.get(k);
             const loc = side.loc?.start ?? { line: 1, column: 0 };
@@ -46,7 +55,11 @@ export const enumOverStringRule: Rule = {
           }
         }
       }
-      if (node.type === "SwitchCase" && node.test?.type === "Literal" && typeof node.test.value === "string") {
+      if (
+        node.type === "SwitchCase" &&
+        node.test?.type === "Literal" &&
+        typeof node.test.value === "string"
+      ) {
         const k = node.test.value;
         const prev = literalCounts.get(k);
         const loc = node.test.loc?.start ?? { line: 1, column: 0 };
@@ -70,7 +83,6 @@ export const enumOverStringRule: Rule = {
   },
 };
 
-// biome-ignore lint/suspicious/noExplicitAny: estree node walk
 function walk(node: any, visit: (n: any) => void): void {
   if (!node || typeof node !== "object") return;
   if (node.type) visit(node);
@@ -85,16 +97,16 @@ function walk(node: any, visit: (n: any) => void): void {
   }
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: estree node
 function isStringLiteralUnion(node: any): boolean {
   if (node.type !== "TSUnionType") return false;
   return node.types.every(
-    // biome-ignore lint/suspicious/noExplicitAny: estree node
-    (t: any) => t.type === "TSLiteralType" && t.literal?.type === "Literal" && typeof t.literal.value === "string",
+    (t: any) =>
+      t.type === "TSLiteralType" &&
+      t.literal?.type === "Literal" &&
+      typeof t.literal.value === "string",
   );
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: estree node
 function countStringLiteralChildren(node: any): number {
   if (node.type !== "TSUnionType") return 0;
   return node.types.length;

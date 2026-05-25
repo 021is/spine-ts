@@ -1,5 +1,5 @@
 import { AsyncLocalStorage } from "node:async_hooks";
-import { pino, type Logger as PinoLogger, type LoggerOptions } from "pino";
+import { type LoggerOptions, type Logger as PinoLogger, pino } from "pino";
 
 /**
  * Structured JSON logger with Loki-friendly field names (cluster, service,
@@ -51,7 +51,10 @@ export function makeLogger(config: LoggerConfig): PinoLogger {
  *
  *   app.use((req, res, next) => withRequestContext({ requestId: nanoid() }, next));
  */
-export async function withRequestContext<T>(ctx: RequestContext, fn: () => T | Promise<T>): Promise<T> {
+export async function withRequestContext<T>(
+  ctx: RequestContext,
+  fn: () => T | Promise<T>,
+): Promise<T> {
   return als.run(ctx, async () => fn());
 }
 

@@ -1,6 +1,6 @@
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { ForbiddenException, UnauthorizedException } from "@021is/spine-errors";
 import { type JwksMockServer, startJwksMockServer } from "@021is/spine-testing/jwks";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { JwksVerifier, requireRoles, requireScopes } from "../src/verifier.js";
 
 describe("JwksVerifier", () => {
@@ -37,7 +37,10 @@ describe("JwksVerifier", () => {
   });
 
   it("throws on missing sub", async () => {
-    const token = await jwks.signToken({ iss: "spine-test", aud: "test-audience" }, { expiresIn: "5m" });
+    const token = await jwks.signToken(
+      { iss: "spine-test", aud: "test-audience" },
+      { expiresIn: "5m" },
+    );
     await expect(verifier.verify(token)).rejects.toThrow(UnauthorizedException);
   });
 
@@ -67,15 +70,21 @@ describe("requireRoles / requireScopes", () => {
     expect(() => requireRoles({ sub: "u", roles: ["admin", "editor"] }, ["admin"])).not.toThrow();
   });
   it("requireRoles throws Forbidden when missing", () => {
-    expect(() => requireRoles({ sub: "u", roles: ["editor"] }, ["admin"])).toThrow(ForbiddenException);
+    expect(() => requireRoles({ sub: "u", roles: ["editor"] }, ["admin"])).toThrow(
+      ForbiddenException,
+    );
   });
   it("requireRoles noop on empty required", () => {
     expect(() => requireRoles({ sub: "u" }, [])).not.toThrow();
   });
   it("requireScopes passes when all scopes present", () => {
-    expect(() => requireScopes({ sub: "u", scopes: ["user.read", "user.write"] }, ["user.read"])).not.toThrow();
+    expect(() =>
+      requireScopes({ sub: "u", scopes: ["user.read", "user.write"] }, ["user.read"]),
+    ).not.toThrow();
   });
   it("requireScopes throws on missing scope", () => {
-    expect(() => requireScopes({ sub: "u", scopes: ["user.read"] }, ["user.write"])).toThrow(ForbiddenException);
+    expect(() => requireScopes({ sub: "u", scopes: ["user.read"] }, ["user.write"])).toThrow(
+      ForbiddenException,
+    );
   });
 });

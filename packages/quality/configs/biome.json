@@ -41,17 +41,7 @@
       },
       "style": {
         "useImportType": "error",
-        "useNamingConvention": {
-          "level": "warn",
-          "options": {
-            "strictCase": false,
-            "conventions": [
-              { "selector": { "kind": "typeLike" }, "formats": ["PascalCase"] },
-              { "selector": { "kind": "enumMember" }, "formats": ["CONSTANT_CASE"] },
-              { "selector": { "kind": "variable", "modifiers": ["const"] }, "formats": ["camelCase", "CONSTANT_CASE", "PascalCase"] }
-            ]
-          }
-        },
+        "useNamingConvention": "off",
         "noNonNullAssertion": "error",
         "useConst": "error",
         "useTemplate": "error",

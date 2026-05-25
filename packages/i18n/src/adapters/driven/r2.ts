@@ -1,6 +1,6 @@
-import type { Catalog } from "../domain/catalog.js";
-import { makeLocale, type Locale } from "../domain/locale.js";
-import type { CatalogStore } from "../ports/catalog-store.js";
+import type { Catalog } from "../../domain/catalog.js";
+import { type Locale, makeLocale } from "../../domain/locale.js";
+import type { CatalogStore } from "../../ports/catalog-store.js";
 
 /**
  * R2-backed CatalogStore. One JSON object per locale at

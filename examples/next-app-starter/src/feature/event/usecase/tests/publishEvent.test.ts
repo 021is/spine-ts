@@ -1,8 +1,8 @@
-import { describe, expect, it } from "vitest";
 import { BadRequestException, ForbiddenException, NotFoundException } from "@021is/spine-errors";
+import { describe, expect, it } from "vitest";
+import { makeInMemoryEventRepo } from "../../adapters/memory/InMemoryEventRepo.js";
 import type { Event } from "../../domain/Event.js";
 import { EVENT_STATUS, EVENT_VISIBILITY } from "../../domain/event-enums.js";
-import { makeInMemoryEventRepo } from "../../adapters/memory/InMemoryEventRepo.js";
 import { publishEvent } from "../publishEvent.js";
 
 const seed: Event[] = [
@@ -37,22 +37,22 @@ describe("publishEvent", () => {
 
   it("throws NotFound when event missing", async () => {
     const events = makeInMemoryEventRepo(seed);
-    await expect(
-      publishEvent({ eventId: "e_missing", userId: "u_1" }, { events }),
-    ).rejects.toThrow(NotFoundException);
+    await expect(publishEvent({ eventId: "e_missing", userId: "u_1" }, { events })).rejects.toThrow(
+      NotFoundException,
+    );
   });
 
   it("throws Forbidden when caller isn't the organizer", async () => {
     const events = makeInMemoryEventRepo(seed);
-    await expect(
-      publishEvent({ eventId: "e_1", userId: "u_other" }, { events }),
-    ).rejects.toThrow(ForbiddenException);
+    await expect(publishEvent({ eventId: "e_1", userId: "u_other" }, { events })).rejects.toThrow(
+      ForbiddenException,
+    );
   });
 
   it("throws BadRequest when no poster", async () => {
     const events = makeInMemoryEventRepo(seed);
-    await expect(
-      publishEvent({ eventId: "e_2", userId: "u_2" }, { events }),
-    ).rejects.toThrow(BadRequestException);
+    await expect(publishEvent({ eventId: "e_2", userId: "u_2" }, { events })).rejects.toThrow(
+      BadRequestException,
+    );
   });
 });

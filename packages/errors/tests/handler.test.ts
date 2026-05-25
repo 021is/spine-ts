@@ -54,7 +54,8 @@ describe("toHandledError", () => {
     const logger = { error: vi.fn() };
     toHandledError(new TypeError("kaboom"), { logger });
     expect(logger.error).toHaveBeenCalledOnce();
-    const [msg, meta] = logger.error.mock.calls[0]!;
+    const call = logger.error.mock.calls[0] ?? ["", undefined];
+    const [msg, meta] = call;
     expect(msg).toContain("kaboom");
     expect(meta?.name).toBe("TypeError");
   });

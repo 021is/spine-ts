@@ -35,7 +35,11 @@ export abstract class TranslatableException extends Error {
 export class BadRequestException extends TranslatableException {
   constructor(
     message = "Bad request, please check your request and try again.",
-    options?: { cause?: unknown; translationKey?: string; translationParams?: Record<string, string> },
+    options?: {
+      cause?: unknown;
+      translationKey?: string;
+      translationParams?: Record<string, string>;
+    },
   ) {
     super(message, options);
   }
@@ -45,7 +49,11 @@ export class BadRequestException extends TranslatableException {
 export class UnauthorizedException extends TranslatableException {
   constructor(
     message = "Authentication required.",
-    options?: { cause?: unknown; translationKey?: string; translationParams?: Record<string, string> },
+    options?: {
+      cause?: unknown;
+      translationKey?: string;
+      translationParams?: Record<string, string>;
+    },
   ) {
     super(message, options);
   }
@@ -55,7 +63,11 @@ export class UnauthorizedException extends TranslatableException {
 export class ForbiddenException extends TranslatableException {
   constructor(
     message = "You don't have permission to perform this action.",
-    options?: { cause?: unknown; translationKey?: string; translationParams?: Record<string, string> },
+    options?: {
+      cause?: unknown;
+      translationKey?: string;
+      translationParams?: Record<string, string>;
+    },
   ) {
     super(message, options);
   }
@@ -65,7 +77,11 @@ export class ForbiddenException extends TranslatableException {
 export class NotAllowedException extends TranslatableException {
   constructor(
     message = "Action not allowed.",
-    options?: { cause?: unknown; translationKey?: string; translationParams?: Record<string, string> },
+    options?: {
+      cause?: unknown;
+      translationKey?: string;
+      translationParams?: Record<string, string>;
+    },
   ) {
     super(message, options);
   }
@@ -75,7 +91,11 @@ export class NotAllowedException extends TranslatableException {
 export class NotFoundException extends TranslatableException {
   constructor(
     message = "Resource not found.",
-    options?: { cause?: unknown; translationKey?: string; translationParams?: Record<string, string> },
+    options?: {
+      cause?: unknown;
+      translationKey?: string;
+      translationParams?: Record<string, string>;
+    },
   ) {
     super(message, options);
   }
@@ -85,7 +105,11 @@ export class NotFoundException extends TranslatableException {
 export class ConflictException extends TranslatableException {
   constructor(
     message = "Conflict — the operation cannot be completed in the current state.",
-    options?: { cause?: unknown; translationKey?: string; translationParams?: Record<string, string> },
+    options?: {
+      cause?: unknown;
+      translationKey?: string;
+      translationParams?: Record<string, string>;
+    },
   ) {
     super(message, options);
   }
@@ -95,7 +119,11 @@ export class ConflictException extends TranslatableException {
 export class ExpectationFailedException extends TranslatableException {
   constructor(
     message = "Expectation failed.",
-    options?: { cause?: unknown; translationKey?: string; translationParams?: Record<string, string> },
+    options?: {
+      cause?: unknown;
+      translationKey?: string;
+      translationParams?: Record<string, string>;
+    },
   ) {
     super(message, options);
   }
@@ -108,7 +136,11 @@ export class RateLimitedException extends TranslatableException {
   constructor(
     retryAfterSec: number,
     message = "Rate limit exceeded. Please try again later.",
-    options?: { cause?: unknown; translationKey?: string; translationParams?: Record<string, string> },
+    options?: {
+      cause?: unknown;
+      translationKey?: string;
+      translationParams?: Record<string, string>;
+    },
   ) {
     super(message, options);
     this.retryAfterSec = retryAfterSec;
@@ -119,7 +151,11 @@ export class RateLimitedException extends TranslatableException {
 export class SomethingWentWrongException extends TranslatableException {
   constructor(
     message = "Something went wrong. Try again or contact support.",
-    options?: { cause?: unknown; translationKey?: string; translationParams?: Record<string, string> },
+    options?: {
+      cause?: unknown;
+      translationKey?: string;
+      translationParams?: Record<string, string>;
+    },
   ) {
     super(message, options);
   }

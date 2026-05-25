@@ -1,5 +1,13 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import { buildRuntime, type Runtime } from "./application/runtime.js";
+import {
+  type ReactNode,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import { type Runtime, buildRuntime } from "./application/runtime.js";
 import type { Catalog } from "./domain/catalog.js";
 import type { Locale } from "./domain/locale.js";
 
@@ -28,12 +36,16 @@ export function LocaleProvider({ initial, children }: LocaleProviderProps) {
 /** Hook returning the bound `t` and full runtime. */
 export function useRuntime(): Runtime {
   const r = useContext(RuntimeCtx);
-  if (!r) throw new Error("[spine-i18n] LocaleProvider missing — wrap your tree in <LocaleProvider initial={...} />");
+  if (!r)
+    throw new Error(
+      "[spine-i18n] LocaleProvider missing — wrap your tree in <LocaleProvider initial={...} />",
+    );
   return r;
 }
 
 export function useT() {
   const r = useRuntime();
+  // biome-ignore lint/correctness/useExhaustiveDependencies: r.t is bound; r reference is the dep
   return useCallback(r.t.bind(r), [r]);
 }
 

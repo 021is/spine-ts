@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { mkdirSync, existsSync } from "node:fs";
+import { existsSync, mkdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { cac } from "cac";
 import kleur from "kleur";

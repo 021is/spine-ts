@@ -1,5 +1,5 @@
 import { BadRequestException, type ResponseDto, ok, toHandledError } from "@021is/spine-errors";
-import { type ZodTypeAny, z } from "zod";
+import type { ZodTypeAny, z } from "zod";
 
 /**
  * Type-safe server-action helper.

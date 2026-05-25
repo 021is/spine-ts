@@ -44,7 +44,9 @@ export function doctor(input: DoctorInput): DoctorReport {
     return {
       type: "unknown",
       passing: false,
-      findings: [{ severity: "error", code: "no-package-json", message: "No package.json at repo root." }],
+      findings: [
+        { severity: "error", code: "no-package-json", message: "No package.json at repo root." },
+      ],
     };
   }
   const pkg = JSON.parse(readFileSync(pkgPath, "utf-8")) as {
@@ -54,8 +56,7 @@ export function doctor(input: DoctorInput): DoctorReport {
     scripts?: Record<string, string>;
   };
   const deps = { ...(pkg.dependencies ?? {}), ...(pkg.devDependencies ?? {}) };
-  const detected: "next-app" | "library" =
-    input.type ?? (deps.next ? "next-app" : "library");
+  const detected: "next-app" | "library" = input.type ?? (deps.next ? "next-app" : "library");
 
   // Required root files
   const required = ["AGENTS.md", "CLAUDE.md", "README.md", "tsconfig.json"];
@@ -150,6 +151,10 @@ export function renderReport(report: DoctorReport): string {
     if (f.hint) out.push(`    → ${f.hint}`);
   }
   out.push("");
-  out.push(report.passing ? "✓ Passing (warnings only)." : `✗ ${report.findings.filter((f) => f.severity === "error").length} error(s).`);
+  out.push(
+    report.passing
+      ? "✓ Passing (warnings only)."
+      : `✗ ${report.findings.filter((f) => f.severity === "error").length} error(s).`,
+  );
   return out.join("\n");
 }

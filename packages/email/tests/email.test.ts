@@ -1,9 +1,12 @@
-import { describe, expect, it, vi } from "vitest";
 import { SomethingWentWrongException } from "@021is/spine-errors";
+import { describe, expect, it, vi } from "vitest";
 import { makeEmailClient } from "../src/index.js";
 
-function makeFetch(handler: (url: string, init?: RequestInit) => Response | Promise<Response>): typeof fetch {
-  return ((url: string | URL, init?: RequestInit) => Promise.resolve(handler(String(url), init))) as typeof fetch;
+function makeFetch(
+  handler: (url: string, init?: RequestInit) => Response | Promise<Response>,
+): typeof fetch {
+  return ((url: string | URL, init?: RequestInit) =>
+    Promise.resolve(handler(String(url), init))) as typeof fetch;
 }
 
 describe("makeEmailClient", () => {
@@ -62,7 +65,9 @@ describe("makeEmailClient", () => {
       retries: 3,
       fetchImpl: fetchSpy as unknown as typeof fetch,
     });
-    await expect(client.send({ to: "x", subject: "y", html: "z" })).rejects.toThrow(SomethingWentWrongException);
+    await expect(client.send({ to: "x", subject: "y", html: "z" })).rejects.toThrow(
+      SomethingWentWrongException,
+    );
     expect(fetchSpy).toHaveBeenCalledTimes(1);
   });
 

@@ -1,5 +1,36 @@
 {
   "extends": "./tsconfig.base.json",
-  "include": ["packages/*/src/**/*.ts", "packages/*/tests/**/*.ts"],
-  "exclude": ["**/dist", "**/node_modules"]
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@021is/spine-errors": ["packages/errors/src/index.ts"],
+      "@021is/spine-errors/next": ["packages/errors/src/next.ts"],
+      "@021is/spine-env": ["packages/env/src/index.ts"],
+      "@021is/spine-testing": ["packages/testing/src/index.ts"],
+      "@021is/spine-testing/postgres": ["packages/testing/src/postgres.ts"],
+      "@021is/spine-testing/jwks": ["packages/testing/src/jwks.ts"],
+      "@021is/spine-testing/msw": ["packages/testing/src/msw.ts"],
+      "@021is/spine-testing/time": ["packages/testing/src/time.ts"],
+      "@021is/spine-http": ["packages/http/src/index.ts"],
+      "@021is/spine-auth": ["packages/auth/src/index.ts"],
+      "@021is/spine-auth/next": ["packages/auth/src/next.ts"],
+      "@021is/spine-telemetry": ["packages/telemetry/src/index.ts"],
+      "@021is/spine-actions": ["packages/actions/src/index.ts"],
+      "@021is/spine-ratelimit": ["packages/ratelimit/src/index.ts"],
+      "@021is/spine-webhooks": ["packages/webhooks/src/index.ts"],
+      "@021is/spine-email": ["packages/email/src/index.ts"],
+      "@021is/spine-cache": ["packages/cache/src/index.ts"],
+      "@021is/spine-i18n": ["packages/i18n/src/index.ts"],
+      "@021is/spine-i18n/react": ["packages/i18n/src/react.tsx"],
+      "@021is/spine-i18n/server": ["packages/i18n/src/server.ts"],
+      "@021is/spine-i18n/r2": ["packages/i18n/src/adapters/r2.ts"],
+      "@021is/spine-i18n/fs": ["packages/i18n/src/adapters/fs.ts"],
+      "@021is/spine-jobs": ["packages/jobs/src/index.ts"],
+      "@021is/spine-query": ["packages/query/src/index.ts"]
+    }
+  },
+  "include": ["packages/*/src/**/*.ts", "packages/*/src/**/*.tsx", "packages/*/tests/**/*.ts"],
+  "exclude": ["**/dist", "**/node_modules", "examples/**"]
 }

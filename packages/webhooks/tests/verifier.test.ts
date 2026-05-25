@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
 import { UnauthorizedException } from "@021is/spine-errors";
+import { describe, expect, it } from "vitest";
 import { makeHmacVerifier, makeMemoryIdempotencyStore } from "../src/index.js";
 
 describe("makeHmacVerifier", () => {
@@ -8,7 +8,9 @@ describe("makeHmacVerifier", () => {
   it("raw HMAC accepts valid signature", () => {
     const body = '{"event":"x"}';
     const sig = verifier.computeSignature(body, "raw");
-    expect(() => verifier.verify({ payload: body, signature: sig, headerScheme: "raw" })).not.toThrow();
+    expect(() =>
+      verifier.verify({ payload: body, signature: sig, headerScheme: "raw" }),
+    ).not.toThrow();
   });
 
   it("raw HMAC rejects tampered payload", () => {

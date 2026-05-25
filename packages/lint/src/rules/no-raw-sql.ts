@@ -1,4 +1,4 @@
-import { SEVERITY, type Rule } from "../types.js";
+import { type Rule, SEVERITY } from "../types.js";
 
 /**
  * Reject `$queryRawUnsafe` / `$executeRawUnsafe` and any string-concat
@@ -29,8 +29,6 @@ export const noRawSqlRule: Rule = {
     });
   },
 };
-
-// biome-ignore lint/suspicious/noExplicitAny: estree
 function walk(node: any, visit: (n: any) => void): void {
   if (!node || typeof node !== "object") return;
   if (node.type) visit(node);

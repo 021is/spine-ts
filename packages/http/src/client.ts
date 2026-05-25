@@ -1,4 +1,4 @@
-import { type ResponseDto } from "@021is/spine-errors";
+import type { ResponseDto } from "@021is/spine-errors";
 
 /**
  * Typed, resilient HTTP client. Wraps fetch with:
@@ -36,7 +36,9 @@ interface CircuitState {
 const IDEMPOTENT = new Set(["GET", "HEAD", "OPTIONS", "PUT", "DELETE"]);
 
 export class SpineHttpClient {
-  private readonly config: Required<Omit<SpineHttpConfig, "authToken" | "fetchImpl" | "defaultHeaders">> &
+  private readonly config: Required<
+    Omit<SpineHttpConfig, "authToken" | "fetchImpl" | "defaultHeaders">
+  > &
     Pick<SpineHttpConfig, "authToken" | "fetchImpl" | "defaultHeaders">;
   private readonly circuit: CircuitState = { failures: [] };
 
@@ -53,10 +55,7 @@ export class SpineHttpClient {
     };
   }
 
-  async request<T>(
-    path: string,
-    init: RequestInit & { method?: string } = {},
-  ): Promise<T> {
+  async request<T>(path: string, init: RequestInit & { method?: string } = {}): Promise<T> {
     this.checkCircuit();
     const method = (init.method ?? "GET").toUpperCase();
     const url = path.startsWith("http") ? path : `${this.config.baseUrl}${path}`;
@@ -104,13 +103,25 @@ export class SpineHttpClient {
     return this.request<T>(path, { ...init, method: "GET" });
   }
   post<T>(path: string, body: unknown, init?: Omit<RequestInit, "method" | "body">): Promise<T> {
-    return this.request<T>(path, { ...init, method: "POST", body: body == null ? null : JSON.stringify(body) });
+    return this.request<T>(path, {
+      ...init,
+      method: "POST",
+      body: body == null ? null : JSON.stringify(body),
+    });
   }
   put<T>(path: string, body: unknown, init?: Omit<RequestInit, "method" | "body">): Promise<T> {
-    return this.request<T>(path, { ...init, method: "PUT", body: body == null ? null : JSON.stringify(body) });
+    return this.request<T>(path, {
+      ...init,
+      method: "PUT",
+      body: body == null ? null : JSON.stringify(body),
+    });
   }
   patch<T>(path: string, body: unknown, init?: Omit<RequestInit, "method" | "body">): Promise<T> {
-    return this.request<T>(path, { ...init, method: "PATCH", body: body == null ? null : JSON.stringify(body) });
+    return this.request<T>(path, {
+      ...init,
+      method: "PATCH",
+      body: body == null ? null : JSON.stringify(body),
+    });
   }
   delete<T>(path: string, init?: Omit<RequestInit, "method" | "body">): Promise<T> {
     return this.request<T>(path, { ...init, method: "DELETE" });
@@ -118,13 +129,7 @@ export class SpineHttpClient {
 
   /** Strip the ResponseDto envelope if peer returned one; otherwise pass through. */
   private unwrap<T>(data: unknown): T {
-    if (
-      data &&
-      typeof data === "object" &&
-      "success" in data &&
-      "data" in data &&
-      "code" in data
-    ) {
+    if (data && typeof data === "object" && "success" in data && "data" in data && "code" in data) {
       const dto = data as ResponseDto<T>;
       if (!dto.success) {
         const err = new Error(dto.errorMessage ?? "request failed") as Error & {
@@ -148,9 +153,7 @@ export class SpineHttpClient {
   private recordFailure() {
     const now = Date.now();
     this.circuit.failures.push({ ts: now });
-    this.circuit.failures = this.circuit.failures.filter(
-      (f) => now - f.ts <= this.config.windowMs,
-    );
+    this.circuit.failures = this.circuit.failures.filter((f) => now - f.ts <= this.config.windowMs);
     if (this.circuit.failures.length >= this.config.failureThreshold) {
       this.circuit.openUntil = now + this.config.windowMs;
     }

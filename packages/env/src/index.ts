@@ -45,8 +45,7 @@ export function defineEnv<TSchema extends Record<string, ZodTypeAny>>(
       })
       .join("\n");
     throw new Error(
-      `[spine-env] Environment validation failed:\n${issues}\n\n` +
-        "Fix the missing/invalid variables and restart. See your project's `.env.example`.",
+      `[spine-env] Environment validation failed:\n${issues}\n\nFix the missing/invalid variables and restart. See your project's \`.env.example\`.`,
     );
   }
 
@@ -78,27 +77,24 @@ export const common = {
     z
       .string()
       .url()
-      .refine((u) => u.startsWith("postgres://") || u.startsWith("postgresql://"), "must be postgres://"),
+      .refine(
+        (u) => u.startsWith("postgres://") || u.startsWith("postgresql://"),
+        "must be postgres://",
+      ),
   /** Bytes-size string with optional unit (e.g. `100mb`, `1gb`). */
-  bytes: () =>
-    z.string().regex(/^\d+(b|kb|mb|gb)?$/i, "must look like 100mb, 1gb, 50000"),
+  bytes: () => z.string().regex(/^\d+(b|kb|mb|gb)?$/i, "must look like 100mb, 1gb, 50000"),
   /** Number from a string env var. */
   number: () =>
-    z
-      .string()
-      .transform((s, ctx) => {
-        const n = Number(s);
-        if (Number.isNaN(n)) {
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: "must be a number" });
-          return z.NEVER;
-        }
-        return n;
-      }),
+    z.string().transform((s, ctx) => {
+      const n = Number(s);
+      if (Number.isNaN(n)) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: "must be a number" });
+        return z.NEVER;
+      }
+      return n;
+    }),
   /** Boolean from `"true" | "false" | "1" | "0"`. */
-  boolean: () =>
-    z
-      .enum(["true", "false", "1", "0"])
-      .transform((s) => s === "true" || s === "1"),
+  boolean: () => z.enum(["true", "false", "1", "0"]).transform((s) => s === "true" || s === "1"),
   /** Non-empty string, used for secrets. */
   secret: () => z.string().min(1, "secret cannot be empty"),
 };

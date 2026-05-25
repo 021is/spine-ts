@@ -1,4 +1,4 @@
-import { emptyCatalog, renderPluralForm, type Catalog } from "../domain/catalog.js";
+import { type Catalog, emptyCatalog, renderPluralForm } from "../domain/catalog.js";
 import type { Locale } from "../domain/locale.js";
 import type { CatalogStore } from "../ports/catalog-store.js";
 

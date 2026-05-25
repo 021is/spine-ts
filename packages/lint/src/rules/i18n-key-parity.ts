@@ -1,4 +1,4 @@
-import { SEVERITY, type Rule } from "../types.js";
+import { type Rule, SEVERITY } from "../types.js";
 
 /**
  * Every `t("namespace.key")` call must resolve in every locale catalog
@@ -8,7 +8,7 @@ import { SEVERITY, type Rule } from "../types.js";
  */
 export const i18nKeyParityRule: Rule = {
   id: "spine/i18n-key-parity",
-  description: "Every t(\"key\") call exists in every loaded locale catalog.",
+  description: 'Every t("key") call exists in every loaded locale catalog.',
   run(ctx) {
     const catalogs = ctx.workspace.i18nCatalogs;
     if (catalogs.size === 0) return;
@@ -41,8 +41,6 @@ export const i18nKeyParityRule: Rule = {
     });
   },
 };
-
-// biome-ignore lint/suspicious/noExplicitAny: estree
 function walk(node: any, visit: (n: any) => void): void {
   if (!node || typeof node !== "object") return;
   if (node.type) visit(node);

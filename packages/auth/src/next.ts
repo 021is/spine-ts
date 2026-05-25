@@ -21,7 +21,10 @@ export function makeVerifier(options: VerifierOptions): JwksVerifier {
  */
 export function withAuth<TArgs extends unknown[], TCtx extends { request: Request }>(
   verifier: JwksVerifier,
-  handler: (ctx: TCtx & { principal: VerifiedPrincipal }, ...args: TArgs) => Promise<Response> | Response,
+  handler: (
+    ctx: TCtx & { principal: VerifiedPrincipal },
+    ...args: TArgs
+  ) => Promise<Response> | Response,
   options?: { roles?: string[]; scopes?: string[] },
 ): (ctx: TCtx, ...args: TArgs) => Promise<Response> {
   return async (ctx, ...args) => {

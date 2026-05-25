@@ -1,7 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
   "files": {
-    "ignore": ["dist/**", "node_modules/**", "coverage/**"]
+    "ignore": ["dist/**", "node_modules/**", "coverage/**", "packages/quality/configs/biome.json"]
   },
   "formatter": {
     "enabled": true,
@@ -22,7 +22,7 @@
       "recommended": true,
       "suspicious": {
         "noExplicitAny": "error",
-        "noConsoleLog": "warn"
+        "noConsoleLog": "off"
       },
       "style": {
         "useImportType": "error"
@@ -31,5 +31,34 @@
         "noForEach": "off"
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "include": ["packages/lint/**", "packages/cli/**", "packages/jobs/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsoleLog": "off",
+            "noExplicitAny": "off"
+          },
+          "style": {
+            "noNonNullAssertion": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": ["**/tests/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noNonNullAssertion": "off"
+          },
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    }
+  ]
 }

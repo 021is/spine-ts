@@ -1,19 +1,26 @@
 import { describe, expect, it, vi } from "vitest";
 import { SpineHttpClient } from "../src/client.js";
 
-function makeFetch(handler: (url: string, init?: RequestInit) => Response | Promise<Response>): typeof fetch {
-  return ((url: string | URL, init?: RequestInit) => Promise.resolve(handler(String(url), init))) as typeof fetch;
+function makeFetch(
+  handler: (url: string, init?: RequestInit) => Response | Promise<Response>,
+): typeof fetch {
+  return ((url: string | URL, init?: RequestInit) =>
+    Promise.resolve(handler(String(url), init))) as typeof fetch;
 }
 
 describe("SpineHttpClient", () => {
   it("GET unwraps ResponseDto", async () => {
     const client = new SpineHttpClient({
       baseUrl: "https://api.example",
-      fetchImpl: makeFetch(() =>
-        new Response(JSON.stringify({ success: true, data: { id: "x" }, code: 200, timestamp: 0 }), {
-          status: 200,
-          headers: { "content-type": "application/json" },
-        }),
+      fetchImpl: makeFetch(
+        () =>
+          new Response(
+            JSON.stringify({ success: true, data: { id: "x" }, code: 200, timestamp: 0 }),
+            {
+              status: 200,
+              headers: { "content-type": "application/json" },
+            },
+          ),
       ),
     });
     const result = await client.get<{ id: string }>("/items/x");
@@ -23,11 +30,12 @@ describe("SpineHttpClient", () => {
   it("passes through non-envelope JSON", async () => {
     const client = new SpineHttpClient({
       baseUrl: "https://api.example",
-      fetchImpl: makeFetch(() =>
-        new Response(JSON.stringify({ foo: "bar" }), {
-          status: 200,
-          headers: { "content-type": "application/json" },
-        }),
+      fetchImpl: makeFetch(
+        () =>
+          new Response(JSON.stringify({ foo: "bar" }), {
+            status: 200,
+            headers: { "content-type": "application/json" },
+          }),
       ),
     });
     const r = await client.get<{ foo: string }>("/x");
@@ -37,18 +45,19 @@ describe("SpineHttpClient", () => {
   it("throws on ResponseDto with success=false", async () => {
     const client = new SpineHttpClient({
       baseUrl: "https://api.example",
-      fetchImpl: makeFetch(() =>
-        new Response(
-          JSON.stringify({
-            success: false,
-            data: null,
-            code: 404,
-            errorMessage: "missing",
-            errorKey: "x.not_found",
-            timestamp: 0,
-          }),
-          { status: 200, headers: { "content-type": "application/json" } },
-        ),
+      fetchImpl: makeFetch(
+        () =>
+          new Response(
+            JSON.stringify({
+              success: false,
+              data: null,
+              code: 404,
+              errorMessage: "missing",
+              errorKey: "x.not_found",
+              timestamp: 0,
+            }),
+            { status: 200, headers: { "content-type": "application/json" } },
+          ),
       ),
     });
     await expect(client.get("/x")).rejects.toThrow(/missing/);

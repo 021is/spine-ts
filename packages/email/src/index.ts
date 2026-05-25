@@ -95,11 +95,19 @@ export function makeEmailClient(config: EmailClientConfig): EmailClient {
               lastErr = new Error(`Resend ${res.status}: ${text}`);
               continue;
             }
-            config.logger?.error("[spine-email] failed", { status: res.status, body: text, to: input.to });
+            config.logger?.error("[spine-email] failed", {
+              status: res.status,
+              body: text,
+              to: input.to,
+            });
             throw new SomethingWentWrongException(`Resend rejected email: ${res.status} ${text}`);
           }
           const json = (await res.json()) as { id: string };
-          config.logger?.info("[spine-email] sent", { id: json.id, to: input.to, subject: input.subject });
+          config.logger?.info("[spine-email] sent", {
+            id: json.id,
+            to: input.to,
+            subject: input.subject,
+          });
           return { id: json.id };
         } catch (e) {
           // Terminal errors (4xx, missing-body) bubble straight out — never retry.

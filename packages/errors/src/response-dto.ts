@@ -49,7 +49,10 @@ export interface ResponseDto<T> {
 }
 
 /** Construct a success response. */
-export function ok<T>(data: T, options?: Omit<Partial<ResponseDto<T>>, "data" | "success">): ResponseDto<T> {
+export function ok<T>(
+  data: T,
+  options?: Omit<Partial<ResponseDto<T>>, "data" | "success">,
+): ResponseDto<T> {
   return {
     success: true,
     data,
