@@ -47,7 +47,7 @@ export function makeMemoryCache(): MemoryCache {
   }
 
   return {
-    async fetch<T>(key, fn, opts) {
+    async fetch<T>(key: string, fn: () => Promise<T>, opts?: CacheOptions) {
       const now = Date.now();
       const entry = map.get(key);
       if (entry && entry.expiresAt > now) return entry.value as T;

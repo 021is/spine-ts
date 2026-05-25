@@ -1,4 +1,4 @@
-# AGENTS.md — @021/spine-errors
+# AGENTS.md — @021is/spine-errors
 
 ## What this is
 

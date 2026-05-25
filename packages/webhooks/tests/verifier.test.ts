@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { UnauthorizedException } from "@021/spine-errors";
+import { UnauthorizedException } from "@021is/spine-errors";
 import { makeHmacVerifier, makeMemoryIdempotencyStore } from "../src/index.js";
 
 describe("makeHmacVerifier", () => {

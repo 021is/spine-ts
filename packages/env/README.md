@@ -1,4 +1,4 @@
-# @021/spine-env
+# @021is/spine-env
 
 Type-safe, zod-validated environment loader. Fails LOUDLY at module-load time when a variable is missing or invalid.
 
@@ -6,7 +6,7 @@ Type-safe, zod-validated environment loader. Fails LOUDLY at module-load time wh
 
 ```ts
 // lib/env.ts
-import { defineEnv, common } from "@021/spine-env";
+import { defineEnv, common } from "@021is/spine-env";
 import { z } from "zod";
 
 export const env = defineEnv({

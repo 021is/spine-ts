@@ -1,4 +1,4 @@
-import { type ResponseDto } from "@021/spine-errors";
+import { type ResponseDto } from "@021is/spine-errors";
 
 /**
  * Typed, resilient HTTP client. Wraps fetch with:

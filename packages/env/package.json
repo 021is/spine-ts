@@ -1,5 +1,5 @@
 {
-  "name": "@021/spine-env",
+  "name": "@021is/spine-env",
   "version": "0.1.0",
   "description": "Type-safe zod-validated environment loader. Fails at startup with a clear message instead of failing at runtime with a NaN somewhere.",
   "type": "module",
@@ -11,12 +11,22 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "zod": "^3.23.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/021is/spine-ts.git",
+    "directory": "packages/env"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

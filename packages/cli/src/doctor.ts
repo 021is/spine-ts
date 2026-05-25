@@ -7,7 +7,7 @@ import { join } from "node:path";
  *
  * Categories checked:
  *   - Required root files (AGENTS.md, CLAUDE.md, README.md, tsconfig.json)
- *   - Test stack present (vitest config, @021/spine-testing dep)
+ *   - Test stack present (vitest config, @021is/spine-testing dep)
  *   - Spine packages present (errors + auth + http for any non-trivial app)
  *   - Folder skeleton (src/feature, src/components, src/lib, prisma)
  *   - Hard rules (no raw <button> grep, etc.) — coming next pass
@@ -79,12 +79,12 @@ export function doctor(input: DoctorInput): DoctorReport {
       hint: "bun add -d vitest @vitest/coverage-v8",
     });
   }
-  if (!deps["@021/spine-testing"]) {
+  if (!deps["@021is/spine-testing"]) {
     findings.push({
       severity: "warn",
       code: "no-spine-testing",
-      message: "@021/spine-testing not installed — DB tests will reinvent Testcontainers.",
-      hint: "bun add -d @021/spine-testing",
+      message: "@021is/spine-testing not installed — DB tests will reinvent Testcontainers.",
+      hint: "bun add -d @021is/spine-testing",
     });
   }
   if (!pkg.scripts?.test) {
@@ -98,11 +98,11 @@ export function doctor(input: DoctorInput): DoctorReport {
 
   // Core packages for any non-trivial app
   if (detected === "next-app") {
-    for (const want of ["@021/spine-errors", "@021/spine-env"]) {
+    for (const want of ["@021is/spine-errors", "@021is/spine-env"]) {
       if (!deps[want]) {
         findings.push({
           severity: "error",
-          code: `missing-${want.replace(/@021\//, "")}`,
+          code: `missing-${want.replace(/@021is\//, "")}`,
           message: `${want} not installed.`,
           hint: `Required across every 021 product. Run: bun add ${want}`,
         });

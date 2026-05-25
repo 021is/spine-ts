@@ -44,12 +44,12 @@ describe("doctor", () => {
         scripts: { test: "vitest run" },
         dependencies: {
           next: "^16",
-          "@021/spine-errors": "^0.1.0",
-          "@021/spine-env": "^0.1.0",
+          "@021is/spine-errors": "^0.1.0",
+          "@021is/spine-env": "^0.1.0",
         },
         devDependencies: {
           vitest: "^2.1.0",
-          "@021/spine-testing": "^0.1.0",
+          "@021is/spine-testing": "^0.1.0",
         },
       }),
     );

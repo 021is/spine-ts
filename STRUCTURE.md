@@ -64,15 +64,15 @@ my-app/
 │   │   └── …                        StatCard, MetricChart, etc.
 │   ├── lib/                         Cross-cutting helpers
 │   │   ├── db.ts                    Prisma client singleton
-│   │   ├── env.ts                   defineEnv from @021/spine-env
-│   │   ├── auth.ts                  re-exports from @021/spine-auth
+│   │   ├── env.ts                   defineEnv from @021is/spine-env
+│   │   ├── auth.ts                  re-exports from @021is/spine-auth
 │   │   ├── format.ts                pure formatters
 │   │   └── cn.ts                    clsx + tailwind-merge
 │   ├── hooks/                       Shared React hooks
 │   ├── config/                      Static config (feature flags, constants)
 │   ├── data/                        Static catalogs (countries, currencies)
 │   ├── types/                       Global TS types
-│   └── i18n/                        Translation runtime + per-feature catalogs (see @021/spine-i18n)
+│   └── i18n/                        Translation runtime + per-feature catalogs (see @021is/spine-i18n)
 ├── tests/
 │   ├── setup.ts                     Vitest setup (Testcontainers PG, MSW, JWKS mock)
 │   ├── factories/                   Reusable test data factories
@@ -155,14 +155,14 @@ This is what locks the architecture — you cannot accidentally have `rest` call
 
 | Concern | TS package | Kotlin module (future spine-kotlin) |
 |---|---|---|
-| Response envelope + exceptions | `@021/spine-errors` | `021-platform-errors` |
-| Auth (JWKS verify) | `@021/spine-auth` | `021-platform-auth` (SecurityConfigBase) |
-| HTTP client + resilience | `@021/spine-http` | `021-platform-rest` (WebClient + Resilience4j) |
-| Telemetry | `@021/spine-telemetry` | `021-platform-otel` |
-| Env loading | `@021/spine-env` | `021-platform-env` |
-| i18n | `@021/spine-i18n` | `021-platform-locale` |
-| NATS jobs | `@021/spine-jobs` | `021-platform-nats` |
-| Rate-limit | `@021/spine-ratelimit` | `021-platform-ratelimit` |
+| Response envelope + exceptions | `@021is/spine-errors` | `021-platform-errors` |
+| Auth (JWKS verify) | `@021is/spine-auth` | `021-platform-auth` (SecurityConfigBase) |
+| HTTP client + resilience | `@021is/spine-http` | `021-platform-rest` (WebClient + Resilience4j) |
+| Telemetry | `@021is/spine-telemetry` | `021-platform-otel` |
+| Env loading | `@021is/spine-env` | `021-platform-env` |
+| i18n | `@021is/spine-i18n` | `021-platform-locale` |
+| NATS jobs | `@021is/spine-jobs` | `021-platform-nats` |
+| Rate-limit | `@021is/spine-ratelimit` | `021-platform-ratelimit` |
 
 These NEVER live inside an app. They're versioned packages every app declares as deps.
 
@@ -200,7 +200,7 @@ packages/<pkg-name>/
 - **`README.md` opens with one-paragraph purpose + one usage example per public surface.** No marketing fluff.
 - **`AGENTS.md` lists hard rules + when extension is/isn't allowed.** Future agents read this on entry — saves them re-deriving conventions.
 - **`peerDependencies`** for framework deps (Next, Prisma) so the consuming app pins the version.
-- **`@021/spine-*` cross-package deps via `workspace:*`** during dev; Changesets publishes pinned ranges.
+- **`@021is/spine-*` cross-package deps via `workspace:*`** during dev; Changesets publishes pinned ranges.
 
 ### Hexagonal layout INSIDE a complex package (e.g., spine-i18n, spine-jobs)
 

@@ -1,4 +1,4 @@
-# @021/spine-errors
+# @021is/spine-errors
 
 The canonical response envelope (`ResponseDto`) + typed exception hierarchy + framework-agnostic handler used by every 021 product.
 
@@ -13,13 +13,13 @@ Locked by Edvard 2026-05-24. Reasoning: consistent client-side handling across e
 ## Install
 
 ```bash
-bun add @021/spine-errors
+bun add @021is/spine-errors
 ```
 
 ## Use — domain code
 
 ```ts
-import { BadRequestException, NotFoundException, ForbiddenException } from "@021/spine-errors";
+import { BadRequestException, NotFoundException, ForbiddenException } from "@021is/spine-errors";
 
 export async function publishEvent(eventId: string, userId: string) {
   const event = await db.event.findUnique({ where: { id: eventId } });
@@ -37,7 +37,7 @@ export async function publishEvent(eventId: string, userId: string) {
 ## Use — Next.js route handler
 
 ```ts
-import { withErrorHandling, ok } from "@021/spine-errors/next";
+import { withErrorHandling, ok } from "@021is/spine-errors/next";
 import { publishEvent } from "@/server/events/publish";
 
 export const POST = withErrorHandling(async (req: Request) => {
@@ -53,7 +53,7 @@ Any thrown `*Exception` becomes the correct HTTP status + `ResponseDto`. Unknown
 ## Use — Server action
 
 ```ts
-import { tryAction } from "@021/spine-errors/next";
+import { tryAction } from "@021is/spine-errors/next";
 import { publishEvent } from "@/server/events/publish";
 
 export async function publishEventAction(formData: FormData) {
@@ -82,7 +82,7 @@ Status code is in `response.code` (server actions don't have HTTP status).
 
 ## i18n
 
-Every exception subclass accepts `translationKey` + `translationParams`. These flow into `ResponseDto.errorKey` + `errorParams`. The client's i18n runtime (`@021/spine-i18n`) reads them and renders the localized message, falling back to `errorMessage` when no key exists.
+Every exception subclass accepts `translationKey` + `translationParams`. These flow into `ResponseDto.errorKey` + `errorParams`. The client's i18n runtime (`@021is/spine-i18n`) reads them and renders the localized message, falling back to `errorMessage` when no key exists.
 
 ## Testing
 

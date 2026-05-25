@@ -1,4 +1,4 @@
-import { UnauthorizedException } from "@021/spine-errors";
+import { UnauthorizedException } from "@021is/spine-errors";
 import { JwksVerifier, type VerifiedPrincipal, type VerifierOptions } from "./verifier.js";
 
 /**
@@ -14,7 +14,7 @@ export function makeVerifier(options: VerifierOptions): JwksVerifier {
 /**
  * Use inside a Next.js route handler:
  *
- *   import { withAuth } from "@021/spine-auth/next";
+ *   import { withAuth } from "@021is/spine-auth/next";
  *   export const GET = withAuth(verifier, async (req, ctx) => {
  *     return Response.json({ me: ctx.principal.sub });
  *   }, { roles: ["admin"] });

@@ -1,4 +1,4 @@
-import { BadRequestException, type ResponseDto, ok, toHandledError } from "@021/spine-errors";
+import { BadRequestException, type ResponseDto, ok, toHandledError } from "@021is/spine-errors";
 import { type ZodTypeAny, z } from "zod";
 
 /**
@@ -47,13 +47,13 @@ export interface ActionDefinition<TSchema extends ZodTypeAny, TPrincipal, TResul
   logger?: { error: (msg: string, meta?: any) => void };
 }
 
-export interface BuiltAction<TSchema extends ZodTypeAny, TResult> {
+export interface BuiltAction<TResult> {
   run(rawInput: unknown): Promise<ResponseDto<TResult | null>>;
 }
 
 export function defineAction<TSchema extends ZodTypeAny, TPrincipal, TResult>(
   def: ActionDefinition<TSchema, TPrincipal, TResult>,
-): BuiltAction<TSchema, TResult> {
+): BuiltAction<TResult> {
   return {
     async run(rawInput: unknown): Promise<ResponseDto<TResult | null>> {
       try {

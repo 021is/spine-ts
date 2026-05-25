@@ -1,14 +1,32 @@
 {
-  "name": "@021/spine-telemetry",
+  "name": "@021is/spine-telemetry",
   "version": "0.1.0",
   "description": "OpenTelemetry auto-setup + Pino structured JSON logger with Vector/Loki-friendly fields (cluster, service, request_id).",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
-  "files": ["dist"],
-  "scripts": { "build": "tsup src/index.ts --format esm --dts --clean", "typecheck": "tsc --noEmit" },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "typecheck": "tsc --noEmit"
+  },
   "dependencies": {
     "pino": "^9.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/021is/spine-ts.git",
+    "directory": "packages/telemetry"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

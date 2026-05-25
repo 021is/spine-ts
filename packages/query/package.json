@@ -1,7 +1,7 @@
 {
-  "name": "@021/spine-query",
+  "name": "@021is/spine-query",
   "version": "0.1.0",
-  "description": "TanStack Query wrapper with 021 defaults: dedupe, SWR, no auto-refetch, query-key factory pattern. Reduces frontend → backend traffic.",
+  "description": "TanStack Query wrapper with 021 defaults: dedupe, SWR, no auto-refetch, query-key factory pattern. Reduces frontend \u2192 backend traffic.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,7 +11,9 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean",
     "typecheck": "tsc --noEmit"
@@ -30,5 +32,13 @@
   },
   "devDependencies": {
     "@types/react": "^19.2.15"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/021is/spine-ts.git",
+    "directory": "packages/query"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

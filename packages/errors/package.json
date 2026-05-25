@@ -1,5 +1,5 @@
 {
-  "name": "@021/spine-errors",
+  "name": "@021is/spine-errors",
   "version": "0.1.0",
   "description": "ResponseDto envelope + typed exception hierarchy + framework-agnostic handler. Lifted from DanceClub's shared-lib.",
   "type": "module",
@@ -15,15 +15,32 @@
       "import": "./dist/next.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsup src/index.ts src/next.ts --format esm --dts --clean",
+    "build": "tsup src/index.ts src/next.ts --format esm --dts --clean --external next",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
     "next": ">=15 <17"
   },
   "peerDependenciesMeta": {
-    "next": { "optional": true }
+    "next": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "next": "^16.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/021is/spine-ts.git",
+    "directory": "packages/errors"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

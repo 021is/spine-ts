@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { SomethingWentWrongException } from "@021/spine-errors";
+import { SomethingWentWrongException } from "@021is/spine-errors";
 import { makeEmailClient } from "../src/index.js";
 
 function makeFetch(handler: (url: string, init?: RequestInit) => Response | Promise<Response>): typeof fetch {

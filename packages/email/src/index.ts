@@ -1,4 +1,4 @@
-import { SomethingWentWrongException } from "@021/spine-errors";
+import { SomethingWentWrongException } from "@021is/spine-errors";
 
 /**
  * Resend wrapper. Templates are the consuming app's concern — typically

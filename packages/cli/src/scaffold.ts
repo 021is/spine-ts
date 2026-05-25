@@ -27,7 +27,7 @@ export function scaffoldNextApp(input: ScaffoldNextAppInput): { created: string[
   const created: string[] = [];
   const skipped: string[] = [];
   const name = input.name ?? root.split("/").filter(Boolean).pop() ?? "my-app";
-  const org = input.org ?? "021";
+  const org = input.org ?? "021is";
 
   const dirs = [
     "src/app/(public)",
@@ -78,12 +78,12 @@ export function scaffoldNextApp(input: ScaffoldNextAppInput): { created: string[
           "react-dom": "^19.0.0",
           "@prisma/client": "^5.20.0",
           zod: "^3.23.8",
-          "@021/spine-errors": "^0.1.0",
-          "@021/spine-env": "^0.1.0",
-          "@021/spine-auth": "^0.1.0",
-          "@021/spine-i18n": "^0.1.0",
-          "@021/spine-actions": "^0.1.0",
-          "@021/spine-query": "^0.1.0",
+          "@021is/spine-errors": "^0.1.0",
+          "@021is/spine-env": "^0.1.0",
+          "@021is/spine-auth": "^0.1.0",
+          "@021is/spine-i18n": "^0.1.0",
+          "@021is/spine-actions": "^0.1.0",
+          "@021is/spine-query": "^0.1.0",
           "@tanstack/react-query": "^5.0.0",
         },
         devDependencies: {
@@ -91,7 +91,7 @@ export function scaffoldNextApp(input: ScaffoldNextAppInput): { created: string[
           "@types/node": "^22.0.0",
           "@types/react": "^19.0.0",
           "@vitest/coverage-v8": "^2.1.0",
-          "@021/spine-testing": "^0.1.0",
+          "@021is/spine-testing": "^0.1.0",
           prisma: "^5.20.0",
           typescript: "^5.6.0",
           vitest: "^2.1.0",
@@ -203,7 +203,7 @@ function agentsTemplate(name: string): string {
 
 - **ResponseDto from every endpoint + server action.** Wrap with \`withErrorHandling\` (route) or \`tryAction\` / \`defineAction\` (server action).
 - **Hexagonal per feature.** \`src/feature/<f>/{domain,ports,adapters,usecase,schema,components}\`. Domain knows nothing about Prisma/Next.
-- **Tests use real DB via @021/spine-testing.** No mocks for our own domain.
+- **Tests use real DB via @021is/spine-testing.** No mocks for our own domain.
 - **No raw \`<button>\` / \`<input>\`** — always shadcn primitives (or the project's chosen design system).
 - **No push to main** — PR-only. Branch protection enforces it. If staging exists: \`preview/*\` branches.
 
@@ -244,8 +244,8 @@ export default defineConfig({
 
 function testsSetup(): string {
   return `import { afterAll, afterEach, beforeAll } from "vitest";
-import { runPrismaMigrate, startSharedPostgres, truncateAll } from "@021/spine-testing/postgres";
-import { startMockServer } from "@021/spine-testing/msw";
+import { runPrismaMigrate, startSharedPostgres, truncateAll } from "@021is/spine-testing/postgres";
+import { startMockServer } from "@021is/spine-testing/msw";
 
 let dbUrl: string;
 const mocks = startMockServer();
@@ -278,7 +278,7 @@ model Example {
 }
 
 function envStub(): string {
-  return `import { common, defineEnv } from "@021/spine-env";
+  return `import { common, defineEnv } from "@021is/spine-env";
 export const env = defineEnv({
   schema: {
     NODE_ENV: common.nodeEnv(),
@@ -289,7 +289,7 @@ export const env = defineEnv({
 }
 
 function exampleUsecase(): string {
-  return `import { BadRequestException } from "@021/spine-errors";
+  return `import { BadRequestException } from "@021is/spine-errors";
 import type { ExampleRepo } from "../ports/ExampleRepo.js";
 import type { Example } from "../domain/Example.js";
 
@@ -306,7 +306,7 @@ export async function exampleUseCase(
 
 function exampleUsecaseTest(): string {
   return `import { describe, expect, it } from "vitest";
-import { BadRequestException } from "@021/spine-errors";
+import { BadRequestException } from "@021is/spine-errors";
 import { makeInMemoryExampleRepo } from "../../adapters/memory/InMemoryExampleRepo.js";
 import { exampleUseCase } from "../example.js";
 

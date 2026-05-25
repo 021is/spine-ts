@@ -1,14 +1,32 @@
 {
-  "name": "@021/spine-webhooks",
+  "name": "@021is/spine-webhooks",
   "version": "0.1.0",
   "description": "Inbound webhook verifier: HMAC signature + replay/idempotency dedupe. Generalized from DC's Resend/Stripe handlers.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
-  "files": ["dist"],
-  "scripts": { "build": "tsup src/index.ts --format esm --dts --clean", "typecheck": "tsc --noEmit" },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "typecheck": "tsc --noEmit"
+  },
   "dependencies": {
-    "@021/spine-errors": "workspace:*"
+    "@021is/spine-errors": "workspace:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/021is/spine-ts.git",
+    "directory": "packages/webhooks"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

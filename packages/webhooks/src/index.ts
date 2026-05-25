@@ -1,5 +1,5 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
-import { BadRequestException, UnauthorizedException } from "@021/spine-errors";
+import { BadRequestException, UnauthorizedException } from "@021is/spine-errors";
 
 /**
  * Verify an inbound webhook with HMAC-SHA256.
