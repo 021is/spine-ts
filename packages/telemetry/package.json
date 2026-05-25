@@ -1,7 +1,7 @@
 {
   "name": "@021is/spine-telemetry",
-  "version": "0.2.0",
-  "description": "OpenTelemetry auto-setup + Pino structured JSON logger with Vector/Loki-friendly fields (cluster, service, request_id).",
+  "version": "0.3.0",
+  "description": "Pino structured JSON logger with Loki-friendly base fields (cluster, service, env) + AsyncLocalStorage request context so every log line auto-tags with request_id. OpenTelemetry tracer planned for next release.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,7 +11,9 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean",
     "typecheck": "tsc --noEmit"

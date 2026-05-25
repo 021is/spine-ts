@@ -39,8 +39,10 @@ spine doctor
 
 Exit code 1 on any error. Use as a pre-merge sanity check or in CI.
 
-## Coming
+## Roadmap (not yet shipped)
 
-- `spine add feature <name>` — scaffold a feature folder skeleton
-- `spine add testing` / `spine add auth` — add a Spine package to existing repo + wire boilerplate
+These ideas live as GitHub issues; the CLI currently only ships `new` + `doctor`. PRs welcome.
+
+- `spine add feature <name>` — scaffold a feature folder skeleton inside an existing repo
+- `spine add testing` / `spine add auth` — install a Spine package + wire boilerplate
 - `spine upgrade` — bump all `@021is/spine-*` to latest in lockstep

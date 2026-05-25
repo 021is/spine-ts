@@ -1,4 +1,5 @@
 import { type Rule, SEVERITY } from "../types.js";
+import { walk } from "../walk.js";
 
 /**
  * Every `t("namespace.key")` call must resolve in every locale catalog
@@ -41,16 +42,3 @@ export const i18nKeyParityRule: Rule = {
     });
   },
 };
-function walk(node: any, visit: (n: any) => void): void {
-  if (!node || typeof node !== "object") return;
-  if (node.type) visit(node);
-  for (const key of Object.keys(node)) {
-    if (key === "parent" || key === "loc" || key === "range") continue;
-    const child = node[key];
-    if (Array.isArray(child)) {
-      for (const c of child) walk(c, visit);
-    } else if (child && typeof child === "object") {
-      walk(child, visit);
-    }
-  }
-}

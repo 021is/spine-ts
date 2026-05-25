@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-email",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Resend wrapper with structured logging, retries, and a uniform send API. Templates live in the consuming app.",
   "type": "module",
   "main": "./dist/index.js",
@@ -11,13 +11,15 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@021is/spine-errors": "^0.2.0"
+    "@021is/spine-errors": "^0.3.0"
   },
   "repository": {
     "type": "git",

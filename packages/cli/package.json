@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Spine CLI: scaffold 021-shaped projects (spine new), add Spine features to existing repos (spine add), audit (spine doctor). Enforces STRUCTURE.md.",
   "type": "module",
   "main": "./dist/index.js",
@@ -14,7 +14,10 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist", "templates"],
+  "files": [
+    "dist",
+    "templates"
+  ],
   "scripts": {
     "build": "tsup src/index.ts src/bin.ts --format esm --dts --clean",
     "typecheck": "tsc --noEmit"

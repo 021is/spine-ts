@@ -6,6 +6,22 @@ All notable changes to Spine-TS packages. Format follows [Keep a Changelog](http
 
 (empty)
 
+## [0.3.0] — 2026-05-25
+
+### Added
+- **`@021is/spine-i18n` DC parity (partial)** — top-level `$schema` + `version` fields on `Catalog`. `{{param}}` double-brace interpolation (matches DC's contract used by DeepL bulk-translate tooling). `validateCatalogs(input, policy?)` with 10 rule codes (MISSING_KEY, EXTRA_KEY, MISSING_PLURAL_BRANCH, MISSING_PARAM, UNKNOWN_PARAM, EMPTY_VALUE, UNTRANSLATED, HTML_IN_VALUE, NAMESPACE_PREFIX, KEY_CASE). Per-namespace rule overrides. `DEFAULT_POLICY` ships with sensible defaults. Adapters reorganized to `src/adapters/driven/{r2,fs,memory}.ts` matching DC's hexagonal layout.
+- **`@021is/spine-jobs` tests** — public surface lock + unreachable-NATS error path. Full Testcontainers NATS integration deferred to next release.
+- **`@021is/spine-quality/vitest`** — vitest config preset (worker pool, coverage thresholds, github-actions reporter). Consumers `mergeConfig` it.
+- **`@021is/spine-lint/walk`** — shared AST walker extracted (was copy-pasted in 5 rule files). DRY.
+
+### Changed
+- **`@021is/spine-telemetry`** package.json description corrected — no more "OpenTelemetry auto-setup" overclaim. OTel tracer wire-up tracked for next release.
+- **`@021is/spine`** CLI README — `add` / `upgrade` commands moved from "Coming" to "Roadmap (not yet shipped)" so consumers don't try to invoke them.
+- Self-gate (`.github/workflows/quality-gate.yml`) now actually passes — fixed biome formatting, unused suppressions, useTemplate, useExhaustiveDependencies. tsc gets baseUrl + paths so workspace packages resolve.
+
+### Fixed
+- Non-null assertions in `i18n/{locale,negotiate}` + `auth/verifier` replaced with `?? ""` fallbacks.
+
 ## [0.2.0] — 2026-05-25
 
 ### Added

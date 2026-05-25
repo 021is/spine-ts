@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-testing",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Shared test helpers: Testcontainers Postgres (worker-shared), Prisma migrator, JWKS mock server, MSW factory, deterministic time + uuid.",
   "type": "module",
   "main": "./dist/index.js",
@@ -27,7 +27,9 @@
       "import": "./dist/time.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts src/postgres.ts src/jwks.ts src/msw.ts src/time.ts --format esm --dts --clean",
     "typecheck": "tsc --noEmit"

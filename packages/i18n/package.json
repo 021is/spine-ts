@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-i18n",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "i18n runtime for every 021 product. Hexagonal: domain + ports + R2/fs/memory adapters. CLDR plurals. React + server runtimes. Generalized from DanceClub's locale lib.",
   "type": "module",
   "main": "./dist/index.js",
@@ -27,13 +27,15 @@
       "import": "./dist/adapters/driven/fs.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts src/react.tsx src/server.ts src/adapters/driven/r2.ts src/adapters/driven/fs.ts --format esm --dts --clean",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@021is/spine-errors": "^0.2.0"
+    "@021is/spine-errors": "^0.3.0"
   },
   "peerDependencies": {
     "react": ">=18",

@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-env",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Type-safe zod-validated environment loader. Fails at startup with a clear message instead of failing at runtime with a NaN somewhere.",
   "type": "module",
   "main": "./dist/index.js",
@@ -11,7 +11,9 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean",
     "typecheck": "tsc --noEmit"

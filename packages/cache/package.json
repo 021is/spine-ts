@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-cache",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Cache helpers with TTL + tag invalidation. Wraps Next.js `unstable_cache` and `cache()` patterns; in-memory store for non-Next runtimes.",
   "type": "module",
   "main": "./dist/index.js",
@@ -11,7 +11,9 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean",
     "typecheck": "tsc --noEmit"
