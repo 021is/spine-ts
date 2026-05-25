@@ -1,12 +1,12 @@
 {
-  "name": "@021is/spine",
+  "name": "@021is/spine-lint",
   "version": "0.2.0",
-  "description": "Spine CLI: scaffold 021-shaped projects (spine new), add Spine features to existing repos (spine add), audit (spine doctor). Enforces STRUCTURE.md.",
+  "description": "Spine-specific AST checks that biome can't express: enum-over-string, ResponseDto enforcement, endpoint documentation, i18n key parity, no raw SQL. Runs in CI as the spine-lint job + locally via `spine-lint .`.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "spine": "./dist/bin.js"
+    "spine-lint": "./dist/bin.js"
   },
   "exports": {
     ".": {
@@ -15,21 +15,22 @@
     }
   },
   "files": [
-    "dist",
-    "templates"
+    "dist"
   ],
   "scripts": {
     "build": "tsup src/index.ts src/bin.ts --format esm --dts --clean",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@typescript-eslint/typescript-estree": "^8.10.0",
     "cac": "^6.7.14",
+    "fast-glob": "^3.3.2",
     "kleur": "^4.1.5"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/021is/spine-ts.git",
-    "directory": "packages/cli"
+    "directory": "packages/lint"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

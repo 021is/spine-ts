@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-i18n",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "i18n runtime for every 021 product. Hexagonal: domain + ports + R2/fs/memory adapters. CLDR plurals. React + server runtimes. Generalized from DanceClub's locale lib.",
   "type": "module",
   "main": "./dist/index.js",

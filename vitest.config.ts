@@ -46,6 +46,8 @@ export default defineConfig({
       { find: "@021is/spine-i18n", replacement: resolve(__dirname, "packages/i18n/src/index.ts") },
       { find: "@021is/spine-jobs", replacement: resolve(__dirname, "packages/jobs/src/index.ts") },
       { find: "@021is/spine-query", replacement: resolve(__dirname, "packages/query/src/index.ts") },
+      { find: "@021is/spine-quality", replacement: resolve(__dirname, "packages/quality/src/index.ts") },
+      { find: "@021is/spine-lint", replacement: resolve(__dirname, "packages/lint/src/index.ts") },
     ],
   },
   test: {

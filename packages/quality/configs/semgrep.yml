@@ -1,0 +1,98 @@
+# Spine OWASP + Spine-specific security ruleset.
+# Runs in CI via `semgrep --config <this-file>`.
+rules:
+  # ─── OWASP A03 — Injection ─────────────────────────────────────────────
+  - id: no-string-concat-sql
+    languages: [typescript, javascript]
+    severity: ERROR
+    message: "SQL string concatenation — use Prisma parameterized queries or $queryRaw with tagged template."
+    pattern-either:
+      - pattern: |
+          $DB.$queryRawUnsafe(`... ${$X} ...`)
+      - pattern: |
+          $DB.$executeRawUnsafe(`... ${$X} ...`)
+
+  - id: no-string-concat-shell
+    languages: [typescript, javascript]
+    severity: ERROR
+    message: "Shell command built from user input — use execFile with arg array."
+    patterns:
+      - pattern-either:
+          - pattern: child_process.exec(`... ${$X} ...`)
+          - pattern: exec(`... ${$X} ...`)
+
+  # ─── OWASP A01 — Broken access control ──────────────────────────────────
+  - id: route-handler-without-auth-check
+    languages: [typescript]
+    severity: WARNING
+    message: "Route handler doesn't reference any auth utility — confirm intentional public access."
+    paths:
+      include: ["src/app/api/**/route.ts"]
+    pattern: |
+      export async function $METHOD(...) { ... }
+    pattern-not-regex: "requireUser|requireRoles|requireScopes|withAuth|public"
+
+  # ─── OWASP A02 — Crypto failures ────────────────────────────────────────
+  - id: no-md5
+    languages: [typescript, javascript]
+    severity: ERROR
+    message: "MD5 is broken. Use SHA-256 (or Argon2 for passwords)."
+    pattern-either:
+      - pattern: createHash("md5")
+      - pattern: crypto.createHash("md5")
+
+  - id: no-weak-random-for-tokens
+    languages: [typescript, javascript]
+    severity: ERROR
+    message: "Math.random() is NOT cryptographically secure. Use crypto.randomBytes() / crypto.randomUUID()."
+    patterns:
+      - pattern: Math.random()
+      - pattern-inside: |
+          function $F(...) { ... }
+      - metavariable-regex:
+          metavariable: $F
+          regex: "(?i)(token|secret|key|nonce|salt|password|signature|otp)"
+
+  # ─── OWASP A10 — SSRF ───────────────────────────────────────────────────
+  - id: no-fetch-on-user-input
+    languages: [typescript, javascript]
+    severity: WARNING
+    message: "fetch() called with non-literal URL — confirm allowlist + private CIDR block. See spine-http for safe defaults."
+    pattern-either:
+      - pattern: fetch($URL, ...)
+      - pattern: $CLIENT.fetch($URL, ...)
+    pattern-not: fetch("...", ...)
+    paths:
+      include: ["src/**/*.ts", "src/**/*.tsx"]
+      exclude: ["**/*.test.ts", "tests/**"]
+
+  # ─── OWASP A09 — Logging gaps ───────────────────────────────────────────
+  - id: no-pii-in-logs
+    languages: [typescript]
+    severity: WARNING
+    message: "Don't log PII (email/phone/token). Hash or redact at the boundary."
+    pattern-either:
+      - pattern: console.log($MSG, $USER.email, ...)
+      - pattern: logger.info($MSG, { email: $X, ... })
+      - pattern: logger.info($MSG, { phone: $X, ... })
+
+  # ─── Spine-specific — ResponseDto enforcement ──────────────────────────
+  - id: route-handler-returns-raw-payload
+    languages: [typescript]
+    severity: ERROR
+    message: "Route handler returns raw payload — must return ResponseDto via withErrorHandling/ok()."
+    paths:
+      include: ["src/app/api/**/route.ts"]
+    pattern-either:
+      - patterns:
+          - pattern: NextResponse.json({...})
+          - pattern-not-inside: |
+              withErrorHandling(async (...) => { ... })
+          - pattern-not-regex: "ok\\(|err\\("
+
+  # ─── Spine-specific — Enum-over-string ─────────────────────────────────
+  - id: prefer-enum-over-string-union
+    languages: [typescript]
+    severity: WARNING
+    message: "Inline string-literal union — promote to const-as-object enum. See spine-ts AGENTS.md § Enums."
+    pattern-regex: ":\\s*\"[a-zA-Z_]+\"\\s*\\|\\s*\"[a-zA-Z_]+\"\\s*\\|\\s*\"[a-zA-Z_]+\""

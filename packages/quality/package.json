@@ -1,0 +1,37 @@
+{
+  "name": "@021is/spine-quality",
+  "version": "0.2.0",
+  "description": "Shipping configs for the Spine quality gate: biome, tsc, knip, dependency-cruiser (hexagonal layer rules), semgrep OWASP, vitest coverage, size-limit, lighthouse-ci. One install gives every 021 app the same gate.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./biome": "./configs/biome.json",
+    "./tsconfig": "./configs/tsconfig.json",
+    "./tsconfig-next": "./configs/tsconfig-next.json",
+    "./knip": "./configs/knip.json",
+    "./dependency-cruiser": "./configs/dependency-cruiser.cjs",
+    "./semgrep": "./configs/semgrep.yml",
+    "./size-limit": "./configs/size-limit.json"
+  },
+  "files": [
+    "dist",
+    "configs"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/021is/spine-ts.git",
+    "directory": "packages/quality"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}

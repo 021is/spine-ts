@@ -1,0 +1,8 @@
+[
+  {
+    "name": "First Load JS per route",
+    "path": ".next/server/app/**/*.js",
+    "limit": "200 kB",
+    "gzip": true
+  }
+]

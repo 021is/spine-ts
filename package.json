@@ -2,14 +2,14 @@
   "name": "@021is/spine-ts",
   "version": "0.1.0",
   "private": true,
-  "description": "Spine-TS monorepo — shared TypeScript packages for every 021 product",
+  "description": "Spine-TS monorepo \u2014 shared TypeScript packages for every 021 product",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
     "build": "bun run build:foundation && bun run build:rest",
     "build:foundation": "bun run --filter @021is/spine-errors --filter @021is/spine-env --filter @021is/spine-testing build",
-    "build:rest": "bun run --filter @021is/spine-http --filter @021is/spine-auth --filter @021is/spine-telemetry --filter @021is/spine-actions --filter @021is/spine-ratelimit --filter @021is/spine-webhooks --filter @021is/spine-email --filter @021is/spine-cache --filter @021is/spine-jobs --filter @021is/spine-i18n --filter @021is/spine-query --filter @021is/spine build",
+    "build:rest": "bun run --filter @021is/spine-http --filter @021is/spine-auth --filter @021is/spine-telemetry --filter @021is/spine-actions --filter @021is/spine-ratelimit --filter @021is/spine-webhooks --filter @021is/spine-email --filter @021is/spine-cache --filter @021is/spine-jobs --filter @021is/spine-i18n --filter @021is/spine-query --filter @021is/spine-quality --filter @021is/spine-lint --filter @021is/spine build",
     "test": "vitest run --reporter=verbose --reporter=github-actions",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit -p tsconfig.json",

@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-jobs",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "NATS JetStream publisher + consumer wrapper. Async fan-out + cron triggers + work queues, all going through the same NATS instance in the helvix cluster.",
   "type": "module",
   "main": "./dist/index.js",

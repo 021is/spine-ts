@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-auth",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "JWKS verifier + requireUser/requireRole helpers for Next.js route handlers + server actions. Verifies elvix-issued RS256 tokens.",
   "type": "module",
   "main": "./dist/index.js",

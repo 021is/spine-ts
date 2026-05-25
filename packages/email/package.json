@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-email",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Resend wrapper with structured logging, retries, and a uniform send API. Templates live in the consuming app.",
   "type": "module",
   "main": "./dist/index.js",

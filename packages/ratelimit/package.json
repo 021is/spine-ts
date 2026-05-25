@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-ratelimit",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Postgres-backed sliding-window rate limiter. Generalized from elvix's per-API-key bucket pattern. No Redis required.",
   "type": "module",
   "main": "./dist/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-actions",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Type-safe server-action helper: zod input validation + auth check + audit + auto revalidatePath, returning ResponseDto.",
   "type": "module",
   "main": "./dist/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "@021is/spine-webhooks",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Inbound webhook verifier: HMAC signature + replay/idempotency dedupe. Generalized from DC's Resend/Stripe handlers.",
   "type": "module",
   "main": "./dist/index.js",

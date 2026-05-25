@@ -1,0 +1,85 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "files": {
+    "ignore": [
+      "**/dist/**",
+      "**/.next/**",
+      "**/node_modules/**",
+      "**/coverage/**",
+      "**/*.generated.ts",
+      "**/.turbo/**"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "semicolons": "always",
+      "trailingCommas": "all",
+      "arrowParentheses": "always"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "error",
+        "noConsoleLog": "error",
+        "noCommentText": "off",
+        "noEmptyBlockStatements": "error",
+        "noConsole": "error",
+        "noDoubleEquals": "error",
+        "noEvolvingTypes": "error",
+        "noMisleadingInstantiator": "error",
+        "noSkippedTests": "error"
+      },
+      "style": {
+        "useImportType": "error",
+        "useNamingConvention": {
+          "level": "warn",
+          "options": {
+            "strictCase": false,
+            "conventions": [
+              { "selector": { "kind": "typeLike" }, "formats": ["PascalCase"] },
+              { "selector": { "kind": "enumMember" }, "formats": ["CONSTANT_CASE"] },
+              { "selector": { "kind": "variable", "modifiers": ["const"] }, "formats": ["camelCase", "CONSTANT_CASE", "PascalCase"] }
+            ]
+          }
+        },
+        "noNonNullAssertion": "error",
+        "useConst": "error",
+        "useTemplate": "error",
+        "useShorthandAssign": "error",
+        "useNumberNamespace": "error"
+      },
+      "complexity": {
+        "noForEach": "off",
+        "noUselessCatch": "error",
+        "noUselessTypeConstraint": "error",
+        "noStaticOnlyClass": "error"
+      },
+      "correctness": {
+        "noUnusedImports": "error",
+        "noUnusedVariables": "error",
+        "noUnusedPrivateClassMembers": "error",
+        "useExhaustiveDependencies": "warn"
+      },
+      "performance": {
+        "noBarrelFile": "off"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "error",
+        "noGlobalEval": "error"
+      },
+      "nursery": {
+        "noEnum": "off"
+      }
+    }
+  }
+}

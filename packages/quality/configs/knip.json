@@ -1,0 +1,25 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "src/app/**/page.tsx",
+    "src/app/**/layout.tsx",
+    "src/app/**/route.ts",
+    "src/app/**/loading.tsx",
+    "src/app/**/error.tsx",
+    "src/app/**/not-found.tsx",
+    "src/app/**/template.tsx",
+    "src/feature/**/index.ts",
+    "src/middleware.ts",
+    "src/instrumentation.ts",
+    "tests/**/*.test.ts",
+    "tests/setup.ts",
+    "vitest.config.ts",
+    "playwright.config.ts",
+    "next.config.*",
+    "biome.json"
+  ],
+  "project": ["src/**/*.{ts,tsx}", "tests/**/*.{ts,tsx}"],
+  "ignore": ["**/*.generated.ts", "**/.next/**", "**/coverage/**"],
+  "ignoreDependencies": ["typescript", "@types/node"],
+  "ignoreExportsUsedInFile": true
+}
