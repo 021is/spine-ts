@@ -29,7 +29,8 @@
     }
   },
   "publishConfig": {
-    "access": "public"
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
   },
   "keywords": ["docs", "llms.txt", "agent", "mcp", "openapi"],
   "license": "MIT",
