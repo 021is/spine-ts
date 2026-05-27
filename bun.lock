@@ -21,6 +21,16 @@
         "zod": "^3.23.8",
       },
     },
+    "packages/agent-docs": {
+      "name": "@021is/agent-docs",
+      "version": "0.1.0",
+      "peerDependencies": {
+        "next": ">=15 <17",
+      },
+      "optionalPeers": [
+        "next",
+      ],
+    },
     "packages/auth": {
       "name": "@021is/spine-auth",
       "version": "0.4.0",
@@ -125,7 +135,7 @@
     },
     "packages/lint": {
       "name": "@021is/spine-lint",
-      "version": "0.4.0",
+      "version": "0.4.2",
       "bin": {
         "spine-lint": "./dist/bin.js",
       },
@@ -205,6 +215,8 @@
     },
   },
   "packages": {
+    "@021is/agent-docs": ["@021is/agent-docs@workspace:packages/agent-docs"],
+
     "@021is/spine": ["@021is/spine@workspace:packages/cli"],
 
     "@021is/spine-actions": ["@021is/spine-actions@workspace:packages/actions"],
