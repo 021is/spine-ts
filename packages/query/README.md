@@ -4,7 +4,7 @@ TanStack Query wrapper with sensible defaults that minimize backend traffic. Plu
 
 ## Why
 
-DC-web hit a real rate-limit because 10 components were each calling the same endpoint. TanStack Query's defaults (`refetchOnFocus: true`, `staleTime: 0`) make this worse, not better. spine-query tunes for **don't hammer**.
+A production app hit a real rate-limit because 10 components were each calling the same endpoint. TanStack Query's defaults (`refetchOnFocus: true`, `staleTime: 0`) make this worse, not better. spine-query tunes for **don't hammer**.
 
 ## Defaults (built into `makeQueryClient`)
 

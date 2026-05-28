@@ -198,7 +198,7 @@ git push origin spine/migrate
 # Open PR. Gate runs. Fix what fires.
 ```
 
-After merge, check `grafana.021.is/d/spine-quality` — your repo should appear within 5 min.
+After merge, your repo appears on the code-quality dashboard within 5 min.
 
 ## Known traps
 

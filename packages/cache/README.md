@@ -1,6 +1,6 @@
 # @021.is/spine-cache
 
-TTL + tag-invalidation cache with **single-flight dedupe**. Fixes the dc-web N+1 scar: 10 components asking for the same user concurrently → 1 backend call.
+TTL + tag-invalidation cache with **single-flight dedupe**. Fixes the classic N+1: 10 components asking for the same user concurrently → 1 backend call.
 
 ## Use
 

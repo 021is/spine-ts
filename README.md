@@ -1,6 +1,6 @@
 # Spine-TS
 
-The universal TypeScript service doctrine + 15 shared packages for every 021 product.
+The universal TypeScript service doctrine + 15 shared packages for every product.
 
 Render `knowledge/code.md` concrete for Next.js + Node:
 - **Same shape in every repo.** See [STRUCTURE.md](./STRUCTURE.md).
@@ -57,7 +57,7 @@ bun add -d @021.is/spine-testing vitest @vitest/coverage-v8 playwright
 
 - [STRUCTURE.md](./STRUCTURE.md) — folder shape every 021 app + every Spine package follows.
 - [AGENTS.md](./AGENTS.md) — repo-local agent rules.
-- `axon/knowledge/code.md` — universal code standards Spine renders concrete.
+- Universal code standards, rendered concrete for Next.js + Node.
 
 ## Status
 

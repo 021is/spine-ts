@@ -2,7 +2,7 @@
 
 > The mandatory shape of every 021 app. Same skeleton in every repo so any human or agent walking into any service knows exactly where to look.
 >
-> Lifted + generalized from DanceClub (`backend/event-service/*`, `hub/src/feature/*`, `web/src/feature/*`).
+> Generalized from a production Kotlin service + Next.js apps.
 > Locked 2026-05-24 by Edvard.
 
 ## The principle
@@ -21,7 +21,7 @@ Domain knows nothing about Prisma, Next.js, Resend, or any framework. Adapters k
 
 ## Spine-TS app skeleton (Next.js / Node)
 
-Mirrors `danceclub/hub/src/` and `danceclub/web/src/`, formalized.
+Formalized from production Next.js apps.
 
 ```
 my-app/
@@ -104,7 +104,7 @@ my-app/
 
 ## Spine-Kotlin app skeleton (Spring Boot service)
 
-Mirrors `danceclub/backend/event-service/*`, formalized.
+Formalized from a production Kotlin service.
 
 ```
 <service-name>/                      e.g., dc-event, helvix-billing
@@ -224,7 +224,7 @@ packages/spine-i18n/src/
 └── index.ts                  Default re-exports
 ```
 
-Same shape as `danceclub/locale/src/{domain,ports,application,adapters}/`. Agents who know one Spine package know the layout for all.
+Same shape as the locale package's `{domain,ports,application,adapters}/`. Know one Spine package, know them all.
 
 ## What this gives you
 

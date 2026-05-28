@@ -41,7 +41,7 @@ afterAll(() => {
 
 ## Why Testcontainers > mocks
 
-Doctrine from `axon/knowledge/code.md` §9: "mocks lie when production diverges." A real Postgres runs your real migrations, executes your real SQL, surfaces real index bugs. The cost (~1.5s per worker cold start) is amortized over the whole suite.
+The rule: "mocks lie when production diverges." A real Postgres runs your real migrations, executes your real SQL, surfaces real index bugs. The cost (~1.5s per worker cold start) is amortized over the whole suite.
 
 ## Performance notes
 

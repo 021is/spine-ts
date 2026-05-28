@@ -2,7 +2,7 @@
 
 ## What this is
 
-The mandatory response envelope + exception hierarchy for every 021 HTTP endpoint and server action. Lifted from DanceClub's `shared-lib.domain.dto.ResponseDto` + `shared-lib.exceptions.*`.
+The mandatory response envelope + exception hierarchy for every HTTP endpoint and server action. Modeled on a proven Kotlin shared-lib (ResponseDto + a typed exception hierarchy).
 
 ## Hard rules
 

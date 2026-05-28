@@ -1,6 +1,6 @@
 # AGENTS.md — spine-ts
 
-The universal TypeScript service doctrine for every 021 product. Read [STRUCTURE.md](./STRUCTURE.md) before touching anything here.
+The universal TypeScript service doctrine for every product. Read [STRUCTURE.md](./STRUCTURE.md) before touching anything here.
 
 ## Hard rules (this repo)
 
@@ -14,7 +14,7 @@ The universal TypeScript service doctrine for every 021 product. Read [STRUCTURE
 
 - **ResponseDto from every endpoint + server action.** Mandatory. No raw payloads.
 - **Hexagonal per feature.** `src/feature/<f>/{domain,ports,adapters,usecase,schema,components}`. See STRUCTURE.md import-rules table.
-- **Tests use Testcontainers, not mocks.** `axon/knowledge/code.md` §9 is the binding constitution.
+- **Tests use Testcontainers, not mocks.** Real-DB integration testing is the binding rule.
 - **No raw `<button>` / `<input>`** — always design-system primitives.
 
 ## CI conventions (for spine itself and every consumer)
@@ -35,6 +35,5 @@ The universal TypeScript service doctrine for every 021 product. Read [STRUCTURE
 
 ## When in doubt
 
-- `axon/knowledge/code.md` is the universal doctrine. Spine renders it concrete.
-- `axon/knowledge/spine-ts.md` is Spine's own doctrine (next session).
-- DC backend's `shared-lib` is the proven Kotlin twin; behaviour matches.
+- The universal code doctrine is rendered concrete here.
+- Modeled on a proven Kotlin shared-lib; behaviour matches.

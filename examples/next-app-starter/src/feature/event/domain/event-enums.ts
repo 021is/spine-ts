@@ -1,5 +1,5 @@
 // Reference: const-as-object enums (the only enum style Spine accepts).
-// See axon/knowledge/spine-rules.md § Enums + STRUCTURE.md § Enum-over-string.
+// See STRUCTURE.md § Enum-over-string.
 
 export const EVENT_STATUS = {
   DRAFT: "draft",

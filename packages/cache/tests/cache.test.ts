@@ -32,7 +32,7 @@ describe("makeMemoryCache", () => {
     }
   });
 
-  it("single-flight dedupes concurrent calls (fixes the dc-web N+1)", async () => {
+  it("single-flight dedupes concurrent calls (fixes the classic N+1)", async () => {
     const cache = makeMemoryCache();
     let executions = 0;
     const fn = async () => {

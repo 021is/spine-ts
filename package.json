@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
-  "description": "Spine-TS monorepo \u2014 shared TypeScript packages for every 021 product",
+  "description": "Spine-TS monorepo \u2014 shared TypeScript packages for every product",
   "workspaces": ["packages/*"],
   "scripts": {
     "build": "bun run build:foundation && bun run build:rest",
