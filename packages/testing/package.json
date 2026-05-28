@@ -1,6 +1,7 @@
 {
-  "name": "@021is/spine-testing",
+  "name": "@021.is/spine-testing",
   "version": "0.4.0",
+  "license": "MIT",
   "description": "Shared test helpers: Testcontainers Postgres (worker-shared), Prisma migrator, JWKS mock server, MSW factory, deterministic time + uuid.",
   "type": "module",
   "main": "./dist/index.js",
@@ -46,6 +47,6 @@
     "directory": "packages/testing"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   }
 }

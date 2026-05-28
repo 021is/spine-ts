@@ -1,4 +1,4 @@
-import { UnauthorizedException } from "@021is/spine-errors";
+import { UnauthorizedException } from "@021.is/spine-errors";
 import { describe, expect, it } from "vitest";
 import { makeHmacVerifier, makeMemoryIdempotencyStore } from "../src/index.js";
 

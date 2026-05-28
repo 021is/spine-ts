@@ -9,7 +9,7 @@ import { PostgreSqlContainer, type StartedPostgreSqlContainer } from "@testconta
  * Usage in a Vitest setup file:
  *
  *   // tests/setup.ts
- *   import { startSharedPostgres, runPrismaMigrate } from "@021is/spine-testing/postgres";
+ *   import { startSharedPostgres, runPrismaMigrate } from "@021.is/spine-testing/postgres";
  *   import { beforeAll } from "vitest";
  *
  *   beforeAll(async () => {

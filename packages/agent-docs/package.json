@@ -1,7 +1,7 @@
 {
-  "name": "@021is/agent-docs",
+  "name": "@021.is/agent-docs",
   "version": "0.1.1",
-  "description": "Single-source-of-truth docs catalog + .md route handlers + llms.txt + agent-prompt scaffolding. One library, every 021/edvone product gets first-class agent integration.",
+  "description": "Single-source-of-truth docs catalog + .md route handlers + llms.txt + agent-prompt scaffolding. One library, every product gets first-class agent integration.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -29,8 +29,7 @@
     }
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
-    "access": "restricted"
+    "access": "public"
   },
   "keywords": ["docs", "llms.txt", "agent", "mcp", "openapi"],
   "license": "MIT",

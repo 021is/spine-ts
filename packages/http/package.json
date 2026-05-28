@@ -1,7 +1,8 @@
 {
-  "name": "@021is/spine-http",
+  "name": "@021.is/spine-http",
   "version": "0.4.0",
-  "description": "Typed HTTP client base with resilience defaults (timeout, retry, circuit-break). TS twin of dc-rest-kotlin / 021-platform-rest.",
+  "license": "MIT",
+  "description": "Typed HTTP client base with resilience defaults (timeout, retry, circuit-break). TS twin of a proven Kotlin REST kit.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -17,7 +18,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@021is/spine-errors": "^0.4.0"
+    "@021.is/spine-errors": "^0.4.0"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,6 @@
     "directory": "packages/http"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   }
 }

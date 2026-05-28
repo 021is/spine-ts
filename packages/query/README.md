@@ -1,6 +1,6 @@
-# @021is/spine-query
+# @021.is/spine-query
 
-TanStack Query wrapper with 021 defaults that minimize backend traffic. Plus a typed `makeKeys` factory for consistent, scoped query keys.
+TanStack Query wrapper with sensible defaults that minimize backend traffic. Plus a typed `makeKeys` factory for consistent, scoped query keys.
 
 ## Why
 
@@ -21,7 +21,7 @@ DC-web hit a real rate-limit because 10 components were each calling the same en
 
 ```tsx
 import { QueryClientProvider } from "@tanstack/react-query";
-import { makeQueryClient } from "@021is/spine-query";
+import { makeQueryClient } from "@021.is/spine-query";
 
 const qc = makeQueryClient();
 <QueryClientProvider client={qc}>{children}</QueryClientProvider>
@@ -30,7 +30,7 @@ const qc = makeQueryClient();
 ## Use — typed query keys
 
 ```ts
-import { makeKeys } from "@021is/spine-query";
+import { makeKeys } from "@021.is/spine-query";
 
 export const eventKeys = makeKeys("events", {
   all: () => [],

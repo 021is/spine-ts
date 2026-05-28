@@ -1,11 +1,11 @@
-# @021is/spine-webhooks
+# @021.is/spine-webhooks
 
 Inbound webhook HMAC verifier (4 formats: raw, GitHub `sha256=…`, Stripe `t=…,v1=…` with tolerance window, Resend svix-style `v1,<b64>`) + idempotency-key dedupe store. Timing-safe comparisons throughout.
 
 ## Use
 
 ```ts
-import { makeHmacVerifier, makeMemoryIdempotencyStore } from "@021is/spine-webhooks";
+import { makeHmacVerifier, makeMemoryIdempotencyStore } from "@021.is/spine-webhooks";
 
 const stripe = makeHmacVerifier({
   secret: env.STRIPE_WEBHOOK_SECRET,

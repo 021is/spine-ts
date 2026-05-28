@@ -1,4 +1,4 @@
-import { BadRequestException, ForbiddenException, NotFoundException } from "@021is/spine-errors";
+import { BadRequestException, ForbiddenException, NotFoundException } from "@021.is/spine-errors";
 import { describe, expect, it } from "vitest";
 import { makeInMemoryEventRepo } from "../../adapters/memory/InMemoryEventRepo.js";
 import type { Event } from "../../domain/Event.js";

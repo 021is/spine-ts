@@ -6,7 +6,7 @@ import { type ZodTypeAny, z } from "zod";
  * missing or invalid — never silently lets a NaN ship to production.
  *
  * Inspired by t3-env (https://env.t3.gg) but with no client/server split
- * (server-only at the moment; client-env split lands when a 021 product
+ * (server-only at the moment; client-env split lands when a product
  * needs it).
  */
 export interface DefineEnvOptions<TSchema extends Record<string, ZodTypeAny>> {

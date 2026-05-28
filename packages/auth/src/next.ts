@@ -1,11 +1,11 @@
-import { UnauthorizedException } from "@021is/spine-errors";
+import { UnauthorizedException } from "@021.is/spine-errors";
 import { JwksVerifier, type VerifiedPrincipal, type VerifierOptions } from "./verifier.js";
 
 /**
  * Build a singleton verifier from env. Most apps call this once at startup:
  *
  *   // lib/auth.ts
- *   export const verifier = makeVerifier({ jwksUri: env.ELVIX_JWKS_URI, audience: env.ELVIX_AUDIENCE });
+ *   export const verifier = makeVerifier({ jwksUri: env.JWKS_URI, audience: env.JWKS_AUDIENCE });
  */
 export function makeVerifier(options: VerifierOptions): JwksVerifier {
   return new JwksVerifier(options);
@@ -14,7 +14,7 @@ export function makeVerifier(options: VerifierOptions): JwksVerifier {
 /**
  * Use inside a Next.js route handler:
  *
- *   import { withAuth } from "@021is/spine-auth/next";
+ *   import { withAuth } from "@021.is/spine-auth/next";
  *   export const GET = withAuth(verifier, async (req, ctx) => {
  *     return Response.json({ me: ctx.principal.sub });
  *   }, { roles: ["admin"] });

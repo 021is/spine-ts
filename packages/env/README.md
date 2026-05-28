@@ -1,4 +1,4 @@
-# @021is/spine-env
+# @021.is/spine-env
 
 Type-safe, zod-validated environment loader. Fails LOUDLY at module-load time when a variable is missing or invalid.
 
@@ -6,7 +6,7 @@ Type-safe, zod-validated environment loader. Fails LOUDLY at module-load time wh
 
 ```ts
 // lib/env.ts
-import { defineEnv, common } from "@021is/spine-env";
+import { defineEnv, common } from "@021.is/spine-env";
 import { z } from "zod";
 
 export const env = defineEnv({
@@ -18,7 +18,7 @@ export const env = defineEnv({
     PORT: common.number(),
     SIGN_UPS_OPEN: common.boolean(),
     MAX_UPLOAD: common.bytes(),
-    ELVIX_CLIENT_ID: z.string().startsWith("app_"),
+    AUTH_CLIENT_ID: z.string().startsWith("app_"),
   },
 });
 ```

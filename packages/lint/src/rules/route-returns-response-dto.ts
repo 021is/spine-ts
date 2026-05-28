@@ -6,10 +6,10 @@ const HTTP_METHODS = new Set(["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "
 /**
  * Every Next.js route handler MUST return a ResponseDto. The cheap check:
  * the handler is either wrapped in `withErrorHandling(...)` from
- * @021is/spine-errors/next, OR its body calls `ok(...)` / `err(...)`
+ * @021.is/spine-errors/next, OR its body calls `ok(...)` / `err(...)`
  * to construct a ResponseDto envelope before returning.
  *
- * Mandatory per Edvard, locked 2026-05-24.
+ * Mandatory.
  */
 export const routeReturnsResponseDtoRule: Rule = {
   id: "spine/route-returns-response-dto",
@@ -19,7 +19,7 @@ export const routeReturnsResponseDtoRule: Rule = {
     const source = ctx.source;
     const hasWithErrorHandling = /withErrorHandling\s*\(/.test(source);
     const hasOkOrErr =
-      /\bfrom\s+["']@021is\/spine-errors(?:\/next)?["']/.test(source) &&
+      /\bfrom\s+["']@021.is\/spine-errors(?:\/next)?["']/.test(source) &&
       /\b(ok|err)\s*\(/.test(source);
 
     // Find every `export (async )? function METHOD` or `export const METHOD =`
@@ -54,7 +54,7 @@ export const routeReturnsResponseDtoRule: Rule = {
           line: loc.line,
           column: loc.column,
           message: `Route handler ${methodName} doesn't go through withErrorHandling or build a ResponseDto.`,
-          hint: "Wrap with withErrorHandling from @021is/spine-errors/next, or return Response.json(ok(...)) / err(...) explicitly.",
+          hint: "Wrap with withErrorHandling from @021.is/spine-errors/next, or return Response.json(ok(...)) / err(...) explicitly.",
         });
       }
     });

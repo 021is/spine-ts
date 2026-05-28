@@ -1,23 +1,23 @@
-# @021is/spine-testing
+# @021.is/spine-testing
 
-Shared test helpers used by every 021 product. Lets every repo's `tests/setup.ts` look the same.
+Shared test helpers used by every product. Lets every repo's `tests/setup.ts` look the same.
 
 ## What's in the box
 
 | Subpath | Purpose |
 |---|---|
-| `@021is/spine-testing/postgres` | `startSharedPostgres()` — Testcontainers PG per Vitest worker. `runPrismaMigrate()` — apply your schema once. `truncateAll()` — clean between tests without restart. |
-| `@021is/spine-testing/jwks` | `startJwksMockServer()` — in-process RS256 JWKS endpoint + `signToken()`. Point your auth middleware at it; no real elvix needed. |
-| `@021is/spine-testing/msw` | `startMockServer()` — MSW for outbound HTTP. Mock Resend / Stripe / R2 / Google. |
-| `@021is/spine-testing/time` | `freezeTime()` + `deterministicIds()` — stable timestamps + ids for snapshot + rate-limit tests. |
+| `@021.is/spine-testing/postgres` | `startSharedPostgres()` — Testcontainers PG per Vitest worker. `runPrismaMigrate()` — apply your schema once. `truncateAll()` — clean between tests without restart. |
+| `@021.is/spine-testing/jwks` | `startJwksMockServer()` — in-process RS256 JWKS endpoint + `signToken()`. Point your auth middleware at it; no real elvix needed. |
+| `@021.is/spine-testing/msw` | `startMockServer()` — MSW for outbound HTTP. Mock Resend / Stripe / R2 / Google. |
+| `@021.is/spine-testing/time` | `freezeTime()` + `deterministicIds()` — stable timestamps + ids for snapshot + rate-limit tests. |
 
 ## Reference setup
 
 ```ts
 // tests/setup.ts
 import { beforeAll, afterAll, afterEach } from "vitest";
-import { startSharedPostgres, runPrismaMigrate, truncateAll } from "@021is/spine-testing/postgres";
-import { startMockServer } from "@021is/spine-testing/msw";
+import { startSharedPostgres, runPrismaMigrate, truncateAll } from "@021.is/spine-testing/postgres";
+import { startMockServer } from "@021.is/spine-testing/msw";
 
 let dbUrl: string;
 const mocks = startMockServer();

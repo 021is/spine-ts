@@ -1,8 +1,8 @@
 import { QueryClient } from "@tanstack/react-query";
 
 /**
- * Build a QueryClient with the 021 defaults that minimize redundant
- * backend traffic (the DC-web rate-limit scar):
+ * Build a QueryClient with sensible defaults that minimize redundant
+ * backend traffic:
  *
  *   - `staleTime: 60_000` — assume fresh for 1 min; component swaps don't refetch
  *   - `refetchOnWindowFocus: false` — opt-in per query if needed

@@ -1,6 +1,6 @@
-# @021is/spine-i18n
+# @021.is/spine-i18n
 
-Hexagonal i18n: domain + ports + R2/fs/memory adapters + React + server runtime. CLDR plural forms via `Intl.PluralRules`. Generalized from DanceClub's `@danceclub-platform/locale` library.
+Hexagonal i18n: domain + ports + R2/fs/memory adapters + React + server runtime. CLDR plural forms via `Intl.PluralRules`. Modeled on a proven Kotlin locale library.
 
 ## Catalog format
 
@@ -20,8 +20,8 @@ One JSON file per locale at `src/i18n/<bcp47>.json` (e.g., `en.json`, `de.json`,
 ## Use — server (Next RSC, metadata, JSON-LD)
 
 ```ts
-import { getServerLocaleRuntime } from "@021is/spine-i18n/server";
-import { makeFsCatalogStore } from "@021is/spine-i18n/fs";
+import { getServerLocaleRuntime } from "@021.is/spine-i18n/server";
+import { makeFsCatalogStore } from "@021.is/spine-i18n/fs";
 
 const store = makeFsCatalogStore("./src/i18n");
 const runtime = await getServerLocaleRuntime(store, "de", "en");
@@ -36,7 +36,7 @@ runtime.fmtDate(new Date(), { dateStyle: "long" });   // "30. Mai 2026"
 ## Use — React client
 
 ```tsx
-import { LocaleProvider, useT } from "@021is/spine-i18n/react";
+import { LocaleProvider, useT } from "@021.is/spine-i18n/react";
 
 <LocaleProvider initial={runtime}>
   <App />
@@ -51,7 +51,7 @@ function SignInButton() {
 ## Locale negotiation
 
 ```ts
-import { negotiateLocale, makeLocale } from "@021is/spine-i18n";
+import { negotiateLocale, makeLocale } from "@021.is/spine-i18n";
 
 const locale = negotiateLocale({
   urlLocale: "de",                                // 1st priority
@@ -66,10 +66,10 @@ const locale = negotiateLocale({
 
 | | Use | Subpath |
 |---|---|---|
-| `makeR2CatalogStore` | Production — R2 is the source of truth, shared across all consumer apps | `@021is/spine-i18n/r2` |
-| `makeFsCatalogStore` | Dev mode, CI tests | `@021is/spine-i18n/fs` |
-| `makeMemoryCatalogStore` | Unit tests, in-process embedded use | `@021is/spine-i18n` |
+| `makeR2CatalogStore` | Production — R2 is the source of truth, shared across all consumer apps | `@021.is/spine-i18n/r2` |
+| `makeFsCatalogStore` | Dev mode, CI tests | `@021.is/spine-i18n/fs` |
+| `makeMemoryCatalogStore` | Unit tests, in-process embedded use | `@021.is/spine-i18n` |
 
 ## Key parity (mandatory)
 
-The `spine/i18n-key-parity` rule in `@021is/spine-lint` enforces that every `t("namespace.key")` call exists in EVERY catalog loaded under `src/i18n/`. Prevents the silent production bug where one language renders the raw key text.
+The `spine/i18n-key-parity` rule in `@021.is/spine-lint` enforces that every `t("namespace.key")` call exists in EVERY catalog loaded under `src/i18n/`. Prevents the silent production bug where one language renders the raw key text.

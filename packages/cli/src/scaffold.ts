@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 /**
- * Scaffold a fresh Next.js app following the 021 skeleton (see STRUCTURE.md).
+ * Scaffold a fresh Next.js app following the package skeleton (see STRUCTURE.md).
  *
  * Creates:
  *   - root files: package.json, tsconfig.json, biome.json, AGENTS.md, CLAUDE.md, README.md, .gitignore
@@ -81,12 +81,12 @@ export function scaffoldNextApp(input: ScaffoldNextAppInput): {
           "react-dom": "^19.0.0",
           "@prisma/client": "^5.20.0",
           zod: "^3.23.8",
-          "@021is/spine-errors": "^0.1.0",
-          "@021is/spine-env": "^0.1.0",
-          "@021is/spine-auth": "^0.1.0",
-          "@021is/spine-i18n": "^0.1.0",
-          "@021is/spine-actions": "^0.1.0",
-          "@021is/spine-query": "^0.1.0",
+          "@021.is/spine-errors": "^0.1.0",
+          "@021.is/spine-env": "^0.1.0",
+          "@021.is/spine-auth": "^0.1.0",
+          "@021.is/spine-i18n": "^0.1.0",
+          "@021.is/spine-actions": "^0.1.0",
+          "@021.is/spine-query": "^0.1.0",
           "@tanstack/react-query": "^5.0.0",
         },
         devDependencies: {
@@ -94,7 +94,7 @@ export function scaffoldNextApp(input: ScaffoldNextAppInput): {
           "@types/node": "^22.0.0",
           "@types/react": "^19.0.0",
           "@vitest/coverage-v8": "^2.1.0",
-          "@021is/spine-testing": "^0.1.0",
+          "@021.is/spine-testing": "^0.1.0",
           prisma: "^5.20.0",
           typescript: "^5.6.0",
           vitest: "^2.1.0",
@@ -200,7 +200,7 @@ function agentsTemplate(name: string): string {
 ## Stack
 
 - Next.js (App Router) + React 19 + TypeScript strict
-- Prisma + Postgres (via Delvix in prod; Testcontainers in tests)
+- Prisma + Postgres (via managed Postgres in prod; Testcontainers in tests)
 - Vitest + Playwright + MSW
 - Spine-TS packages: errors, env, auth, i18n, actions, query, testing
 
@@ -208,7 +208,7 @@ function agentsTemplate(name: string): string {
 
 - **ResponseDto from every endpoint + server action.** Wrap with \`withErrorHandling\` (route) or \`tryAction\` / \`defineAction\` (server action).
 - **Hexagonal per feature.** \`src/feature/<f>/{domain,ports,adapters,usecase,schema,components}\`. Domain knows nothing about Prisma/Next.
-- **Tests use real DB via @021is/spine-testing.** No mocks for our own domain.
+- **Tests use real DB via @021.is/spine-testing.** No mocks for our own domain.
 - **No raw \`<button>\` / \`<input>\`** — always shadcn primitives (or the project's chosen design system).
 - **No push to main** — PR-only. Branch protection enforces it. If staging exists: \`preview/*\` branches.
 
@@ -249,8 +249,8 @@ export default defineConfig({
 
 function testsSetup(): string {
   return `import { afterAll, afterEach, beforeAll } from "vitest";
-import { runPrismaMigrate, startSharedPostgres, truncateAll } from "@021is/spine-testing/postgres";
-import { startMockServer } from "@021is/spine-testing/msw";
+import { runPrismaMigrate, startSharedPostgres, truncateAll } from "@021.is/spine-testing/postgres";
+import { startMockServer } from "@021.is/spine-testing/msw";
 
 let dbUrl: string;
 const mocks = startMockServer();
@@ -283,7 +283,7 @@ model Example {
 }
 
 function envStub(): string {
-  return `import { common, defineEnv } from "@021is/spine-env";
+  return `import { common, defineEnv } from "@021.is/spine-env";
 export const env = defineEnv({
   schema: {
     NODE_ENV: common.nodeEnv(),
@@ -294,7 +294,7 @@ export const env = defineEnv({
 }
 
 function exampleUsecase(): string {
-  return `import { BadRequestException } from "@021is/spine-errors";
+  return `import { BadRequestException } from "@021.is/spine-errors";
 import type { ExampleRepo } from "../ports/ExampleRepo.js";
 import type { Example } from "../domain/Example.js";
 
@@ -311,7 +311,7 @@ export async function exampleUseCase(
 
 function exampleUsecaseTest(): string {
   return `import { describe, expect, it } from "vitest";
-import { BadRequestException } from "@021is/spine-errors";
+import { BadRequestException } from "@021.is/spine-errors";
 import { makeInMemoryExampleRepo } from "../../adapters/memory/InMemoryExampleRepo.js";
 import { exampleUseCase } from "../example.js";
 

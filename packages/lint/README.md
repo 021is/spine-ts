@@ -1,4 +1,4 @@
-# @021is/spine-lint
+# @021.is/spine-lint
 
 Spine-specific AST checks that biome can't express. Runs in CI as the `spine-lint` job in the quality gate; also runs locally via `spine-lint .`.
 
@@ -6,8 +6,8 @@ Spine-specific AST checks that biome can't express. Runs in CI as the `spine-lin
 
 | Rule | Severity | What |
 |---|---|---|
-| `spine/enum-over-string` | error / warning | Forbids inline string-literal unions (`: "a" \| "b" \| "c"`). Warns on repeated string-literal comparisons (`x === "foo"` ≥2 times). Locked by Edvard 2026-05-25. |
-| `spine/route-returns-response-dto` | error | Every Next.js route handler must go through `withErrorHandling` from `@021is/spine-errors/next` OR explicitly call `ok()` / `err()`. |
+| `spine/enum-over-string` | error / warning | Forbids inline string-literal unions (`: "a" \| "b" \| "c"`). Warns on repeated string-literal comparisons (`x === "foo"` ≥2 times). Locked. |
+| `spine/route-returns-response-dto` | error | Every Next.js route handler must go through `withErrorHandling` from `@021.is/spine-errors/next` OR explicitly call `ok()` / `err()`. |
 | `spine/endpoint-documented` | warning | Every route handler must have a JSDoc block above it. |
 | `spine/i18n-key-parity` | error | Every `t("namespace.key")` exists in every locale catalog under `src/i18n/`. Prevents the silent UX bug where production renders raw keys in foreign locales. |
 | `spine/no-raw-sql` | error | Blocks `$queryRawUnsafe` / `$executeRawUnsafe`. Use Prisma or `$queryRaw\`…\`` tagged-template. |

@@ -1,5 +1,5 @@
-import { ForbiddenException, UnauthorizedException } from "@021is/spine-errors";
-import { type JwksMockServer, startJwksMockServer } from "@021is/spine-testing/jwks";
+import { ForbiddenException, UnauthorizedException } from "@021.is/spine-errors";
+import { type JwksMockServer, startJwksMockServer } from "@021.is/spine-testing/jwks";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { JwksVerifier, requireRoles, requireScopes } from "../src/verifier.js";
 

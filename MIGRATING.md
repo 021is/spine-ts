@@ -4,7 +4,7 @@ Step-by-step path that any 021 TypeScript repo can follow to adopt Spine. Order 
 
 ## Pre-flight (10 min)
 
-- Confirm `~/.npmrc` on your dev machine has the @021is scope wired (see [README — Use in an app](./README.md)).
+- Confirm `~/.npmrc` on your dev machine has the @021.is scope wired (see [README — Use in an app](./README.md)).
 - Branch off main: `git checkout -b spine/migrate`.
 - Lock the current state: `git tag pre-spine && git push --tags`.
 
@@ -12,8 +12,8 @@ Step-by-step path that any 021 TypeScript repo can follow to adopt Spine. Order 
 
 ```bash
 # Install Spine
-bun add @021is/spine-errors @021is/spine-env
-bun add -d @021is/spine-testing @021is/spine-quality @021is/spine-lint
+bun add @021.is/spine-errors @021.is/spine-env
+bun add -d @021.is/spine-testing @021.is/spine-quality @021.is/spine-lint
 bun add -d vitest @vitest/coverage-v8 @biomejs/biome typescript playwright
 ```
 
@@ -21,22 +21,22 @@ Wire configs:
 
 ```jsonc
 // biome.json
-{ "extends": "@021is/spine-quality/biome" }
+{ "extends": "@021.is/spine-quality/biome" }
 ```
 
 ```jsonc
 // tsconfig.json
-{ "extends": "@021is/spine-quality/tsconfig-next" }   // or /tsconfig for non-Next
+{ "extends": "@021.is/spine-quality/tsconfig-next" }   // or /tsconfig for non-Next
 ```
 
 ```jsonc
 // knip.json
-{ "extends": "@021is/spine-quality/knip" }
+{ "extends": "@021.is/spine-quality/knip" }
 ```
 
 ```js
 // .dependency-cruiser.cjs
-module.exports = require("@021is/spine-quality/dependency-cruiser");
+module.exports = require("@021.is/spine-quality/dependency-cruiser");
 ```
 
 Add scripts to `package.json`:
@@ -77,7 +77,7 @@ export async function POST(req: Request) {
 }
 
 // After
-import { withErrorHandling, ok } from "@021is/spine-errors/next";
+import { withErrorHandling, ok } from "@021.is/spine-errors/next";
 
 export const POST = withErrorHandling(async (req: Request) => {
   const body = await req.json();
@@ -94,7 +94,7 @@ Run `bunx spine-lint --rule spine/route-returns-response-dto .` to confirm.
 
 ```ts
 // src/lib/env.ts
-import { defineEnv, common } from "@021is/spine-env";
+import { defineEnv, common } from "@021.is/spine-env";
 
 export const env = defineEnv({
   schema: {
@@ -114,8 +114,8 @@ Replace `process.env.X!` with `env.X` everywhere.
 ```ts
 // tests/setup.ts
 import { afterAll, afterEach, beforeAll } from "vitest";
-import { runPrismaMigrate, startSharedPostgres, truncateAll } from "@021is/spine-testing/postgres";
-import { startMockServer } from "@021is/spine-testing/msw";
+import { runPrismaMigrate, startSharedPostgres, truncateAll } from "@021.is/spine-testing/postgres";
+import { startMockServer } from "@021.is/spine-testing/msw";
 
 let dbUrl: string;
 const mocks = startMockServer();
@@ -156,7 +156,7 @@ This is iterative — migrate ONE feature at a time, run tests, commit.
 
 ## Phase 7 — i18n on spine-i18n (if applicable, 30 min per language)
 
-If you already have a translation system, port catalogs to `src/i18n/<locale>.json`. Replace your translator with `useT()` from `@021is/spine-i18n/react`.
+If you already have a translation system, port catalogs to `src/i18n/<locale>.json`. Replace your translator with `useT()` from `@021.is/spine-i18n/react`.
 
 Run `bunx spine-lint --rule spine/i18n-key-parity .` to find keys that exist in some locales but not all.
 
@@ -203,7 +203,7 @@ After merge, check `grafana.021.is/d/spine-quality` — your repo should appear 
 ## Known traps
 
 - `bun add A B` (multi-package one-shot) sometimes fails on private scoped packages with cross-deps (bun 1.3.11 quirk). Split into `bun add A` then `bun add B`.
-- Tests fail with `instanceof` errors across `@021is/spine-*` packages → make sure your `vitest.config.ts` has `server.deps.inline: [/@021is\/spine-/]`.
+- Tests fail with `instanceof` errors across `@021.is/spine-*` packages → make sure your `vitest.config.ts` has `server.deps.inline: [/@021.is\/spine-/]`.
 - Bundle-size job fails on first run → your `.size-limit.json` doesn't exist. Generate it via `bunx size-limit --json > .size-limit.json` after first build.
 
 ## Time estimate

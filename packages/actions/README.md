@@ -1,4 +1,4 @@
-# @021is/spine-actions
+# @021.is/spine-actions
 
 Type-safe server-action helper. Bakes zod input validation + auth + audit + `revalidatePath` into one wrapper. Always returns `ResponseDto<T | null>`.
 
@@ -6,7 +6,7 @@ Type-safe server-action helper. Bakes zod input validation + auth + audit + `rev
 
 ```ts
 "use server";
-import { defineAction } from "@021is/spine-actions";
+import { defineAction } from "@021.is/spine-actions";
 import { z } from "zod";
 import { requireUser } from "@/lib/auth";
 import { publishEvent } from "@/feature/event";
@@ -30,7 +30,7 @@ What the wrapper does in order: parse zod → run `auth` → run `handler` → a
 
 ## Why
 
-- One pattern for every server action across every 021 app
+- One pattern for every server action across your app
 - Zod parsing failures become `400 BadRequest` with translation keys, not raw stack traces
 - Audit happens only on success (no half-states)
 - Revalidation hook makes "force-dynamic" pages refresh after writes

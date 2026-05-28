@@ -14,7 +14,7 @@ describe("planAdd", () => {
 
   it("produces an install command for a Spine package target", () => {
     const r = planAdd(dir, "auth");
-    expect(r.commands[0]).toContain("bun add @021is/spine-auth @021is/spine-errors");
+    expect(r.commands[0]).toContain("bun add @021.is/spine-auth @021.is/spine-errors");
     expect(r.notes.length).toBeGreaterThan(0);
   });
 
@@ -42,31 +42,31 @@ describe("planUpgrade", () => {
   });
   afterEach(() => rmSync(dir, { recursive: true, force: true }));
 
-  it("bumps every @021is/spine-* dep to the target version", () => {
+  it("bumps every @021.is/spine-* dep to the target version", () => {
     writeFileSync(
       join(dir, "package.json"),
       JSON.stringify({
         dependencies: {
-          "@021is/spine-errors": "^0.1.0",
-          "@021is/spine-env": "^0.2.0",
+          "@021.is/spine-errors": "^0.1.0",
+          "@021.is/spine-env": "^0.2.0",
           next: "^16",
         },
-        devDependencies: { "@021is/spine-testing": "^0.2.0" },
+        devDependencies: { "@021.is/spine-testing": "^0.2.0" },
       }),
     );
     const { changed } = planUpgrade(dir, "0.3.0");
     expect(changed.length).toBe(3);
     const after = JSON.parse(readFileSync(join(dir, "package.json"), "utf-8"));
-    expect(after.dependencies["@021is/spine-errors"]).toBe("^0.3.0");
-    expect(after.dependencies["@021is/spine-env"]).toBe("^0.3.0");
+    expect(after.dependencies["@021.is/spine-errors"]).toBe("^0.3.0");
+    expect(after.dependencies["@021.is/spine-env"]).toBe("^0.3.0");
     expect(after.dependencies.next).toBe("^16"); // untouched
-    expect(after.devDependencies["@021is/spine-testing"]).toBe("^0.3.0");
+    expect(after.devDependencies["@021.is/spine-testing"]).toBe("^0.3.0");
   });
 
   it("returns no changes when already at target", () => {
     writeFileSync(
       join(dir, "package.json"),
-      JSON.stringify({ dependencies: { "@021is/spine-errors": "^0.3.0" } }),
+      JSON.stringify({ dependencies: { "@021.is/spine-errors": "^0.3.0" } }),
     );
     const { changed } = planUpgrade(dir, "0.3.0");
     expect(changed).toEqual([]);

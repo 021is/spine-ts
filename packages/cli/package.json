@@ -1,6 +1,7 @@
 {
-  "name": "@021is/spine",
+  "name": "@021.is/spine",
   "version": "0.4.0",
+  "license": "MIT",
   "description": "Spine CLI: scaffold 021-shaped projects (spine new), add Spine features to existing repos (spine add), audit (spine doctor). Enforces STRUCTURE.md.",
   "type": "module",
   "main": "./dist/index.js",
@@ -29,6 +30,6 @@
     "directory": "packages/cli"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   }
 }

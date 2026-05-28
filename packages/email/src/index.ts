@@ -1,4 +1,4 @@
-import { SomethingWentWrongException } from "@021is/spine-errors";
+import { SomethingWentWrongException } from "@021.is/spine-errors";
 
 /**
  * Resend wrapper. Templates are the consuming app's concern — typically
@@ -6,13 +6,13 @@ import { SomethingWentWrongException } from "@021is/spine-errors";
  *
  *   const email = makeEmailClient({
  *     apiKey: env.RESEND_API_KEY,
- *     defaultFrom: "Elvix <noreply@elvix.is>",
+ *     defaultFrom: "My App <noreply@example.com>",
  *   });
  *   await email.send({
- *     to: "edvard@edvone.dev",
- *     subject: "Welcome to Elvix",
- *     html: renderToString(<WelcomeEmail name="Edvard" />),
- *     tags: { app: "elvix", flow: "signup" },
+ *     to: "you@example.com",
+ *     subject: "Welcome to My App",
+ *     html: renderToString(<WelcomeEmail name="Sam" />),
+ *     tags: { app: "my-app", flow: "signup" },
  *   });
  */
 export interface EmailClientConfig {

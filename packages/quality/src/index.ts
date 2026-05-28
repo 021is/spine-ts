@@ -1,26 +1,26 @@
 /**
- * @021is/spine-quality
+ * @021.is/spine-quality
  *
  * Shipping configs for the Spine quality gate. Apps consume via the
  * package.json exports map:
  *
  *   // biome.json
- *   { "extends": "@021is/spine-quality/biome" }
+ *   { "extends": "@021.is/spine-quality/biome" }
  *
  *   // tsconfig.json
- *   { "extends": "@021is/spine-quality/tsconfig-next" }
+ *   { "extends": "@021.is/spine-quality/tsconfig-next" }
  *
  *   // knip.json
- *   { "extends": "@021is/spine-quality/knip" }
+ *   { "extends": "@021.is/spine-quality/knip" }
  *
  *   // .dependency-cruiser.cjs
- *   module.exports = require("@021is/spine-quality/dependency-cruiser");
+ *   module.exports = require("@021.is/spine-quality/dependency-cruiser");
  *
  *   // semgrep
- *   semgrep --config "$(node -p "require.resolve('@021is/spine-quality/semgrep')")"
+ *   semgrep --config "$(node -p "require.resolve('@021.is/spine-quality/semgrep')")"
  *
  *   // size-limit.json
- *   { "extends": "@021is/spine-quality/size-limit" }
+ *   { "extends": "@021.is/spine-quality/size-limit" }
  *
  * Vitest config + Lighthouse-CI assertions are app-local (different
  * apps have different routes), but spine-ts/STRUCTURE.md publishes the

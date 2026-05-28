@@ -1,6 +1,6 @@
-# @021is/agent-docs
+# @021.is/agent-docs
 
-Single-source-of-truth docs catalog. One library, every 021/edvone product gets first-class agent integration without copy-paste.
+Single-source-of-truth docs catalog. One library, every product gets first-class agent integration without copy-paste.
 
 One `DocsCatalog` object feeds:
 
@@ -14,7 +14,7 @@ Drift between surfaces becomes physically impossible.
 ## Install
 
 ```bash
-bun add @021is/agent-docs
+bun add @021.is/agent-docs
 ```
 
 ## Quickstart
@@ -22,7 +22,7 @@ bun add @021is/agent-docs
 Define one catalog per page in `lib/docs/<slug>.ts`:
 
 ```ts
-import { type DocsCatalog, code, h2, p } from "@021is/agent-docs";
+import { type DocsCatalog, code, h2, p } from "@021.is/agent-docs";
 
 export const installCatalog: DocsCatalog = {
   slug: "install",
@@ -31,7 +31,7 @@ export const installCatalog: DocsCatalog = {
   body: [
     h2("Install"),
     p("Use your package manager."),
-    code("bash", "bun add @021is/my-sdk"),
+    code("bash", "bun add @021.is/my-sdk"),
   ],
 };
 ```
@@ -40,7 +40,7 @@ Drop the matching `.md` route handler:
 
 ```ts
 // app/docs/install.md/route.ts
-import { markdownRoute } from "@021is/agent-docs/next";
+import { markdownRoute } from "@021.is/agent-docs/next";
 import { installCatalog } from "@/lib/docs/install";
 
 export const dynamic = "force-static";
@@ -51,16 +51,16 @@ Wire `llms.txt`:
 
 ```ts
 // app/llms.txt/route.ts
-import { llmsTxtRoute } from "@021is/agent-docs/next";
+import { llmsTxtRoute } from "@021.is/agent-docs/next";
 import { installCatalog } from "@/lib/docs/install";
 
 export const dynamic = "force-static";
 export const GET = llmsTxtRoute({
-  name: "elvix",
-  tagline: "Identity, kept in Europe.",
-  siteUrl: "https://elvix.is",
+  name: "my-app",
+  tagline: "Your product tagline.",
+  siteUrl: "https://example.com",
   catalogs: [installCatalog],
-  openapi: { yamlUrl: "https://elvix.is/openapi.yaml" },
+  openapi: { yamlUrl: "https://example.com/openapi.yaml" },
 });
 ```
 

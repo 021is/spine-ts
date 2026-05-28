@@ -1,7 +1,7 @@
 import { publishEvent, publishEventInput } from "@/feature/event";
 import { requireUser } from "@/lib/auth";
 import { eventsRepo } from "@/lib/wiring";
-import { ok, withErrorHandling } from "@021is/spine-errors/next";
+import { ok, withErrorHandling } from "@021.is/spine-errors/next";
 
 /**
  * POST /api/events/[id]/publish

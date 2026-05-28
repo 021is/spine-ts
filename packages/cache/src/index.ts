@@ -1,12 +1,12 @@
 /**
  * TTL + tag-based cache abstraction. Goals:
- *   - Reduce backend round-trips (the DC-web rate-limit scar Edvard called out)
+ *   - Reduce backend round-trips
  *   - One uniform API across Next.js `unstable_cache`, in-memory, and Redis later
  *
  * For Next.js server components: use `cached(fn, { keyParts, ttlMs, tags })`
  * which wraps `unstable_cache` so the same call across components dedupes.
  *
- * For non-Next runtimes (workers, scripts, helvix dashboard backend code):
+ * For non-Next runtimes (workers, scripts, dashboard backend code):
  * use `makeMemoryCache()` and call `.fetch(key, fn, opts)`.
  */
 export interface CacheOptions {

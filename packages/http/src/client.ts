@@ -1,11 +1,11 @@
-import type { ResponseDto } from "@021is/spine-errors";
+import type { ResponseDto } from "@021.is/spine-errors";
 
 /**
  * Typed, resilient HTTP client. Wraps fetch with:
- *   - per-request timeout (default 1s — matches dc-rest-kotlin)
+ *   - per-request timeout (default 1s — matches the Kotlin REST kit)
  *   - retry on idempotent failures (GET/HEAD/PUT/DELETE) up to N times
  *   - circuit-break per host after K failures in a window (default 5 in 10s)
- *   - automatic ResponseDto unwrapping when peer is a 021 service
+ *   - automatic ResponseDto unwrapping when peer is your service
  */
 export interface SpineHttpConfig {
   baseUrl: string;

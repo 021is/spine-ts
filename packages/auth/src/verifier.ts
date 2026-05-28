@@ -1,12 +1,12 @@
-import { ForbiddenException, UnauthorizedException } from "@021is/spine-errors";
+import { ForbiddenException, UnauthorizedException } from "@021.is/spine-errors";
 import { type JWTPayload, createRemoteJWKSet, jwtVerify } from "jose";
 
 /**
- * Verifies RS256 JWTs against a JWKS endpoint (elvix in production, the
- * mock server from @021is/spine-testing in tests).
+ * Verifies RS256 JWTs against a JWKS endpoint (your identity provider in
+ * production, the mock server from @021.is/spine-testing in tests).
  *
  * Caches the JWKS for `cacheTtlMs` (default 1h) and force-refreshes on
- * any unknown `kid` so key rotation in elvix doesn't break the cluster.
+ * any unknown `kid` so IdP key rotation doesn't break the cluster.
  */
 export interface VerifierOptions {
   jwksUri: string;

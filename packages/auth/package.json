@@ -1,7 +1,8 @@
 {
-  "name": "@021is/spine-auth",
+  "name": "@021.is/spine-auth",
   "version": "0.4.0",
-  "description": "JWKS verifier + requireUser/requireRole helpers for Next.js route handlers + server actions. Verifies elvix-issued RS256 tokens.",
+  "license": "MIT",
+  "description": "JWKS verifier + requireUser/requireRole helpers for Next.js route handlers + server actions. Verifies your IdP's issued RS256 tokens.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -21,7 +22,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@021is/spine-errors": "^0.4.0",
+    "@021.is/spine-errors": "^0.4.0",
     "jose": "^5.9.6"
   },
   "peerDependencies": {
@@ -43,6 +44,6 @@
     "directory": "packages/auth"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   }
 }

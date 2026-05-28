@@ -1,13 +1,13 @@
-# @021is/spine
+# @021.is/spine
 
 CLI for scaffolding 021-shaped projects and auditing existing ones.
 
 ## Install
 
 ```bash
-bun add -g @021is/spine
+bun add -g @021.is/spine
 # or
-npx @021is/spine ...
+npx @021.is/spine ...
 ```
 
 ## Commands
@@ -32,8 +32,8 @@ spine doctor
 # Type: next-app
 # ✗ [no-vitest] vitest not installed.
 #     → bun add -d vitest @vitest/coverage-v8
-# ✗ [missing-spine-errors] @021is/spine-errors not installed.
-#     → Required across every 021 product. Run: bun add @021is/spine-errors
+# ✗ [missing-spine-errors] @021.is/spine-errors not installed.
+#     → Required across every product. Run: bun add @021.is/spine-errors
 # ...
 ```
 
@@ -45,4 +45,4 @@ These ideas live as GitHub issues; the CLI currently only ships `new` + `doctor`
 
 - `spine add feature <name>` — scaffold a feature folder skeleton inside an existing repo
 - `spine add testing` / `spine add auth` — install a Spine package + wire boilerplate
-- `spine upgrade` — bump all `@021is/spine-*` to latest in lockstep
+- `spine upgrade` — bump all `@021.is/spine-*` to latest in lockstep

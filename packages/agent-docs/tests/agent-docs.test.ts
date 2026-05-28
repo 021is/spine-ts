@@ -25,7 +25,7 @@ const cat: DocsCatalog = {
     ol(["one", "two"]),
     code("ts", "const x = 1;", "x.ts"),
     callout("info", "Heads up."),
-    tabs([{ label: "bun", language: "bash", source: "bun add @021is/agent-docs" }], "Install"),
+    tabs([{ label: "bun", language: "bash", source: "bun add @021.is/agent-docs" }], "Install"),
   ],
 };
 

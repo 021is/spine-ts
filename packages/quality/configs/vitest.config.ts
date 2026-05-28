@@ -5,7 +5,7 @@ import { defineConfig } from "vitest/config";
  *
  *   // vitest.config.ts
  *   import { mergeConfig } from "vitest/config";
- *   import spineDefaults from "@021is/spine-quality/vitest";
+ *   import spineDefaults from "@021.is/spine-quality/vitest";
  *   import { resolve } from "node:path";
  *
  *   export default mergeConfig(spineDefaults, {

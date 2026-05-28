@@ -1,5 +1,5 @@
-import { RateLimitedException } from "@021is/spine-errors";
-import type { freezeTime } from "@021is/spine-testing/time";
+import { RateLimitedException } from "@021.is/spine-errors";
+import type { freezeTime } from "@021.is/spine-testing/time";
 import { afterEach, describe, expect, it } from "vitest";
 import { RateLimiter, makeMemoryStore } from "../src/index.js";
 

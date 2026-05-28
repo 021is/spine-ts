@@ -1,7 +1,8 @@
 {
-  "name": "@021is/spine-errors",
+  "name": "@021.is/spine-errors",
   "version": "0.4.0",
-  "description": "ResponseDto envelope + typed exception hierarchy + framework-agnostic handler. Lifted from DanceClub's shared-lib.",
+  "license": "MIT",
+  "description": "ResponseDto envelope + typed exception hierarchy + framework-agnostic handler. Modeled on a proven Kotlin shared-lib.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -39,6 +40,6 @@
     "directory": "packages/errors"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   }
 }

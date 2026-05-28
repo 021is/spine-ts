@@ -1,4 +1,4 @@
-import { SomethingWentWrongException } from "@021is/spine-errors";
+import { SomethingWentWrongException } from "@021.is/spine-errors";
 import { describe, expect, it, vi } from "vitest";
 import { makeEmailClient } from "../src/index.js";
 

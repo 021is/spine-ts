@@ -1,37 +1,37 @@
-# @021is/spine-quality
+# @021.is/spine-quality
 
-Shipping configs for the Spine quality gate. Every 021 product consumes the same set.
+Shipping configs for the Spine quality gate. Every product consumes the same set.
 
 ## Use
 
 ```json
 // biome.json
-{ "extends": "@021is/spine-quality/biome" }
+{ "extends": "@021.is/spine-quality/biome" }
 ```
 
 ```json
 // tsconfig.json (Next app)
-{ "extends": "@021is/spine-quality/tsconfig-next" }
+{ "extends": "@021.is/spine-quality/tsconfig-next" }
 ```
 
 ```json
 // knip.json
-{ "extends": "@021is/spine-quality/knip" }
+{ "extends": "@021.is/spine-quality/knip" }
 ```
 
 ```js
 // .dependency-cruiser.cjs
-module.exports = require("@021is/spine-quality/dependency-cruiser");
+module.exports = require("@021.is/spine-quality/dependency-cruiser");
 ```
 
 ```json
 // size-limit
-{ "extends": "@021is/spine-quality/size-limit" }
+{ "extends": "@021.is/spine-quality/size-limit" }
 ```
 
 ```sh
 # semgrep
-semgrep ci --config "$(node -p "require.resolve('@021is/spine-quality/semgrep')")"
+semgrep ci --config "$(node -p "require.resolve('@021.is/spine-quality/semgrep')")"
 ```
 
 ## What's enforced

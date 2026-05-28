@@ -2,7 +2,7 @@
 // See spine-ts/STRUCTURE.md import-rules table.
 // Apps drop this in as `.dependency-cruiser.cjs` (or extend it):
 //
-//   module.exports = require("@021is/spine-quality/dependency-cruiser");
+//   module.exports = require("@021.is/spine-quality/dependency-cruiser");
 //
 
 /** @type {import("dependency-cruiser").IConfiguration} */

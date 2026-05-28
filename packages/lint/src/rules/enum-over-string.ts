@@ -6,7 +6,7 @@ import { walk } from "../walk.js";
  * string-literals used in === / switch where the same literal appears
  * ≥ 2 times in the file (suggests a constant should be extracted).
  *
- * Edvard's rule (locked 2026-05-25): magic strings are forbidden when
+ * Project rule: magic strings are forbidden when
  * an enum-shaped constant would do. Use const-as-object:
  *
  *   export const STATUS = { ACTIVE: "active", INACTIVE: "inactive" } as const;

@@ -1,4 +1,4 @@
-import { SomethingWentWrongException } from "@021is/spine-errors";
+import { SomethingWentWrongException } from "@021.is/spine-errors";
 import { type ConsumerConfig, JSONCodec, type NatsConnection, connect } from "nats";
 
 /**

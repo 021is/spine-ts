@@ -1,4 +1,4 @@
-import { BadRequestException, type ResponseDto, ok, toHandledError } from "@021is/spine-errors";
+import { BadRequestException, type ResponseDto, ok, toHandledError } from "@021.is/spine-errors";
 import type { ZodTypeAny, z } from "zod";
 
 /**

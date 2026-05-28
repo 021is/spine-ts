@@ -7,101 +7,101 @@ export default defineConfig({
     // instanceof failures when ratelimit/auth throw a spine-errors
     // exception that the test imports from the alias.
     dedupe: [
-      "@021is/spine-errors",
-      "@021is/spine-env",
-      "@021is/spine-testing",
-      "@021is/spine-http",
-      "@021is/spine-auth",
-      "@021is/spine-telemetry",
-      "@021is/spine-actions",
-      "@021is/spine-ratelimit",
-      "@021is/spine-webhooks",
-      "@021is/spine-email",
-      "@021is/spine-cache",
-      "@021is/spine-jobs",
-      "@021is/spine-i18n",
-      "@021is/spine-query",
+      "@021.is/spine-errors",
+      "@021.is/spine-env",
+      "@021.is/spine-testing",
+      "@021.is/spine-http",
+      "@021.is/spine-auth",
+      "@021.is/spine-telemetry",
+      "@021.is/spine-actions",
+      "@021.is/spine-ratelimit",
+      "@021.is/spine-webhooks",
+      "@021.is/spine-email",
+      "@021.is/spine-cache",
+      "@021.is/spine-jobs",
+      "@021.is/spine-i18n",
+      "@021.is/spine-query",
     ],
     // Order matters: more specific subpath aliases BEFORE the bare-package alias.
     alias: [
       {
-        find: "@021is/spine-errors/next",
+        find: "@021.is/spine-errors/next",
         replacement: resolve(__dirname, "packages/errors/src/next.ts"),
       },
       {
-        find: "@021is/spine-errors",
+        find: "@021.is/spine-errors",
         replacement: resolve(__dirname, "packages/errors/src/index.ts"),
       },
-      { find: "@021is/spine-env", replacement: resolve(__dirname, "packages/env/src/index.ts") },
+      { find: "@021.is/spine-env", replacement: resolve(__dirname, "packages/env/src/index.ts") },
       {
-        find: "@021is/spine-testing/postgres",
+        find: "@021.is/spine-testing/postgres",
         replacement: resolve(__dirname, "packages/testing/src/postgres.ts"),
       },
       {
-        find: "@021is/spine-testing/jwks",
+        find: "@021.is/spine-testing/jwks",
         replacement: resolve(__dirname, "packages/testing/src/jwks.ts"),
       },
       {
-        find: "@021is/spine-testing/msw",
+        find: "@021.is/spine-testing/msw",
         replacement: resolve(__dirname, "packages/testing/src/msw.ts"),
       },
       {
-        find: "@021is/spine-testing/time",
+        find: "@021.is/spine-testing/time",
         replacement: resolve(__dirname, "packages/testing/src/time.ts"),
       },
       {
-        find: "@021is/spine-testing",
+        find: "@021.is/spine-testing",
         replacement: resolve(__dirname, "packages/testing/src/index.ts"),
       },
-      { find: "@021is/spine-http", replacement: resolve(__dirname, "packages/http/src/index.ts") },
+      { find: "@021.is/spine-http", replacement: resolve(__dirname, "packages/http/src/index.ts") },
       {
-        find: "@021is/spine-auth/next",
+        find: "@021.is/spine-auth/next",
         replacement: resolve(__dirname, "packages/auth/src/next.ts"),
       },
-      { find: "@021is/spine-auth", replacement: resolve(__dirname, "packages/auth/src/index.ts") },
+      { find: "@021.is/spine-auth", replacement: resolve(__dirname, "packages/auth/src/index.ts") },
       {
-        find: "@021is/spine-telemetry",
+        find: "@021.is/spine-telemetry",
         replacement: resolve(__dirname, "packages/telemetry/src/index.ts"),
       },
       {
-        find: "@021is/spine-actions",
+        find: "@021.is/spine-actions",
         replacement: resolve(__dirname, "packages/actions/src/index.ts"),
       },
       {
-        find: "@021is/spine-ratelimit",
+        find: "@021.is/spine-ratelimit",
         replacement: resolve(__dirname, "packages/ratelimit/src/index.ts"),
       },
       {
-        find: "@021is/spine-webhooks",
+        find: "@021.is/spine-webhooks",
         replacement: resolve(__dirname, "packages/webhooks/src/index.ts"),
       },
       {
-        find: "@021is/spine-email",
+        find: "@021.is/spine-email",
         replacement: resolve(__dirname, "packages/email/src/index.ts"),
       },
       {
-        find: "@021is/spine-cache",
+        find: "@021.is/spine-cache",
         replacement: resolve(__dirname, "packages/cache/src/index.ts"),
       },
       {
-        find: "@021is/spine-i18n/react",
+        find: "@021.is/spine-i18n/react",
         replacement: resolve(__dirname, "packages/i18n/src/react.tsx"),
       },
       {
-        find: "@021is/spine-i18n/server",
+        find: "@021.is/spine-i18n/server",
         replacement: resolve(__dirname, "packages/i18n/src/server.ts"),
       },
-      { find: "@021is/spine-i18n", replacement: resolve(__dirname, "packages/i18n/src/index.ts") },
-      { find: "@021is/spine-jobs", replacement: resolve(__dirname, "packages/jobs/src/index.ts") },
+      { find: "@021.is/spine-i18n", replacement: resolve(__dirname, "packages/i18n/src/index.ts") },
+      { find: "@021.is/spine-jobs", replacement: resolve(__dirname, "packages/jobs/src/index.ts") },
       {
-        find: "@021is/spine-query",
+        find: "@021.is/spine-query",
         replacement: resolve(__dirname, "packages/query/src/index.ts"),
       },
       {
-        find: "@021is/spine-quality",
+        find: "@021.is/spine-quality",
         replacement: resolve(__dirname, "packages/quality/src/index.ts"),
       },
-      { find: "@021is/spine-lint", replacement: resolve(__dirname, "packages/lint/src/index.ts") },
+      { find: "@021.is/spine-lint", replacement: resolve(__dirname, "packages/lint/src/index.ts") },
     ],
   },
   test: {
@@ -113,7 +113,7 @@ export default defineConfig({
       deps: {
         // Force bundling of workspace packages so aliases win over symlinks
         // — otherwise instanceof fails across the alias/symlink boundary.
-        inline: [/@021is\/spine-/],
+        inline: [/@021.is\/spine-/],
       },
     },
     coverage: {

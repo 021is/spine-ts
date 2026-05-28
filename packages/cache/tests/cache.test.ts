@@ -1,4 +1,4 @@
-import { freezeTime } from "@021is/spine-testing/time";
+import { freezeTime } from "@021.is/spine-testing/time";
 import { describe, expect, it, vi } from "vitest";
 import { makeKey, makeMemoryCache } from "../src/index.js";
 

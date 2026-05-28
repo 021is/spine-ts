@@ -7,11 +7,11 @@ import { renderMarkdown } from "./render-markdown";
  * fully-rendered llmstxt.org file.
  */
 export type LlmsTxtConfig = {
-  /** Product name (e.g. "elvix", "zeropost"). H1 of the file. */
+  /** Product name (e.g. "my-app", "zeropost"). H1 of the file. */
   name: string;
   /** One-sentence pitch under the H1. Blockquote in the output. */
   tagline: string;
-  /** Public origin (e.g. "https://elvix.is"). No trailing slash. */
+  /** Public origin (e.g. "https://example.com"). No trailing slash. */
   siteUrl: string;
   /** Catalogs to surface under the `## Docs` section. */
   catalogs: DocsCatalog[];

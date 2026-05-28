@@ -1,6 +1,7 @@
 {
-  "name": "@021is/spine-lint",
+  "name": "@021.is/spine-lint",
   "version": "0.4.2",
+  "license": "MIT",
   "description": "Spine-specific AST checks that biome can't express: enum-over-string, ResponseDto enforcement, endpoint documentation, i18n key parity, no raw SQL. Runs in CI as the spine-lint job + locally via `spine-lint .`.",
   "type": "module",
   "main": "./dist/index.js",
@@ -33,6 +34,6 @@
     "directory": "packages/lint"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   }
 }

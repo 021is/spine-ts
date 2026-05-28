@@ -1,25 +1,25 @@
-# @021is/spine-errors
+# @021.is/spine-errors
 
-The canonical response envelope (`ResponseDto`) + typed exception hierarchy + framework-agnostic handler used by every 021 product.
+The canonical response envelope (`ResponseDto`) + typed exception hierarchy + framework-agnostic handler used by every product.
 
-Lifted from DanceClub's `shared-lib.domain.dto.ResponseDto` and `shared-lib.exceptions.*`. Same contract; idiomatic TypeScript.
+Modeled on a proven Kotlin shared-lib. Same contract; idiomatic TypeScript.
 
 ## Why mandatory
 
-Every 021 HTTP endpoint and server action returns a `ResponseDto<T>`. No exceptions, no "this small route doesn't need it". The client and the next service both rely on the envelope's `success` / `code` / `errorMessage` / `errorKey` / `errorParams` / `timestamp` / `requestId` to render UI, branch logic, propagate traces, and localize errors.
+Every HTTP endpoint and server action returns a `ResponseDto<T>`. No exceptions, no "this small route doesn't need it". The client and the next service both rely on the envelope's `success` / `code` / `errorMessage` / `errorKey` / `errorParams` / `timestamp` / `requestId` to render UI, branch logic, propagate traces, and localize errors.
 
-Locked by Edvard 2026-05-24. Reasoning: consistent client-side handling across every app; no per-route surprise shapes; first-class i18n via `errorKey`.
+Locked. Reasoning: consistent client-side handling across every app; no per-route surprise shapes; first-class i18n via `errorKey`.
 
 ## Install
 
 ```bash
-bun add @021is/spine-errors
+bun add @021.is/spine-errors
 ```
 
 ## Use — domain code
 
 ```ts
-import { BadRequestException, NotFoundException, ForbiddenException } from "@021is/spine-errors";
+import { BadRequestException, NotFoundException, ForbiddenException } from "@021.is/spine-errors";
 
 export async function publishEvent(eventId: string, userId: string) {
   const event = await db.event.findUnique({ where: { id: eventId } });
@@ -37,7 +37,7 @@ export async function publishEvent(eventId: string, userId: string) {
 ## Use — Next.js route handler
 
 ```ts
-import { withErrorHandling, ok } from "@021is/spine-errors/next";
+import { withErrorHandling, ok } from "@021.is/spine-errors/next";
 import { publishEvent } from "@/server/events/publish";
 
 export const POST = withErrorHandling(async (req: Request) => {
@@ -53,7 +53,7 @@ Any thrown `*Exception` becomes the correct HTTP status + `ResponseDto`. Unknown
 ## Use — Server action
 
 ```ts
-import { tryAction } from "@021is/spine-errors/next";
+import { tryAction } from "@021.is/spine-errors/next";
 import { publishEvent } from "@/server/events/publish";
 
 export async function publishEventAction(formData: FormData) {
@@ -82,7 +82,7 @@ Status code is in `response.code` (server actions don't have HTTP status).
 
 ## i18n
 
-Every exception subclass accepts `translationKey` + `translationParams`. These flow into `ResponseDto.errorKey` + `errorParams`. The client's i18n runtime (`@021is/spine-i18n`) reads them and renders the localized message, falling back to `errorMessage` when no key exists.
+Every exception subclass accepts `translationKey` + `translationParams`. These flow into `ResponseDto.errorKey` + `errorParams`. The client's i18n runtime (`@021.is/spine-i18n`) reads them and renders the localized message, falling back to `errorMessage` when no key exists.
 
 ## Testing
 

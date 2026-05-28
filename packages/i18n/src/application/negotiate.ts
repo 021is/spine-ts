@@ -2,7 +2,7 @@ import { type Locale, makeLocale, normalizeTag } from "../domain/locale.js";
 
 /**
  * Pick the best locale for a request, in priority order:
- *   1. Explicit URL segment (/de/...) — Edvard's preferred pattern for SEO
+ *   1. Explicit URL segment (/de/...) — the preferred pattern for SEO
  *   2. Cookie (last-chosen)
  *   3. Accept-Language header
  *   4. Default

@@ -9,14 +9,14 @@ All notable changes to Spine-TS packages. Format follows [Keep a Changelog](http
 ## [0.3.0] — 2026-05-25
 
 ### Added
-- **`@021is/spine-i18n` DC parity (partial)** — top-level `$schema` + `version` fields on `Catalog`. `{{param}}` double-brace interpolation (matches DC's contract used by DeepL bulk-translate tooling). `validateCatalogs(input, policy?)` with 10 rule codes (MISSING_KEY, EXTRA_KEY, MISSING_PLURAL_BRANCH, MISSING_PARAM, UNKNOWN_PARAM, EMPTY_VALUE, UNTRANSLATED, HTML_IN_VALUE, NAMESPACE_PREFIX, KEY_CASE). Per-namespace rule overrides. `DEFAULT_POLICY` ships with sensible defaults. Adapters reorganized to `src/adapters/driven/{r2,fs,memory}.ts` matching DC's hexagonal layout.
-- **`@021is/spine-jobs` tests** — public surface lock + unreachable-NATS error path. Full Testcontainers NATS integration deferred to next release.
-- **`@021is/spine-quality/vitest`** — vitest config preset (worker pool, coverage thresholds, github-actions reporter). Consumers `mergeConfig` it.
-- **`@021is/spine-lint/walk`** — shared AST walker extracted (was copy-pasted in 5 rule files). DRY.
+- **`@021.is/spine-i18n` DC parity (partial)** — top-level `$schema` + `version` fields on `Catalog`. `{{param}}` double-brace interpolation (matches DC's contract used by DeepL bulk-translate tooling). `validateCatalogs(input, policy?)` with 10 rule codes (MISSING_KEY, EXTRA_KEY, MISSING_PLURAL_BRANCH, MISSING_PARAM, UNKNOWN_PARAM, EMPTY_VALUE, UNTRANSLATED, HTML_IN_VALUE, NAMESPACE_PREFIX, KEY_CASE). Per-namespace rule overrides. `DEFAULT_POLICY` ships with sensible defaults. Adapters reorganized to `src/adapters/driven/{r2,fs,memory}.ts` matching DC's hexagonal layout.
+- **`@021.is/spine-jobs` tests** — public surface lock + unreachable-NATS error path. Full Testcontainers NATS integration deferred to next release.
+- **`@021.is/spine-quality/vitest`** — vitest config preset (worker pool, coverage thresholds, github-actions reporter). Consumers `mergeConfig` it.
+- **`@021.is/spine-lint/walk`** — shared AST walker extracted (was copy-pasted in 5 rule files). DRY.
 
 ### Changed
-- **`@021is/spine-telemetry`** package.json description corrected — no more "OpenTelemetry auto-setup" overclaim. OTel tracer wire-up tracked for next release.
-- **`@021is/spine`** CLI README — `add` / `upgrade` commands moved from "Coming" to "Roadmap (not yet shipped)" so consumers don't try to invoke them.
+- **`@021.is/spine-telemetry`** package.json description corrected — no more "OpenTelemetry auto-setup" overclaim. OTel tracer wire-up tracked for next release.
+- **`@021.is/spine`** CLI README — `add` / `upgrade` commands moved from "Coming" to "Roadmap (not yet shipped)" so consumers don't try to invoke them.
 - Self-gate (`.github/workflows/quality-gate.yml`) now actually passes — fixed biome formatting, unused suppressions, useTemplate, useExhaustiveDependencies. tsc gets baseUrl + paths so workspace packages resolve.
 
 ### Fixed
@@ -25,15 +25,15 @@ All notable changes to Spine-TS packages. Format follows [Keep a Changelog](http
 ## [0.2.0] — 2026-05-25
 
 ### Added
-- `@021is/spine-quality` — config preset (biome / tsc-strict / knip / dependency-cruiser hexagonal layer rules / semgrep OWASP + Spine custom / size-limit). One install gives every 021 app the same gate.
-- `@021is/spine-lint` — custom AST checks biome can't express: `spine/enum-over-string`, `spine/route-returns-response-dto`, `spine/endpoint-documented`, `spine/i18n-key-parity`, `spine/no-raw-sql`. CLI: `spine-lint .` with `--github` annotation output.
+- `@021.is/spine-quality` — config preset (biome / tsc-strict / knip / dependency-cruiser hexagonal layer rules / semgrep OWASP + Spine custom / size-limit). One install gives every 021 app the same gate.
+- `@021.is/spine-lint` — custom AST checks biome can't express: `spine/enum-over-string`, `spine/route-returns-response-dto`, `spine/endpoint-documented`, `spine/i18n-key-parity`, `spine/no-raw-sql`. CLI: `spine-lint .` with `--github` annotation output.
 - `021is/ci/.github/workflows/spine-quality-gate.yml@v1` — 10-job reusable workflow. Branch protection wires this as the required check.
 - `021is/ci/.github/workflows/spine-metrics.yml@v1` — post-merge metrics push to 021-mon (Prometheus remote_write + Loki). Drives the `grafana.021.is/d/spine-quality` dashboard.
 - STRUCTURE.md sections: Enum-over-string doctrine + Spine Quality Gate requirements.
 - `scripts/resolve-workspace-deps.sh` — pre-tag helper that bumps version + replaces every `workspace:*` (and any prior `^x.y.z` cross-pkg dep) with `^<new>`.
 
 ### Changed
-- All packages renamed from `@021/*` to `@021is/*` (matches GH Packages scope = org name requirement).
+- All packages renamed from `@021/*` to `@021.is/*` (matches GH Packages scope = org name requirement).
 - Cross-package deps now resolve to concrete versions before publish (was leaking `workspace:*` into manifests in 0.1.0).
 
 ## [0.1.1] — 2026-05-25

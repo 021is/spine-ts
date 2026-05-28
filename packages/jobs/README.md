@@ -1,6 +1,6 @@
-# @021is/spine-jobs
+# @021.is/spine-jobs
 
-Wrapper around NATS JetStream (already deployed in the helvix cluster).
+Wrapper around NATS JetStream (your NATS instance).
 
 Three uses:
 
@@ -11,7 +11,7 @@ Three uses:
 ## Use
 
 ```ts
-import { connectJobs } from "@021is/spine-jobs";
+import { connectJobs } from "@021.is/spine-jobs";
 
 const jobs = await connectJobs({ servers: env.NATS_URL });
 

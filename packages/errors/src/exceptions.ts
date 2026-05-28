@@ -1,5 +1,5 @@
 /**
- * Typed exception hierarchy mirroring DanceClub's `shared-lib/exceptions/`.
+ * Typed exception hierarchy modeled on a proven Kotlin shared-lib.
  * Every domain / service layer throws one of these; the framework adapter
  * (`toResponse()` / `handle()` in `./handler.ts` and `./next.ts`) maps each
  * to its HTTP status + ResponseDto error envelope.

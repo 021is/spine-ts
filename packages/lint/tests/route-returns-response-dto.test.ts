@@ -30,7 +30,7 @@ export async function GET(req: Request) {
     writeFileSync(
       join(dir, "src/app/api/foo/route.ts"),
       `
-import { withErrorHandling, ok } from "@021is/spine-errors/next";
+import { withErrorHandling, ok } from "@021.is/spine-errors/next";
 export const GET = withErrorHandling(async () => Response.json(ok({ foo: "bar" })));
 `,
     );
@@ -42,7 +42,7 @@ export const GET = withErrorHandling(async () => Response.json(ok({ foo: "bar" }
     writeFileSync(
       join(dir, "src/app/api/foo/route.ts"),
       `
-import { ok, err } from "@021is/spine-errors";
+import { ok, err } from "@021.is/spine-errors";
 export async function GET() {
   return Response.json(ok({ foo: "bar" }));
 }

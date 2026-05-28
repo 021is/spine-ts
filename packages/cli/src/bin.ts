@@ -10,7 +10,7 @@ import { scaffoldNextApp } from "./scaffold.js";
 const cli = cac("spine");
 
 cli
-  .command("new <name>", "Scaffold a new 021 project (next-app | library)")
+  .command("new <name>", "Scaffold a new project (next-app | library)")
   .option("--type <type>", "next-app | library", { default: "next-app" })
   .option("--cwd <path>", "Target directory (default: ./<name>)")
   .action((name: string, opts: { type: string; cwd?: string }) => {
@@ -80,18 +80,15 @@ cli
 cli
   .command(
     "upgrade [version]",
-    "Bump every @021is/spine-* dep in package.json to the given version (no install). Default: highest published spine-errors version.",
+    "Bump every @021.is/spine-* dep in package.json to the given version (no install). Default: highest published spine-errors version.",
   )
   .option("--cwd <path>", "Repo root", { default: "." })
   .action(async (version: string | undefined, opts: { cwd: string }) => {
     let target = version;
     if (!target) {
       try {
-        const res = await fetch("https://npm.pkg.github.com/@021is%2fspine-errors", {
-          headers: {
-            Authorization: `Bearer ${process.env.GH_PACKAGES_TOKEN ?? process.env.GITHUB_TOKEN ?? ""}`,
-          },
-        });
+        // Public npm — no auth needed.
+        const res = await fetch("https://registry.npmjs.org/@021.is%2fspine-errors");
         const json = (await res.json()) as { "dist-tags"?: { latest?: string } };
         target = json["dist-tags"]?.latest;
       } catch {
@@ -100,9 +97,7 @@ cli
     }
     if (!target) {
       console.error(
-        kleur.red(
-          "✗ no version given + couldn't fetch latest (need GH_PACKAGES_TOKEN or GITHUB_TOKEN env var)",
-        ),
+        kleur.red("✗ no version given + couldn't fetch latest from npm"),
       );
       process.exit(1);
     }

@@ -1,7 +1,8 @@
 {
-  "name": "@021is/spine-i18n",
+  "name": "@021.is/spine-i18n",
   "version": "0.4.0",
-  "description": "i18n runtime for every 021 product. Hexagonal: domain + ports + R2/fs/memory adapters. CLDR plurals. React + server runtimes. Generalized from DanceClub's locale lib.",
+  "license": "MIT",
+  "description": "i18n runtime for every product. Hexagonal: domain + ports + R2/fs/memory adapters. CLDR plurals. React + server runtimes. Modeled on a proven Kotlin locale library.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -36,7 +37,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@021is/spine-errors": "^0.4.0",
+    "@021.is/spine-errors": "^0.4.0",
     "cac": "^6.7.14",
     "kleur": "^4.1.5"
   },
@@ -62,6 +63,6 @@
     "directory": "packages/i18n"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   }
 }

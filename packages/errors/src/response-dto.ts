@@ -1,13 +1,13 @@
 /**
- * The canonical response envelope for every 021 HTTP endpoint and server action.
+ * The canonical response envelope for every HTTP endpoint and server action.
  *
- * Lifted from DanceClub's `app.danceclub.lib.shared.domain.dto.ResponseDto`.
+ * Modeled on a proven Kotlin shared-lib.
  * Differences from the Kotlin original:
  *   - All fields immutable (TypeScript / functional friendly).
  *   - `requestId` added for end-to-end tracing (links to telemetry span).
  *
- * MANDATORY across every 021 product. No endpoint may return a raw payload
- * without this envelope. Locked by Edvard 2026-05-24.
+ * MANDATORY across every product. No endpoint may return a raw payload
+ * without this envelope. Locked.
  */
 export interface ResponseDto<T> {
   /** True iff the operation succeeded. Drives client UI branching. */

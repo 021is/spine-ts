@@ -1,6 +1,7 @@
 {
-  "name": "@021is/spine-env",
+  "name": "@021.is/spine-env",
   "version": "0.4.0",
+  "license": "MIT",
   "description": "Type-safe zod-validated environment loader. Fails at startup with a clear message instead of failing at runtime with a NaN somewhere.",
   "type": "module",
   "main": "./dist/index.js",
@@ -25,6 +26,6 @@
     "directory": "packages/env"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   }
 }

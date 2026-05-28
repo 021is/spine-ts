@@ -1,5 +1,5 @@
 /**
- * Catalog policy + validator. Ports DanceClub locale lib's policy.json
+ * Catalog policy + validator. Modeled on a proven Kotlin locale library's policy.json
  * concept so spine-i18n consumers can enforce key parity, plural-branch
  * completeness, no-namespace-prefix, no-empty-value, etc. in CI.
  *

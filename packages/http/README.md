@@ -1,23 +1,23 @@
-# @021is/spine-http
+# @021.is/spine-http
 
-Typed fetch client with resilience defaults: per-request timeout, retry on idempotent failures, circuit breaker per host. Auto-unwraps `ResponseDto` envelopes from 021 peers.
+Typed fetch client with resilience defaults: per-request timeout, retry on idempotent failures, circuit breaker per host. Auto-unwraps `ResponseDto` envelopes from sibling packages.
 
 ## Use
 
 ```ts
-import { SpineHttpClient } from "@021is/spine-http";
+import { SpineHttpClient } from "@021.is/spine-http";
 
 const dcEvents = new SpineHttpClient({
-  baseUrl: "https://api.danceclub.app",
+  baseUrl: "https://api.example.com",
   timeoutMs: 1000,             // default
   retries: 1,                  // default — retries idempotent methods only
   failureThreshold: 5,         // default — open circuit after 5 fails in 10s
   windowMs: 10_000,
-  defaultHeaders: { "x-service": "elvix" },
+  defaultHeaders: { "x-service": "my-app" },
   authToken: async () => mintServiceJwt(), // optional
 });
 
-// Auto-unwraps ResponseDto<Event> if peer is a 021 service
+// Auto-unwraps ResponseDto<Event> if peer is your service
 const event = await dcEvents.get<Event>(`/events/${id}`);
 ```
 

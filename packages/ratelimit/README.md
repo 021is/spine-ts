@@ -1,11 +1,11 @@
-# @021is/spine-ratelimit
+# @021.is/spine-ratelimit
 
-Postgres-backed sliding-window rate limiter. Generalized from elvix's per-API-key bucket pattern. Multi-window in parallel (1m + 1h + 1d). No Redis required.
+Postgres-backed sliding-window rate limiter. Sliding-window per-key buckets. Multi-window in parallel (1m + 1h + 1d). No Redis required.
 
 ## Use
 
 ```ts
-import { RateLimiter, makePrismaStore } from "@021is/spine-ratelimit";
+import { RateLimiter, makePrismaStore } from "@021.is/spine-ratelimit";
 
 const limiter = new RateLimiter({ store: makePrismaStore(prisma) });
 
@@ -41,7 +41,7 @@ model RateLimitBucket {
 ## In-memory adapter (for tests)
 
 ```ts
-import { makeMemoryStore } from "@021is/spine-ratelimit";
+import { makeMemoryStore } from "@021.is/spine-ratelimit";
 const limiter = new RateLimiter({ store: makeMemoryStore() });
 ```
 

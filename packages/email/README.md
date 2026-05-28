@@ -1,24 +1,24 @@
-# @021is/spine-email
+# @021.is/spine-email
 
 Resend wrapper. Bearer auth, retry on 5xx, terminal on 4xx (no infinite-loop on permanent client errors), idempotency-key passthrough, structured logging hook.
 
 ## Use
 
 ```ts
-import { makeEmailClient } from "@021is/spine-email";
+import { makeEmailClient } from "@021.is/spine-email";
 
 const email = makeEmailClient({
   apiKey: env.RESEND_API_KEY,
-  defaultFrom: "Elvix <noreply@elvix.is>",
+  defaultFrom: "My App <noreply@example.com>",
   retries: 2,
   logger: console, // optional pino-compatible logger
 });
 
 await email.send({
-  to: "edvard@edvone.dev",
-  subject: "Welcome to Elvix",
-  html: renderToString(<WelcomeEmail name="Edvard" />),
-  tags: { app: "elvix", flow: "signup" },
+  to: "you@example.com",
+  subject: "Welcome to My App",
+  html: renderToString(<WelcomeEmail name="Sam" />),
+  tags: { app: "my-app", flow: "signup" },
   idempotencyKey: `signup-${userId}`,
 });
 ```

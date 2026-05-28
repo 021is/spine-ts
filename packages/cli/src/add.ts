@@ -25,17 +25,17 @@ export const ADD_TARGETS = {
 export type AddTarget = (typeof ADD_TARGETS)[keyof typeof ADD_TARGETS];
 
 const PACKAGE_DEPS: Record<AddTarget, { dev: boolean; deps: string[]; peerDeps?: string[] }> = {
-  testing: { dev: true, deps: ["@021is/spine-testing", "vitest", "@vitest/coverage-v8"] },
-  auth: { dev: false, deps: ["@021is/spine-auth", "@021is/spine-errors"] },
-  i18n: { dev: false, deps: ["@021is/spine-i18n"] },
-  actions: { dev: false, deps: ["@021is/spine-actions", "@021is/spine-errors", "zod"] },
-  query: { dev: false, deps: ["@021is/spine-query", "@tanstack/react-query"] },
-  ratelimit: { dev: false, deps: ["@021is/spine-ratelimit", "@021is/spine-errors"] },
-  webhooks: { dev: false, deps: ["@021is/spine-webhooks", "@021is/spine-errors"] },
-  email: { dev: false, deps: ["@021is/spine-email", "@021is/spine-errors"] },
-  cache: { dev: false, deps: ["@021is/spine-cache"] },
-  jobs: { dev: false, deps: ["@021is/spine-jobs"] },
-  telemetry: { dev: false, deps: ["@021is/spine-telemetry"] },
+  testing: { dev: true, deps: ["@021.is/spine-testing", "vitest", "@vitest/coverage-v8"] },
+  auth: { dev: false, deps: ["@021.is/spine-auth", "@021.is/spine-errors"] },
+  i18n: { dev: false, deps: ["@021.is/spine-i18n"] },
+  actions: { dev: false, deps: ["@021.is/spine-actions", "@021.is/spine-errors", "zod"] },
+  query: { dev: false, deps: ["@021.is/spine-query", "@tanstack/react-query"] },
+  ratelimit: { dev: false, deps: ["@021.is/spine-ratelimit", "@021.is/spine-errors"] },
+  webhooks: { dev: false, deps: ["@021.is/spine-webhooks", "@021.is/spine-errors"] },
+  email: { dev: false, deps: ["@021.is/spine-email", "@021.is/spine-errors"] },
+  cache: { dev: false, deps: ["@021.is/spine-cache"] },
+  jobs: { dev: false, deps: ["@021.is/spine-jobs"] },
+  telemetry: { dev: false, deps: ["@021.is/spine-telemetry"] },
 };
 
 export interface AddResult {
@@ -61,11 +61,11 @@ export function planAdd(cwd: string, target: string): AddResult & { commands: st
   const notes: string[] = [];
   if (target === "testing") {
     notes.push("Add to vitest.config.ts: setupFiles: ['./tests/setup.ts']");
-    notes.push("Copy tests/setup.ts from @021is/spine-ts/examples/next-app-starter/");
+    notes.push("Copy tests/setup.ts from @021.is/spine-ts/examples/next-app-starter/");
   }
   if (target === "auth") {
-    notes.push("Build a verifier: `import { JwksVerifier } from '@021is/spine-auth'`");
-    notes.push("Wire env var ELVIX_JWKS_URI in your src/lib/env.ts");
+    notes.push("Build a verifier: `import { JwksVerifier } from '@021.is/spine-auth'`");
+    notes.push("Wire env var JWKS_URI in your src/lib/env.ts");
   }
   if (target === "i18n") {
     notes.push("Create src/i18n/<locale>.json catalogs (en, de, ...)");
@@ -132,7 +132,7 @@ function capitalize(s: string): string {
 }
 
 /**
- * `spine upgrade` — bump every @021is/spine-* dep in package.json to the
+ * `spine upgrade` — bump every @021.is/spine-* dep in package.json to the
  * latest published version, in lockstep. Doesn't run install.
  */
 export function planUpgrade(
@@ -151,7 +151,7 @@ export function planUpgrade(
     const deps = pkg[field];
     if (!deps) continue;
     for (const [name, current] of Object.entries(deps)) {
-      if (!name.startsWith("@021is/spine")) continue;
+      if (!name.startsWith("@021.is/spine")) continue;
       if (current === target) continue;
       deps[name] = target;
       changed.push({ name, from: current, to: target });

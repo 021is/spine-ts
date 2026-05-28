@@ -5,7 +5,7 @@ import { connectJobs } from "../src/index.js";
 // integration test lands when @testcontainers/nats is wired (Phase B
 // of the spine deep-dive). For now we lock the public surface so
 // downstream package changes don't accidentally rename `connectJobs`.
-describe("@021is/spine-jobs", () => {
+describe("@021.is/spine-jobs", () => {
   it("exports connectJobs as an async function", () => {
     expect(typeof connectJobs).toBe("function");
   });

@@ -1,7 +1,8 @@
 {
-  "name": "@021is/spine-ratelimit",
+  "name": "@021.is/spine-ratelimit",
   "version": "0.4.0",
-  "description": "Postgres-backed sliding-window rate limiter. Generalized from elvix's per-API-key bucket pattern. No Redis required.",
+  "license": "MIT",
+  "description": "Postgres-backed sliding-window rate limiter. Sliding-window per-key buckets. No Redis required.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -17,7 +18,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@021is/spine-errors": "^0.4.0"
+    "@021.is/spine-errors": "^0.4.0"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,6 @@
     "directory": "packages/ratelimit"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   }
 }

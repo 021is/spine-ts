@@ -1,4 +1,4 @@
-import { BadRequestException, ForbiddenException, NotFoundException } from "@021is/spine-errors";
+import { BadRequestException, ForbiddenException, NotFoundException } from "@021.is/spine-errors";
 import type { Event } from "../domain/Event.js";
 import { EVENT_STATUS } from "../domain/event-enums.js";
 import type { EventRepo } from "../ports/EventRepo.js";

@@ -1,6 +1,7 @@
 {
-  "name": "@021is/spine-telemetry",
+  "name": "@021.is/spine-telemetry",
   "version": "0.4.0",
+  "license": "MIT",
   "description": "Pino structured JSON logger + AsyncLocalStorage request context + opt-in OpenTelemetry SDK wire-up (withSpan helper, OTLP HTTP exporter).",
   "type": "module",
   "main": "./dist/index.js",
@@ -30,7 +31,7 @@
     "directory": "packages/telemetry"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   },
   "devDependencies": {
     "@opentelemetry/exporter-trace-otlp-http": "^0.218.0",

@@ -4,7 +4,7 @@ import { type JWK, type KeyLike, SignJWT, exportJWK, generateKeyPair } from "jos
 /**
  * Spin up an in-process JWKS server that mints + serves test JWTs.
  * Use in tests that need to assert a request hits the auth middleware
- * with a valid token, without depending on a real elvix instance.
+ * with a valid token, without depending on a real IdP.
  *
  *   const jwks = await startJwksMockServer();
  *   const token = await jwks.signToken({ sub: "u_1", roles: ["admin"] });

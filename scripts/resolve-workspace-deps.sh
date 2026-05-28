@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 # Bump every packages/*/package.json to a new version AND rewrite every
-# cross-package dep ("@021is/spine-*") to "^<new-version>". Use before
+# cross-package dep ("@021.is/spine-*") to "^<new-version>". Use before
 # tagging a release. Handles both "workspace:*" and prior version specs.
 NEW="${1:?usage: resolve-workspace-deps.sh <new-version>}"
 
@@ -9,7 +9,7 @@ python3 - <<PY
 import json, re
 from pathlib import Path
 NEW = "${NEW}"
-spine_re = re.compile(r"^@021is/spine[-]?")
+spine_re = re.compile(r"^@021.is/spine[-]?")
 for d in Path("packages").iterdir():
     if not d.is_dir():
         continue

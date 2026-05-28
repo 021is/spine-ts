@@ -18,7 +18,7 @@ import { type ResponseDto, err } from "./response-dto.js";
  * Framework-agnostic. The Next.js adapter (`./next.ts`) wraps this to return
  * a NextResponse; Express / Hono / Bun.serve adapters do the equivalent.
  *
- * Mirrors DanceClub's `GlobalExceptionHandler`:
+ * Modeled on a proven Kotlin shared-lib:
  *   BadRequestException        → 400
  *   UnauthorizedException      → 401
  *   ForbiddenException         → 403

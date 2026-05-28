@@ -3,16 +3,16 @@
  * don't pay the bundle cost.
  *
  *   // src/lib/telemetry.ts
- *   import { initTelemetry } from "@021is/spine-telemetry/tracing";
+ *   import { initTelemetry } from "@021.is/spine-telemetry/tracing";
  *   initTelemetry({
- *     service: "elvix",
+ *     service: "my-app",
  *     env: process.env.NODE_ENV,
  *     otlpEndpoint: process.env.OTEL_EXPORTER_OTLP_ENDPOINT,
  *   });
  *
  * Then in route handlers / use cases:
  *
- *   import { withSpan } from "@021is/spine-telemetry/tracing";
+ *   import { withSpan } from "@021.is/spine-telemetry/tracing";
  *   const event = await withSpan("publishEvent", async (span) => {
  *     span.setAttribute("event.id", id);
  *     return publishEvent(id);
@@ -26,7 +26,7 @@ export interface InitTelemetryOptions {
   service: string;
   env?: string;
   cluster?: string;
-  /** OTLP HTTP collector endpoint. e.g., http://tempo.021-mon:4318 */
+  /** OTLP HTTP collector endpoint. e.g., http://your-otel-collector:4318 */
   otlpEndpoint?: string;
   /** Sampling rate 0..1. Default: 1 (always sample in dev), 0.05 in prod. */
   samplingRate?: number;
@@ -90,7 +90,7 @@ export async function initTelemetry(options: InitTelemetryOptions): Promise<void
 }
 
 /** Get a tracer by name (or the default service tracer). */
-export function getTracer(name = "@021is/spine-telemetry"): Tracer {
+export function getTracer(name = "@021.is/spine-telemetry"): Tracer {
   if (!cachedTracer) cachedTracer = trace.getTracer(name);
   return cachedTracer;
 }

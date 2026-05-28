@@ -1,11 +1,11 @@
-# @021is/spine-cache
+# @021.is/spine-cache
 
 TTL + tag-invalidation cache with **single-flight dedupe**. Fixes the dc-web N+1 scar: 10 components asking for the same user concurrently → 1 backend call.
 
 ## Use
 
 ```ts
-import { makeMemoryCache, makeKey } from "@021is/spine-cache";
+import { makeMemoryCache, makeKey } from "@021.is/spine-cache";
 
 const cache = makeMemoryCache();
 

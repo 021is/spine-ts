@@ -1,6 +1,7 @@
 {
-  "name": "@021is/spine-webhooks",
+  "name": "@021.is/spine-webhooks",
   "version": "0.4.0",
+  "license": "MIT",
   "description": "Inbound webhook verifier: HMAC signature + replay/idempotency dedupe. Generalized from DC's Resend/Stripe handlers.",
   "type": "module",
   "main": "./dist/index.js",
@@ -17,7 +18,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@021is/spine-errors": "^0.4.0"
+    "@021.is/spine-errors": "^0.4.0"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,6 @@
     "directory": "packages/webhooks"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   }
 }

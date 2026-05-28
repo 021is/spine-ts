@@ -31,7 +31,7 @@ How to cut a new version of every Spine-TS package.
 9. Verify a consumer can install:
    ```bash
    cd /tmp && mkdir tap && cd tap && bun init -y >/dev/null
-   bun add @021is/spine-errors@X.Y.Z
+   bun add @021.is/spine-errors@X.Y.Z
    ```
 
 ## Pre-tag gates (run locally before pushing the tag)
