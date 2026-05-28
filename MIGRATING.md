@@ -185,8 +185,8 @@ jobs:
 
 Add the required secrets at the repo or org level:
 - `ALERTMANAGER_USER`, `ALERTMANAGER_PASSWORD`, `ALERTMANAGER_URL`
-- `SPINE_PROM_USER`, `SPINE_PROM_PASSWORD` (helvix-prom from vault)
-- `SPINE_LOKI_USER`, `SPINE_LOKI_PASSWORD` (helvix-vector from vault)
+- `SPINE_PROM_USER`, `SPINE_PROM_PASSWORD` (from your secrets store)
+- `SPINE_LOKI_USER`, `SPINE_LOKI_PASSWORD` (from your secrets store)
 
 Set branch protection on `main`: PR required, "Spine Quality Gate" status check required.
 

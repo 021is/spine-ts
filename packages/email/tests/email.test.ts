@@ -14,7 +14,7 @@ describe("makeEmailClient", () => {
     let captured: { url: string; body: string; auth: string } | undefined;
     const client = makeEmailClient({
       apiKey: "re_test",
-      defaultFrom: "Elvix <noreply@elvix.is>",
+      defaultFrom: "Acme <noreply@example.com>",
       fetchImpl: makeFetch((url, init) => {
         captured = {
           url,
@@ -32,7 +32,7 @@ describe("makeEmailClient", () => {
     expect(captured?.url).toBe("https://api.resend.com/emails");
     expect(captured?.auth).toBe("Bearer re_test");
     const parsed = JSON.parse(captured?.body ?? "{}");
-    expect(parsed.from).toBe("Elvix <noreply@elvix.is>");
+    expect(parsed.from).toBe("Acme <noreply@example.com>");
     expect(parsed.to).toEqual(["x@y.com"]);
     expect(parsed.subject).toBe("Hi");
   });

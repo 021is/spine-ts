@@ -7,7 +7,7 @@ Shared test helpers used by every product. Lets every repo's `tests/setup.ts` lo
 | Subpath | Purpose |
 |---|---|
 | `@021.is/spine-testing/postgres` | `startSharedPostgres()` — Testcontainers PG per Vitest worker. `runPrismaMigrate()` — apply your schema once. `truncateAll()` — clean between tests without restart. |
-| `@021.is/spine-testing/jwks` | `startJwksMockServer()` — in-process RS256 JWKS endpoint + `signToken()`. Point your auth middleware at it; no real elvix needed. |
+| `@021.is/spine-testing/jwks` | `startJwksMockServer()` — in-process RS256 JWKS endpoint + `signToken()`. Point your auth middleware at it; no real IdP needed. |
 | `@021.is/spine-testing/msw` | `startMockServer()` — MSW for outbound HTTP. Mock Resend / Stripe / R2 / Google. |
 | `@021.is/spine-testing/time` | `freezeTime()` + `deterministicIds()` — stable timestamps + ids for snapshot + rate-limit tests. |
 

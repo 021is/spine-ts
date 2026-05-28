@@ -52,16 +52,16 @@ describe("renderMarkdown", () => {
 describe("buildLlmsTxt", () => {
   it("lists each catalog under ## Docs and adds the openapi optional", () => {
     const out = buildLlmsTxt({
-      name: "elvix",
+      name: "my-app",
       tagline: "Identity, kept in Europe.",
-      siteUrl: "https://elvix.is",
+      siteUrl: "https://example.com",
       catalogs: [cat],
-      openapi: { yamlUrl: "https://elvix.is/openapi.yaml" },
+      openapi: { yamlUrl: "https://example.com/openapi.yaml" },
     });
-    expect(out.startsWith("# elvix")).toBe(true);
-    expect(out).toContain("https://elvix.is/docs/install.md");
-    expect(out).toContain("https://elvix.is/openapi.yaml");
-    expect(out).toContain("https://elvix.is/llms-full.txt");
+    expect(out.startsWith("# my-app")).toBe(true);
+    expect(out).toContain("https://example.com/docs/install.md");
+    expect(out).toContain("https://example.com/openapi.yaml");
+    expect(out).toContain("https://example.com/llms-full.txt");
   });
 });
 
@@ -84,14 +84,14 @@ describe("next handlers", () => {
 
   it("llmsTxtRoute returns text/plain response", async () => {
     const handler = llmsTxtRoute({
-      name: "elvix",
+      name: "my-app",
       tagline: "x",
-      siteUrl: "https://elvix.is",
+      siteUrl: "https://example.com",
       catalogs: [cat],
     });
     const res = handler();
     expect(res.headers.get("content-type")).toContain("text/plain");
-    expect(await res.text()).toContain("# elvix");
+    expect(await res.text()).toContain("# my-app");
   });
 
   it("llmsFullRoute returns text/plain response", async () => {

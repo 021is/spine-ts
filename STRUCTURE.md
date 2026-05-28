@@ -107,7 +107,7 @@ my-app/
 Formalized from a production Kotlin service.
 
 ```
-<service-name>/                      e.g., dc-event, helvix-billing
+<service-name>/                      e.g., billing, notifications
 ├── api/                             Public service contracts (interfaces only)
 │   └── src/main/kotlin/<pkg>/api/
 │       └── EventService.kt          interface EventService { publish(input): Event }

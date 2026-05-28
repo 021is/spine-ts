@@ -4,7 +4,7 @@ Wrapper around NATS JetStream (your NATS instance).
 
 Three uses:
 
-- **Async fan-out** — `dc-event` publishes `event.published`; `dc-audit`, `dc-analytics`, `dc-push` all consume independently. No HTTP, no waiting, no fragile orchestration.
+- **Async fan-out** — a publisher emits `event.published`; independent consumers (audit, analytics, push) each handle it. No HTTP, no waiting, no fragile orchestration.
 - **Cron triggers** — `spine.cron.daily-billing-run` published by a tiny scheduler pod; the billing service consumes.
 - **Work queues** — long-running jobs (image processing, batch emails) get enqueued; consumers pick them up at their own pace.
 

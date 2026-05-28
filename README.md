@@ -18,7 +18,7 @@ Render `knowledge/code.md` concrete for Next.js + Node:
 | [@021.is/spine-auth](./packages/auth) | JWKS verifier (RS256) + requireRoles/requireScopes. |
 | [@021.is/spine-telemetry](./packages/telemetry) | Pino structured logger + AsyncLocalStorage request context. |
 | [@021.is/spine-actions](./packages/actions) | defineAction({ input, auth, audit, revalidate, handler }) → ResponseDto. |
-| [@021.is/spine-ratelimit](./packages/ratelimit) | Postgres sliding-window limiter. Generalized from elvix's pattern. |
+| [@021.is/spine-ratelimit](./packages/ratelimit) | Postgres sliding-window rate limiter. |
 | [@021.is/spine-webhooks](./packages/webhooks) | HMAC verifier (raw, github, stripe, resend) + idempotency dedupe. |
 | [@021.is/spine-email](./packages/email) | Resend wrapper with 5xx retry + 4xx terminal. |
 | [@021.is/spine-cache](./packages/cache) | TTL + tag invalidation + single-flight dedupe. |

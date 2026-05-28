@@ -4,7 +4,7 @@ import { makeLocale, validateCatalogs } from "../src/index.js";
 const en = {
   locale: makeLocale("en"),
   namespaces: {
-    common: { save: { other: "Save" }, brand: { other: "Elvix" } },
+    common: { save: { other: "Save" }, brand: { other: "Acme" } },
     event: { attendeesCount: { one: "{{count}} attendee", other: "{{count}} attendees" } },
   },
 };
@@ -14,7 +14,7 @@ describe("validateCatalogs", () => {
     const de = {
       locale: makeLocale("de"),
       namespaces: {
-        common: { save: { other: "Speichern" }, brand: { other: "Elvix" } },
+        common: { save: { other: "Speichern" }, brand: { other: "Acme" } },
         event: {
           attendeesCount: { one: "{{count}} Teilnehmer", other: "{{count}} Teilnehmer" },
         },
@@ -38,7 +38,7 @@ describe("validateCatalogs", () => {
     const de = {
       locale: makeLocale("de"),
       namespaces: {
-        common: { save: { other: "Speichern" }, brand: { other: "Elvix" }, foo: { other: "Bar" } },
+        common: { save: { other: "Speichern" }, brand: { other: "Acme" }, foo: { other: "Bar" } },
         event: { attendeesCount: { one: "x", other: "x" } },
       },
     };
@@ -50,7 +50,7 @@ describe("validateCatalogs", () => {
     const de = {
       locale: makeLocale("de"),
       namespaces: {
-        common: { save: { other: "Speichern" }, brand: { other: "Elvix" } },
+        common: { save: { other: "Speichern" }, brand: { other: "Acme" } },
         event: { attendeesCount: { other: "{{count}} Teilnehmer" } },
       },
     };
@@ -62,7 +62,7 @@ describe("validateCatalogs", () => {
     const de = {
       locale: makeLocale("de"),
       namespaces: {
-        common: { save: { other: "Speichern" }, brand: { other: "Elvix" } },
+        common: { save: { other: "Speichern" }, brand: { other: "Acme" } },
         event: { attendeesCount: { one: "Teilnehmer", other: "Teilnehmer" } },
       },
     };
@@ -92,7 +92,7 @@ describe("validateCatalogs", () => {
     const de = {
       locale: makeLocale("de"),
       namespaces: {
-        common: { save: { other: "Save" }, brand: { other: "Elvix" } }, // brand is intentionally same; save is suspicious
+        common: { save: { other: "Save" }, brand: { other: "Acme" } }, // brand is intentionally same; save is suspicious
         event: { attendeesCount: { one: "{{count}} attendee", other: "{{count}} attendees" } },
       },
     };
@@ -105,7 +105,7 @@ describe("validateCatalogs", () => {
     const de = {
       locale: makeLocale("de"),
       namespaces: {
-        common: { save: { other: "Speichern" }, brand: { other: "Elvix" } },
+        common: { save: { other: "Speichern" }, brand: { other: "Acme" } },
         event: { attendeesCount: { one: "{{count}} Teilnehmer", other: "{{count}} Teilnehmer" } },
       },
     };

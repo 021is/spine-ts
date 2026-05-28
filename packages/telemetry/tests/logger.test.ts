@@ -3,7 +3,7 @@ import { currentRequestId, makeLogger, newRequestId, withRequestContext } from "
 
 describe("makeLogger", () => {
   it("creates a logger with base fields", () => {
-    const log = makeLogger({ service: "helvix", cluster: "helvix-eu", env: "prod" });
+    const log = makeLogger({ service: "my-app", cluster: "eu-1", env: "prod" });
     expect(log.level).toBe("info");
   });
 
