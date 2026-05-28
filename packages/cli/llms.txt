@@ -1,0 +1,28 @@
+# @021.is/spine (CLI) — LLM usage
+
+> Spine CLI: scaffold Spine-shaped projects and audit existing repos against STRUCTURE.md.
+
+Install (global): bun add -g @021.is/spine
+Run without installing: npx @021.is/spine new my-app
+
+## Commands
+```bash
+spine new <name>                 # scaffold a Next.js app in ./<name> (--type next-app)
+spine doctor                     # audit current repo vs STRUCTURE.md (--cwd .)
+spine add <target>               # add a Spine package, or `feature:<name>` to scaffold a feature folder
+spine upgrade [version]          # bump every @021.is/spine-* dep in package.json (no install)
+spine --help / spine --version
+```
+
+- `spine new` scaffolds the full feature-folder skeleton + example feature + Vitest/Playwright/Prisma/Biome config + AGENTS.md + CLAUDE.md. Refuses to overwrite an existing `package.json`.
+- `spine doctor` prints findings + actionable hints, exits 1 on any error.
+- `spine upgrade` defaults to the latest published `@021.is/spine-errors` version when none is given.
+
+## Programmatic
+- `import { doctor, renderReport, scaffoldNextApp } from "@021.is/spine"`
+- `doctor({ cwd, type? }) => DoctorReport`; `renderReport(report) => string`; `scaffoldNextApp({ cwd, name })`
+- Types: `DoctorReport`, `Finding`, `Severity`, `ScaffoldNextAppInput`
+
+## Notes
+- Command-line tool (npm name `@021.is/spine`, bin `spine`), not an import-API library. Ships a bundled `templates/` dir.
+- `new` currently supports only `--type next-app`.

@@ -30,9 +30,7 @@ function renderSection(section: DocsSection): string[] {
     case "paragraph":
       return [section.text];
     case "list":
-      return section.items.map((item, i) =>
-        section.ordered ? `${i + 1}. ${item}` : `- ${item}`,
-      );
+      return section.items.map((item, i) => (section.ordered ? `${i + 1}. ${item}` : `- ${item}`));
     case "code": {
       const out: string[] = [];
       if (section.filename) out.push(`<!-- ${section.filename} -->`);

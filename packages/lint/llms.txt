@@ -1,0 +1,36 @@
+# @021.is/spine-lint — LLM usage
+
+> Spine-specific AST lint rules that Biome can't express (enum-over-string, ResponseDto returns, endpoint docs, i18n key parity, no raw SQL). CLI + programmatic.
+
+Install (dev): bun add -d @021.is/spine-lint
+
+## CLI
+```bash
+spine-lint .                              # all rules on src/**
+spine-lint src/feature/event             # narrow to a path
+spine-lint --rule spine/enum-over-string .
+spine-lint --github .                      # GitHub Actions annotations
+spine-lint --list-rules
+```
+Exit code 1 on any error-level violation.
+
+## Imports
+- `import { run, ALL_RULES, SEVERITY } from "@021.is/spine-lint"` — programmatic API + rules
+
+## API
+- `run(options)` — run rules over globs; returns `Promise<RunResult>` (`{ violations, filesScanned, errorCount, warningCount }`). `RunOptions`: `cwd`, `ruleIds?`, `globs?`, `githubAnnotations?`
+- `ALL_RULES` — the built-in `Rule[]`
+- `SEVERITY` — `{ ERROR, WARNING }`; `Violation` — `{ file; line; column; ruleId; message; hint?; severity }`
+- Individual rules: `enumOverStringRule`, `routeReturnsResponseDtoRule`, `endpointDocumentedRule`, `i18nKeyParityRule`, `noRawSqlRule`
+- Types: `RunOptions`, `RunResult`, `Severity`, `Rule`, `RuleContext`, `WorkspaceContext`
+
+## Example
+```ts
+import { run } from "@021.is/spine-lint";
+
+const result = await run({ cwd: process.cwd() });
+for (const v of result.violations) console.log(`${v.file}:${v.line} [${v.ruleId}] ${v.message}`);
+```
+
+## Notes
+- Dev dependency; runs in CI as the `spine-lint` job. Disable one line with `// spine-lint-disable-next-line <rule> — why`.

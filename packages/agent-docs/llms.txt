@@ -1,0 +1,41 @@
+# @021.is/agent-docs — LLM usage
+
+> Single-source-of-truth docs catalog: one object feeds a JSX page, a `.md` route, `/llms.txt`, and `/llms-full.txt`.
+
+Install: bun add @021.is/agent-docs
+
+## Imports
+- `import { type DocsCatalog, h1, h2, p, code } from "@021.is/agent-docs"` — catalog type + section builders, markdown renderer, llms.txt builders
+- `import { markdownRoute, llmsTxtRoute, llmsFullRoute } from "@021.is/agent-docs/next"` — Next.js GET handlers (peer: `next`)
+
+## API
+Root (`.`):
+- `DocsCatalog` — `{ slug; title; description; body: DocsSection[]; meta? }`; `DocsSection` union; `SectionKind`/`HeadingLevel`/`CalloutTone` constant maps
+- Section builders: `h1/h2/h3(text)`, `p(text)`, `ul(items)`, `ol(items)`, `code(language, source, filename?)`, `tabs(tabs, title?)`, `callout(tone, text)`
+- `renderMarkdown(catalog)` — catalog → Markdown string
+- `buildLlmsTxt(config)` — `/llms.txt` index string; `buildLlmsFullTxt(catalogs)` — all catalogs concatenated
+- `LlmsTxtConfig` — `{ name; tagline; siteUrl; catalogs; extra?; openapi? }`
+
+`./next` (each returns a `() => Response` GET handler):
+- `markdownRoute(catalog)` — serve one catalog as `text/markdown`
+- `llmsTxtRoute(config)` — serve `/llms.txt`; `llmsFullRoute(catalogs)` — serve `/llms-full.txt`
+
+## Example
+```ts
+import { type DocsCatalog, h2, p, code } from "@021.is/agent-docs";
+
+export const installCatalog: DocsCatalog = {
+  slug: "install",
+  title: "Install the SDK",
+  description: "One package, two minutes to working sign-in.",
+  body: [h2("Install"), p("Use your package manager."), code("bash", "bun add @021.is/my-sdk")],
+};
+
+// app/docs/install.md/route.ts
+import { markdownRoute } from "@021.is/agent-docs/next";
+export const GET = markdownRoute(installCatalog);
+```
+
+## Notes
+- `next` is an optional peer dep, only needed for `./next`.
+- Builders are pure/deterministic; one catalog is the single source for every doc surface.

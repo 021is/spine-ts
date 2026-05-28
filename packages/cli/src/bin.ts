@@ -96,9 +96,7 @@ cli
       }
     }
     if (!target) {
-      console.error(
-        kleur.red("✗ no version given + couldn't fetch latest from npm"),
-      );
+      console.error(kleur.red("✗ no version given + couldn't fetch latest from npm"));
       process.exit(1);
     }
     const { changed } = planUpgrade(resolve(opts.cwd), target);

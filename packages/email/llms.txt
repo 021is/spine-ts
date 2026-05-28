@@ -1,0 +1,35 @@
+# @021.is/spine-email — LLM usage
+
+> Resend wrapper: bearer auth, retry on 5xx, terminal on 4xx, idempotency-key passthrough, structured logging hook.
+
+Install: bun add @021.is/spine-email
+
+## Imports
+- `import { makeEmailClient } from "@021.is/spine-email"` — single entry
+
+## API
+- `makeEmailClient(config)` — returns an `EmailClient` (`send(input) => Promise<{ id }>`)
+- `EmailClientConfig` — `{ apiKey; defaultFrom; retries?` (default 2)`; fetchImpl?; logger? }`
+- `SendEmailInput` — `{ to: string | string[]; subject; html?; text?; from?; replyTo?; cc?; bcc?; tags?; idempotencyKey? }` (requires `html` or `text`)
+- Types: `EmailClient`, `SendEmailResult`
+
+## Example
+```ts
+import { makeEmailClient } from "@021.is/spine-email";
+
+const email = makeEmailClient({
+  apiKey: env.RESEND_API_KEY,
+  defaultFrom: "My App <noreply@example.com>",
+});
+
+await email.send({
+  to: "you@example.com",
+  subject: "Welcome",
+  html: "<p>Welcome.</p>",
+  idempotencyKey: `signup-${userId}`,
+});
+```
+
+## Notes
+- Dep: `@021.is/spine-errors` (throws `SomethingWentWrongException` on 4xx / missing body / exhausted retries). Server-only.
+- 5xx retried up to `retries`; 4xx fails immediately (no loop on permanent errors). Templates live in the consuming app.

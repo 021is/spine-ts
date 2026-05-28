@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import {
+  type DocsCatalog,
   buildLlmsFullTxt,
   buildLlmsTxt,
   callout,
   code,
-  type DocsCatalog,
   h2,
   ol,
   p,

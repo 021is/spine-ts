@@ -15,15 +15,15 @@
     },
     "packages/actions": {
       "name": "@021.is/spine-actions",
-      "version": "0.4.0",
+      "version": "0.4.3",
       "dependencies": {
-        "@021.is/spine-errors": "^0.4.0",
+        "@021.is/spine-errors": "^0.4.3",
         "zod": "^3.23.8",
       },
     },
     "packages/agent-docs": {
       "name": "@021.is/agent-docs",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "peerDependencies": {
         "next": ">=15 <17",
       },
@@ -33,9 +33,9 @@
     },
     "packages/auth": {
       "name": "@021.is/spine-auth",
-      "version": "0.4.0",
+      "version": "0.4.3",
       "dependencies": {
-        "@021.is/spine-errors": "^0.4.0",
+        "@021.is/spine-errors": "^0.4.3",
         "jose": "^5.9.6",
       },
       "devDependencies": {
@@ -52,11 +52,11 @@
     },
     "packages/cache": {
       "name": "@021.is/spine-cache",
-      "version": "0.4.0",
+      "version": "0.4.3",
     },
     "packages/cli": {
       "name": "@021.is/spine",
-      "version": "0.4.0",
+      "version": "0.4.3",
       "bin": {
         "spine": "./dist/bin.js",
       },
@@ -67,21 +67,21 @@
     },
     "packages/email": {
       "name": "@021.is/spine-email",
-      "version": "0.4.0",
+      "version": "0.4.3",
       "dependencies": {
-        "@021.is/spine-errors": "^0.4.0",
+        "@021.is/spine-errors": "^0.4.3",
       },
     },
     "packages/env": {
       "name": "@021.is/spine-env",
-      "version": "0.4.0",
+      "version": "0.4.3",
       "dependencies": {
         "zod": "^3.23.8",
       },
     },
     "packages/errors": {
       "name": "@021.is/spine-errors",
-      "version": "0.4.0",
+      "version": "0.4.3",
       "devDependencies": {
         "next": "^16.0.0",
         "react": "^19.0.0",
@@ -96,19 +96,19 @@
     },
     "packages/http": {
       "name": "@021.is/spine-http",
-      "version": "0.4.0",
+      "version": "0.4.3",
       "dependencies": {
-        "@021.is/spine-errors": "^0.4.0",
+        "@021.is/spine-errors": "^0.4.3",
       },
     },
     "packages/i18n": {
       "name": "@021.is/spine-i18n",
-      "version": "0.4.0",
+      "version": "0.4.3",
       "bin": {
         "spine-i18n": "./dist/adapters/driving/cli.js",
       },
       "dependencies": {
-        "@021.is/spine-errors": "^0.4.0",
+        "@021.is/spine-errors": "^0.4.3",
         "cac": "^6.7.14",
         "kleur": "^4.1.5",
       },
@@ -127,15 +127,15 @@
     },
     "packages/jobs": {
       "name": "@021.is/spine-jobs",
-      "version": "0.4.0",
+      "version": "0.4.3",
       "dependencies": {
-        "@021.is/spine-errors": "^0.4.0",
+        "@021.is/spine-errors": "^0.4.3",
         "nats": "^2.28.2",
       },
     },
     "packages/lint": {
       "name": "@021.is/spine-lint",
-      "version": "0.4.2",
+      "version": "0.4.3",
       "bin": {
         "spine-lint": "./dist/bin.js",
       },
@@ -148,11 +148,11 @@
     },
     "packages/quality": {
       "name": "@021.is/spine-quality",
-      "version": "0.4.0",
+      "version": "0.4.3",
     },
     "packages/query": {
       "name": "@021.is/spine-query",
-      "version": "0.4.0",
+      "version": "0.4.3",
       "devDependencies": {
         "@types/react": "^19.2.15",
       },
@@ -163,14 +163,14 @@
     },
     "packages/ratelimit": {
       "name": "@021.is/spine-ratelimit",
-      "version": "0.4.0",
+      "version": "0.4.3",
       "dependencies": {
-        "@021.is/spine-errors": "^0.4.0",
+        "@021.is/spine-errors": "^0.4.3",
       },
     },
     "packages/telemetry": {
       "name": "@021.is/spine-telemetry",
-      "version": "0.4.0",
+      "version": "0.4.3",
       "dependencies": {
         "@opentelemetry/api": "^1.9.1",
         "pino": "^9.5.0",
@@ -196,7 +196,7 @@
     },
     "packages/testing": {
       "name": "@021.is/spine-testing",
-      "version": "0.4.0",
+      "version": "0.4.3",
       "dependencies": {
         "@testcontainers/postgresql": "^10.13.2",
         "@types/pg": "^8.20.0",
@@ -208,9 +208,9 @@
     },
     "packages/webhooks": {
       "name": "@021.is/spine-webhooks",
-      "version": "0.4.0",
+      "version": "0.4.3",
       "dependencies": {
-        "@021.is/spine-errors": "^0.4.0",
+        "@021.is/spine-errors": "^0.4.3",
       },
     },
   },
@@ -1306,6 +1306,8 @@
     "docker-modem/readable-stream": ["readable-stream@3.6.2", "", { "dependencies": { "inherits": "^2.0.3", "string_decoder": "^1.1.1", "util-deprecate": "^1.0.1" } }, "sha512-9u/sniCrY3D5WdsERHzHE4G2YCXqoG5FTHUiCC4SIbr6XcLZBY05ya9EKjYek9O5xOAwjGq+1JdGBAS7Q9ScoA=="],
 
     "dockerode/tar-fs": ["tar-fs@2.1.4", "", { "dependencies": { "chownr": "^1.1.1", "mkdirp-classic": "^0.5.2", "pump": "^3.0.0", "tar-stream": "^2.1.4" } }, "sha512-mDAjwmZdh7LTT6pNleZ05Yt65HC3E+NiQzl672vQG38jIrehtJk/J3mNwIg+vShQPcLF/LV7CMnDW6vjj6sfYQ=="],
+
+    "estree-walker/@types/estree": ["@types/estree@1.0.9", "", {}, "sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg=="],
 
     "foreground-child/signal-exit": ["signal-exit@4.1.0", "", {}, "sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw=="],
 

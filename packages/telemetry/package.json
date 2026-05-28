@@ -1,6 +1,6 @@
 {
   "name": "@021.is/spine-telemetry",
-  "version": "0.4.0",
+  "version": "0.4.3",
   "license": "MIT",
   "description": "Pino structured JSON logger + AsyncLocalStorage request context + opt-in OpenTelemetry SDK wire-up (withSpan helper, OTLP HTTP exporter).",
   "type": "module",
@@ -16,7 +16,7 @@
       "import": "./dist/tracing.js"
     }
   },
-  "files": ["dist"],
+  "files": ["dist", "llms.txt"],
   "scripts": {
     "build": "tsup src/index.ts src/tracing.ts --format esm --dts --clean",
     "typecheck": "tsc --noEmit"

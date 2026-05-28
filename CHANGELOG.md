@@ -6,6 +6,19 @@ All notable changes to Spine-TS packages. Format follows [Keep a Changelog](http
 
 (empty)
 
+## [0.4.3] — 2026-05-28
+
+> `@021.is/agent-docs` ships the same changes as `0.1.2` (it tracks its own version line).
+
+### Added
+- **Per-package `llms.txt`** — every package now ships an `llms.txt` in its published tarball (added to `files[]`). It is a compact, LLM-readable usage doc (imports, API surface, an example, gotchas) so any agent that installs a package can read `node_modules/@021.is/<pkg>/llms.txt` and integrate without guessing.
+
+### Fixed
+- **`@021.is/spine-ratelimit`** imported `RateLimitedException` from the pre-rename scope `@021is/spine-errors`, which did not match its declared dependency `@021.is/spine-errors`. tsup therefore bundled a private copy of the exception class into the package instead of externalizing it. Consumers' `instanceof RateLimitedException` checks (and `withErrorHandling`'s 429 mapping) failed against that bundled copy. The import now uses `@021.is/spine-errors`, so the exception externalizes correctly. Affected published `0.4.0`–`0.4.2`.
+
+### Changed
+- Removed internal product references from public source comments in `spine-ratelimit` and `agent-docs`.
+
 ## [0.3.0] — 2026-05-25
 
 ### Added

@@ -1,0 +1,45 @@
+# @021.is/spine-testing — LLM usage
+
+> Shared test helpers: worker-shared Testcontainers Postgres + Prisma migrator, in-process JWKS mock server, MSW factory, and deterministic time/ids.
+
+Install (dev): bun add -d @021.is/spine-testing
+
+## Imports
+- `import { startSharedPostgres, runPrismaMigrate, truncateAll } from "@021.is/spine-testing/postgres"`
+- `import { startJwksMockServer } from "@021.is/spine-testing/jwks"`
+- `import { startMockServer, http, HttpResponse } from "@021.is/spine-testing/msw"`
+- `import { freezeTime, deterministicIds } from "@021.is/spine-testing/time"`
+- (root `@021.is/spine-testing` re-exports all of the above)
+
+## API
+`./postgres`:
+- `startSharedPostgres(opts?)` — one Postgres container per Vitest worker (idempotent); returns the connection URL. `stopSharedPostgres()` to stop
+- `runPrismaMigrate(url, { mode?: "deploy" | "push", schemaPath?, prismaBin? })` — apply schema
+- `truncateAll(url, { exclude? })` — truncate all public tables between tests (skips `_prisma_migrations`)
+
+`./jwks`:
+- `startJwksMockServer({ keyId? })` — serves `/.well-known/jwks.json`; returns `JwksMockServer` (`{ url, keyId, publicJwk, signToken(claims, opts?), stop() }`)
+
+`./msw`:
+- `startMockServer(handlers?)` — returns `MockServer` (`{ server, useHandlers, reset, stop }`); re-exports `http`, `HttpResponse`
+
+`./time`:
+- `freezeTime(initial)` — `FrozenClock` (`now/advance/set/restore`); `deterministicIds(prefix?)` — `id_0001`, ...
+
+## Example
+```ts
+import { beforeAll, afterEach } from "vitest";
+import { startSharedPostgres, runPrismaMigrate, truncateAll } from "@021.is/spine-testing/postgres";
+
+let dbUrl: string;
+beforeAll(async () => {
+  dbUrl = await startSharedPostgres();
+  process.env.DATABASE_URL = dbUrl;
+  await runPrismaMigrate(dbUrl, { mode: "push" });
+}, 60_000);
+afterEach(() => truncateAll(dbUrl));
+```
+
+## Notes
+- Postgres helpers need Docker (Testcontainers). One shared container per worker; migrate once, `truncateAll` between tests.
+- Deps bundled: `testcontainers`, `@testcontainers/postgresql`, `pg`, `jose`, `msw`. `freezeTime` uses Vitest fake timers.

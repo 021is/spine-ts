@@ -1,0 +1,36 @@
+# @021.is/spine-webhooks — LLM usage
+
+> Inbound webhook HMAC verifier for 4 schemes (raw, github, stripe, resend) with timing-safe compare + tolerance window, plus idempotency-key dedupe.
+
+Install: bun add @021.is/spine-webhooks
+
+## Imports
+- `import { makeHmacVerifier, makeMemoryIdempotencyStore } from "@021.is/spine-webhooks"` — single entry
+
+## API
+- `makeHmacVerifier(config)` — returns a `Verifier`:
+  - `verify(input)` — throws `UnauthorizedException` (bad sig / stale ts) or `BadRequestException` (malformed) ; returns void on success
+  - `computeSignature(payload, scheme, nowSec?)` — produce a signature header value
+- `VerifierConfig` — `{ secret; toleranceSec?` (default 300)` }`
+- `VerifyInput` — `{ payload: string | Buffer; signature: string; headerScheme: HeaderScheme; nowSec? }`
+- `HeaderScheme` — `"raw" | "github" | "stripe" | "resend"`
+- `IdempotencyStore` interface — `seen(key, ttlSec?) => Promise<boolean>`; `makeMemoryIdempotencyStore()` — in-memory impl
+- Types: `Verifier`, `VerifierConfig`, `VerifyInput`, `IdempotencyStore`
+
+## Example
+```ts
+import { makeHmacVerifier, makeMemoryIdempotencyStore } from "@021.is/spine-webhooks";
+
+const stripe = makeHmacVerifier({ secret: env.STRIPE_WEBHOOK_SECRET });
+const store = makeMemoryIdempotencyStore();
+
+const rawBody = await req.text(); // RAW body, not parsed
+stripe.verify({ payload: rawBody, signature: req.headers.get("stripe-signature")!, headerScheme: "stripe" });
+
+const event = JSON.parse(rawBody);
+if (await store.seen(event.id)) return; // duplicate
+```
+
+## Notes
+- Dep: `@021.is/spine-errors` (`verify` throws Spine exceptions). Server-only (`node:crypto`, timing-safe).
+- Always verify the RAW request body. `stripe` enforces the `toleranceSec` freshness window. Wire `IdempotencyStore` to Prisma for production.
