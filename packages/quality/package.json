@@ -1,6 +1,6 @@
 {
   "name": "@021.is/spine-quality",
-  "version": "0.4.0",
+  "version": "0.4.3",
   "license": "MIT",
   "description": "Shipping configs for the Spine quality gate: biome, tsc, knip, dependency-cruiser (hexagonal layer rules), semgrep OWASP, vitest coverage, size-limit, lighthouse-ci. One install gives your app the same gate.",
   "type": "module",
@@ -20,7 +20,7 @@
     "./size-limit": "./configs/size-limit.json",
     "./vitest": "./configs/vitest.config.ts"
   },
-  "files": ["dist", "configs"],
+  "files": ["dist", "configs", "llms.txt"],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean",
     "typecheck": "tsc --noEmit"

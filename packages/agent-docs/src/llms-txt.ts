@@ -7,7 +7,7 @@ import { renderMarkdown } from "./render-markdown";
  * fully-rendered llmstxt.org file.
  */
 export type LlmsTxtConfig = {
-  /** Product name (e.g. "my-app", "zeropost"). H1 of the file. */
+  /** Product name (e.g. "my-app", "acme"). H1 of the file. */
   name: string;
   /** One-sentence pitch under the H1. Blockquote in the output. */
   tagline: string;
@@ -35,7 +35,9 @@ export function buildLlmsTxt(cfg: LlmsTxtConfig): string {
   }
   lines.push("");
   lines.push("## Optional");
-  lines.push(`- [Full SDK + API source](${cfg.siteUrl}/llms-full.txt): every doc page concatenated.`);
+  lines.push(
+    `- [Full SDK + API source](${cfg.siteUrl}/llms-full.txt): every doc page concatenated.`,
+  );
   if (cfg.openapi?.yamlUrl) {
     lines.push(`- [OpenAPI](${cfg.openapi.yamlUrl}): machine-readable REST spec.`);
   }

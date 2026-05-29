@@ -1,0 +1,35 @@
+# @021.is/spine-env — LLM usage
+
+> Type-safe zod-validated environment loader. Fails LOUDLY at module-load time when a variable is missing or invalid.
+
+Install: bun add @021.is/spine-env
+
+## Imports
+- `import { defineEnv, common } from "@021.is/spine-env"` — single entry
+
+## API
+- `defineEnv(options)` — validate a source against per-key zod schemas; returns a frozen, typed object. Throws `Error` listing every bad key on failure. `DefineEnvOptions`: `schema` (`Record<string, ZodType>`), `source?` (default `process.env`), `strict?` (reject extras), `redactOnError?`
+- `common` — ready-made schema builders: `nodeEnv()`, `httpsUrl()`, `url()`, `pgUrl()`, `bytes()`, `number()` (string→number), `boolean()` (`"true"|"false"|"1"|"0"`), `secret()` (non-empty)
+- Type: `EnvOf<TSchema>`
+
+## Example
+```ts
+import { defineEnv, common } from "@021.is/spine-env";
+import { z } from "zod";
+
+export const env = defineEnv({
+  schema: {
+    NODE_ENV: common.nodeEnv(),
+    DATABASE_URL: common.pgUrl(),
+    APP_URL: common.httpsUrl(),
+    RESEND_API_KEY: common.secret(),
+    PORT: common.number(),
+    AUTH_CLIENT_ID: z.string().startsWith("app_"),
+  },
+});
+// env.PORT is typed number, env.DATABASE_URL typed string; typos are compile errors.
+```
+
+## Notes
+- Dep: `zod`. Server-only (reads `process.env`).
+- Throws a plain `Error` (not a Spine exception) so it crashes the boot. Run the schema against `{}` to list required keys.

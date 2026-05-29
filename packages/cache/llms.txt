@@ -1,0 +1,36 @@
+# @021.is/spine-cache — LLM usage
+
+> TTL + tag-invalidation cache with single-flight dedupe: N concurrent callers for the same key share one backend call.
+
+Install: bun add @021.is/spine-cache
+
+## Imports
+- `import { makeMemoryCache, makeKey } from "@021.is/spine-cache"` — single entry
+
+## API
+- `makeMemoryCache()` — returns a `MemoryCache`:
+  - `fetch<T>(key, fn, opts?)` — cache-aside; concurrent calls for the same key dedupe to one `fn` run. `CacheOptions`: `ttlMs?` (default 60_000), `tags?`
+  - `invalidate(key)` — drop one entry
+  - `invalidateTag(tag)` — drop every entry tagged `tag`
+  - `clear()` / `size()` — for tests + observability
+- `makeKey(prefix, ...parts)` — build a readable key (`user:u_1:lang:en`); nullish parts dropped
+- Types: `MemoryCache`, `CacheOptions`
+
+## Example
+```ts
+import { makeMemoryCache, makeKey } from "@021.is/spine-cache";
+
+const cache = makeMemoryCache();
+
+const user = await cache.fetch(
+  makeKey("user", id),
+  () => db.user.findUniqueOrThrow({ where: { id } }),
+  { ttlMs: 60_000, tags: ["user", `user:${id}`] },
+);
+
+cache.invalidateTag("user"); // wipes ALL user entries
+```
+
+## Notes
+- Zero deps, process-local (no Redis). `tags` are `revalidateTag`-compatible naming.
+- Default `ttlMs` is 60_000 when omitted.

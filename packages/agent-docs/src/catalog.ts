@@ -73,12 +73,28 @@ export type DocsCatalogModule = {
 };
 
 /** Convenience constructors — keep call sites readable. */
-export const h1 = (text: string): DocsSection => ({ kind: SectionKind.HEADING, level: HeadingLevel.H1, text });
-export const h2 = (text: string): DocsSection => ({ kind: SectionKind.HEADING, level: HeadingLevel.H2, text });
-export const h3 = (text: string): DocsSection => ({ kind: SectionKind.HEADING, level: HeadingLevel.H3, text });
+export const h1 = (text: string): DocsSection => ({
+  kind: SectionKind.HEADING,
+  level: HeadingLevel.H1,
+  text,
+});
+export const h2 = (text: string): DocsSection => ({
+  kind: SectionKind.HEADING,
+  level: HeadingLevel.H2,
+  text,
+});
+export const h3 = (text: string): DocsSection => ({
+  kind: SectionKind.HEADING,
+  level: HeadingLevel.H3,
+  text,
+});
 export const p = (text: string): DocsSection => ({ kind: SectionKind.PARAGRAPH, text });
 export const ul = (items: string[]): DocsSection => ({ kind: SectionKind.LIST, items });
-export const ol = (items: string[]): DocsSection => ({ kind: SectionKind.LIST, items, ordered: true });
+export const ol = (items: string[]): DocsSection => ({
+  kind: SectionKind.LIST,
+  items,
+  ordered: true,
+});
 export const code = (language: string, source: string, filename?: string): DocsSection => ({
   kind: SectionKind.CODE,
   language,

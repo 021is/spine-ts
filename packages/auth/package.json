@@ -1,6 +1,6 @@
 {
   "name": "@021.is/spine-auth",
-  "version": "0.4.0",
+  "version": "0.4.3",
   "license": "MIT",
   "description": "JWKS verifier + requireUser/requireRole helpers for Next.js route handlers + server actions. Verifies your IdP's issued RS256 tokens.",
   "type": "module",
@@ -16,13 +16,13 @@
       "import": "./dist/next.js"
     }
   },
-  "files": ["dist"],
+  "files": ["dist", "llms.txt"],
   "scripts": {
     "build": "tsup src/index.ts src/next.ts --format esm --dts --clean --external next",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@021.is/spine-errors": "^0.4.0",
+    "@021.is/spine-errors": "^0.4.3",
     "jose": "^5.9.6"
   },
   "peerDependencies": {

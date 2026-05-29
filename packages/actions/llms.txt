@@ -1,0 +1,40 @@
+# @021.is/spine-actions — LLM usage
+
+> Type-safe server-action helper: zod input validation + auth + audit + revalidatePath, always returning ResponseDto<T | null>.
+
+Install: bun add @021.is/spine-actions
+
+## Imports
+- `import { defineAction } from "@021.is/spine-actions"` — single entry
+
+## API
+- `defineAction(def)` — returns a `BuiltAction<TResult>` with one method: `run(rawInput) => Promise<ResponseDto<TResult | null>>`
+- `ActionDefinition` fields:
+  - `input` — a zod schema (`safeParse`d; failure → `BadRequestException` 400)
+  - `auth?` — `() => Promise<TPrincipal>` (e.g. requireUser); runs after parse
+  - `handler` — `({ input, principal }) => Promise<TResult>` (the actual work)
+  - `audit?(input, principal)` + `auditor?(row)` — audit row built + persisted on success only
+  - `revalidate?(input, result): string[]` + `onRevalidate?(path)` — call e.g. `revalidatePath` per path
+  - `logger?` — `{ error }` hook for unhandled errors
+- Type: `ActionDefinition`, `BuiltAction`
+
+Order: parse → auth → handler → audit → revalidate → `ok(result)`. Thrown spine-errors exceptions map to the right envelope.
+
+## Example
+```ts
+"use server";
+import { defineAction } from "@021.is/spine-actions";
+import { z } from "zod";
+
+export const publishEventAction = defineAction({
+  input: z.object({ eventId: z.string().min(1) }),
+  auth: requireUser,
+  revalidate: (input) => [`/events/${input.eventId}`, "/events"],
+  onRevalidate: revalidatePath,
+  handler: async ({ input, principal }) => publishEvent(input.eventId, { userId: principal.sub }),
+}).run;
+```
+
+## Notes
+- Deps: `@021.is/spine-errors` + `zod`.
+- `run()` never throws — every outcome is a `ResponseDto`. Testable without Next.js context.

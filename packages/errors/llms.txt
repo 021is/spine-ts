@@ -1,0 +1,39 @@
+# @021.is/spine-errors — LLM usage
+
+> The canonical ResponseDto envelope, typed exception hierarchy, and framework-agnostic error handler used by every endpoint and server action.
+
+Install: bun add @021.is/spine-errors
+
+## Imports
+- `import { ok, err, NotFoundException, toHandledError } from "@021.is/spine-errors"` — envelope + exceptions + handler
+- `import { withErrorHandling, tryAction } from "@021.is/spine-errors/next"` — Next.js route/server-action wrappers (peer: `next`)
+
+## API
+Root (`.`):
+- `ResponseDto<T>` — `{ success; data; code; successMessage?; errorMessage?; errorKey?; errorParams?; helperMessage?; timestamp; requestId? }`
+- `ok(data, opts?)` — success envelope; `opts`: `code?` (default 200), `successMessage?`, `requestId?`
+- `err(code, errorMessage, opts?)` — error envelope (`data` defaults to `null`); `opts`: `errorKey?`, `errorParams?`, `helperMessage?`, `requestId?`
+- Exceptions (extend abstract `TranslatableException`, ctor `(message?, { cause?, translationKey?, translationParams? }?)`): `BadRequestException` 400, `UnauthorizedException` 401, `ForbiddenException`/`NotAllowedException` 403, `NotFoundException` 404, `ConflictException` 409, `ExpectationFailedException` 417, `RateLimitedException` (ctor `(retryAfterSec, message?, opts?)`) 429, `SomethingWentWrongException` 500
+- `toHandledError(error, options?)` — map any thrown value → `HandledError` (`{ status; response: ResponseDto; headers?; isInternal }`); unknown → 500 (logged). `HandleOptions`: `requestId?`, `logger?`
+
+`./next`:
+- `withErrorHandling(handler, options?)` — wrap a route handler; thrown exceptions → `NextResponse.json(ResponseDto)` + status
+- `tryAction(fn, options?)` — run a server action; returns `ResponseDto<T | null>` (status in `response.code`)
+
+## Example
+```ts
+import { withErrorHandling, ok } from "@021.is/spine-errors/next";
+import { NotFoundException } from "@021.is/spine-errors";
+
+export const POST = withErrorHandling(async (req: Request) => {
+  const { id } = await req.json();
+  const user = await db.user.find(id);
+  if (!user) throw new NotFoundException("User not found", { translationKey: "user.not_found" });
+  return Response.json(ok(user, { successMessage: "Found" }));
+});
+```
+
+## Notes
+- Throw a `*Exception` and let the handler build the envelope; `err()` is the direct escape hatch.
+- `RateLimitedException` adds a `Retry-After` header. `next` is an optional peer dep.
+- `translationKey`/`translationParams` flow into `errorKey`/`errorParams` for i18n.

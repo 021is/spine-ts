@@ -1,0 +1,35 @@
+# @021.is/spine-telemetry — LLM usage
+
+> Pino structured JSON logger with Loki-friendly fields + AsyncLocalStorage request context (auto request_id), plus opt-in OpenTelemetry tracing.
+
+Install: bun add @021.is/spine-telemetry
+
+## Imports
+- `import { makeLogger, withRequestContext, currentRequestId, newRequestId } from "@021.is/spine-telemetry"` — logger + request context
+- `import { initTelemetry, withSpan, getTracer } from "@021.is/spine-telemetry/tracing"` — OpenTelemetry (opt-in)
+
+## API
+Root (`.`):
+- `makeLogger(config)` — a Pino logger with base fields. `LoggerConfig`: `service`, `cluster?`, `env?` (default `NODE_ENV`), `level?` (`debug|info|warn|error|fatal`, default `info`)
+- `withRequestContext(ctx, fn)` — run `fn` with a `RequestContext` auto-attached (across awaits) to every log line; adds `request_id`
+- `currentRequestId()` — id for the active context or `undefined`; `newRequestId()` — generate `req_<...>`
+- Type: `RequestContext` (`{ requestId; [k]: any }`)
+
+`./tracing`:
+- `initTelemetry(options)` — idempotent OTel SDK wire-up (no-op if no `otlpEndpoint`). `InitTelemetryOptions`: `service`, `env?`, `cluster?`, `otlpEndpoint?`, `samplingRate?`
+- `withSpan(name, fn, attributes?)` — run `fn(span)` in a span; records exceptions + sets status on throw, always ends. No-op if not initialized
+- `getTracer(name?)` — a `Tracer`
+
+## Example
+```ts
+import { makeLogger, newRequestId, withRequestContext } from "@021.is/spine-telemetry";
+
+export const log = makeLogger({ service: "my-app", cluster: "eu-1" });
+
+await withRequestContext({ requestId: newRequestId() }, async () => {
+  log.info("user created", { userId: "u1" }); // line auto-tagged with request_id
+});
+```
+
+## Notes
+- Dep: `pino` + `@opentelemetry/api`. The OTel SDK deps (`@opentelemetry/sdk-node`, exporter, etc.) are optional peers — `./tracing` is a no-op until both `initTelemetry` runs and they're installed. Server-only.

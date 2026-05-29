@@ -1,0 +1,32 @@
+# @021.is/spine-ratelimit — LLM usage
+
+> Postgres-backed sliding-window rate limiter, multi-window in parallel (1m + 1h + 1d). Storage-agnostic via a Store adapter. No Redis.
+
+Install: bun add @021.is/spine-ratelimit
+
+## Imports
+- `import { RateLimiter, makePrismaStore, makeMemoryStore } from "@021.is/spine-ratelimit"` — single entry
+
+## API
+- `RateLimiter` — `new RateLimiter({ store })`. `hit(input)` records one hit against each limit and throws `RateLimitedException` if any window is exceeded (its `retryAfterSec` reflects the tightest window)
+- `HitInput` — `{ subject: string; limits: LimitSpec[]; now?: Date }`; `LimitSpec` — `{ window: "1m" | "1h" | "1d"; max: number }`
+- `RateLimitStore` interface — `incrementBucket({ subject, window, bucketStart }) => Promise<number>`
+- `makePrismaStore(prisma, modelName?)` — adapter over a Prisma model (default `rateLimitBucket`, composite PK)
+- `makeMemoryStore()` — in-memory store for tests/single-process
+- Types: `WindowSpec`, `LimitSpec`, `HitInput`, `RateLimitStore`, `PrismaClientLike`
+
+## Example
+```ts
+import { RateLimiter, makePrismaStore } from "@021.is/spine-ratelimit";
+
+const limiter = new RateLimiter({ store: makePrismaStore(prisma) });
+
+await limiter.hit({
+  subject: `api-key:${keyId}`,
+  limits: [{ window: "1m", max: 60 }, { window: "1d", max: 100_000 }],
+}); // throws RateLimitedException → spine-errors maps to 429 + Retry-After
+```
+
+## Notes
+- Dep: `@021.is/spine-errors`. Server-only. Prisma model needs `@@id([subject, window, bucketStart])` + `count Int @default(0)`.
+- Atomic upsert+increment per bucket; subjects share zero state. Prune old buckets via a daily cron.

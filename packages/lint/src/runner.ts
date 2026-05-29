@@ -170,13 +170,21 @@ function collectDisableDirectives(ast: {
     // Match `spine-lint-<verb>` optionally followed by rule IDs. Allow
     // a leading prefix like `LEGACY:` or `TODO:` so codemod-inserted
     // disables can carry a grep-marker without breaking suppression.
-    const m = raw.match(/(?:^|\s)spine-lint-(disable-line|disable-next-line|disable-file|disable|enable)\b\s*([^\n]*)$/);
+    const m = raw.match(
+      /(?:^|\s)spine-lint-(disable-line|disable-next-line|disable-file|disable|enable)\b\s*([^\n]*)$/,
+    );
     if (!m) continue;
     const verb = m[1]!;
     // Stop the rule-id list at `--` so trailing `-- LEGACY` style
     // markers don't get parsed as rule IDs.
     const rest = (m[2] ?? "").split(/--/)[0]!.trim();
-    const ruleIds = rest.length === 0 ? ["*"] : rest.split(/[,\s]+/).map((s) => s.trim()).filter(Boolean);
+    const ruleIds =
+      rest.length === 0
+        ? ["*"]
+        : rest
+            .split(/[,\s]+/)
+            .map((s) => s.trim())
+            .filter(Boolean);
     const ruleIdsClean = ruleIds.map((r) => r.replace(/[.;].*$/, "")); // strip trailing punctuation
 
     const startLine = c.loc.start.line;
@@ -223,7 +231,11 @@ function isDisabled(disables: DisableMap, ruleId: string, line: number): boolean
   const wildLines = disables.byLine.get("*");
   if (wildLines?.has(line)) return true;
   for (const r of disables.openRanges) {
-    if ((r.ruleId === ruleId || r.ruleId === "*") && line >= r.from && (r.to === null || line <= r.to)) {
+    if (
+      (r.ruleId === ruleId || r.ruleId === "*") &&
+      line >= r.from &&
+      (r.to === null || line <= r.to)
+    ) {
       return true;
     }
   }

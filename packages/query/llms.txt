@@ -1,0 +1,35 @@
+# @021.is/spine-query — LLM usage
+
+> TanStack Query wrapper with don't-hammer defaults (dedupe, SWR, no auto-refetch) + a typed, scoped query-key factory.
+
+Install: bun add @021.is/spine-query
+
+## Imports
+- `import { makeQueryClient, makeKeys } from "@021.is/spine-query"` — single entry
+
+## API
+- `makeQueryClient()` — a TanStack `QueryClient` with tuned defaults: `staleTime` 60_000, `gcTime` 5*60_000, `refetchOnWindowFocus` false, `refetchOnReconnect` false, `retry` 1, `mutations.retry` 0
+- `makeKeys(scope, builders)` — typed query-key factory; every key is prefixed with `scope`. Returns `KeyBuilders<T>`
+- Type: `KeyBuilders<TBuilders>`
+
+## Example
+```tsx
+import { QueryClientProvider } from "@tanstack/react-query";
+import { makeQueryClient, makeKeys } from "@021.is/spine-query";
+
+const qc = makeQueryClient();
+// <QueryClientProvider client={qc}>{children}</QueryClientProvider>
+
+export const eventKeys = makeKeys("events", {
+  all: () => [],
+  byId: (id: string) => [id],
+  listByOrganizer: (orgId: string) => ["by-org", orgId],
+});
+
+// useQuery({ queryKey: eventKeys.byId("e_1"), queryFn: () => fetchEvent("e_1") });
+// queryClient.invalidateQueries({ queryKey: eventKeys.all() }); // ["events"] → wipes all
+```
+
+## Notes
+- Peer deps (required): `@tanstack/react-query` + `react`. Client-side.
+- Override any default per-query when you need it (e.g. `refetchOnWindowFocus: true`).

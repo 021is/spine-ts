@@ -1,0 +1,33 @@
+# @021.is/spine-jobs — LLM usage
+
+> NATS JetStream wrapper: typed JSON publish + durable consumers for async fan-out, cron triggers, and work queues.
+
+Install: bun add @021.is/spine-jobs
+
+## Imports
+- `import { connectJobs } from "@021.is/spine-jobs"` — single entry
+
+## API
+- `connectJobs(opts)` — connect + ensure the stream; returns a `JobsClient`. `ConnectJobsOptions`: `servers` (string | string[]), `streamName?` (default `spine-events`), `streamSubjects?` (default `["spine.>"]`)
+- `JobsClient`:
+  - `publish<T>(subject, payload)` — publish typed JSON (subject auto-prefixed `spine.`)
+  - `consume<T>(subject, consumerName, handler, options?)` — durable consumer; ack on success, nak+retry on throw
+  - `drain()` — graceful shutdown
+- Type: `NatsConnection` (re-exported)
+
+## Example
+```ts
+import { connectJobs } from "@021.is/spine-jobs";
+
+const jobs = await connectJobs({ servers: env.NATS_URL });
+
+await jobs.publish("event.published", { eventId: "e_1", organizerId: "o_1" });
+
+await jobs.consume("event.published", "audit-consumer", async (payload) => {
+  await db.audit.create({ data: { action: "event.published", ...payload } });
+});
+```
+
+## Notes
+- Deps: `nats` + `@021.is/spine-errors`. Requires a reachable NATS/JetStream server. Server-only.
+- Subjects are auto-prefixed with `spine.`; consumers are durable (survive restarts). Handler errors nak with a 1s retry delay.

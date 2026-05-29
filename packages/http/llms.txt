@@ -1,0 +1,28 @@
+# @021.is/spine-http — LLM usage
+
+> Typed fetch client with resilience defaults (timeout, retry on idempotent methods, per-host circuit breaker). Auto-unwraps ResponseDto envelopes.
+
+Install: bun add @021.is/spine-http
+
+## Imports
+- `import { SpineHttpClient } from "@021.is/spine-http"` — single entry
+
+## API
+- `SpineHttpClient` — `new SpineHttpClient(config)`. Methods (each returns the unwrapped payload `T`, or throws): `get<T>(path, init?)`, `post<T>(path, body, init?)`, `put<T>(path, body, init?)`, `patch<T>(path, body, init?)`, `delete<T>(path, init?)`, plus low-level `request<T>(path, init?)`
+- `SpineHttpConfig` — `{ baseUrl; timeoutMs?` (1000)`; retries?` (1, idempotent methods only)`; failureThreshold?` (5)`; windowMs?` (10_000)`; defaultHeaders?; authToken?; fetchImpl? }`
+
+## Example
+```ts
+import { SpineHttpClient } from "@021.is/spine-http";
+
+const api = new SpineHttpClient({
+  baseUrl: "https://api.example.com",
+  authToken: async () => mintServiceJwt(), // optional, adds Bearer
+});
+
+const event = await api.get<Event>(`/events/${id}`); // returns Event or throws
+```
+
+## Notes
+- Dep: `@021.is/spine-errors`. Tuned for service-to-service (1s timeout). POST/PATCH are NOT retried (non-idempotent).
+- If the peer returns a `{ success, data, code }` envelope it is unwrapped to `data`; `success: false` throws an `Error` carrying `code` + `errorKey`. After `failureThreshold` fails in `windowMs` the circuit opens and requests fail fast.

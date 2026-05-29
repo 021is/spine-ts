@@ -1,0 +1,34 @@
+# @021.is/spine-auth — LLM usage
+
+> JWKS-based RS256 JWT verifier with cached key fetching + role/scope guards. Verifies your IdP's tokens; pair with @021.is/spine-testing/jwks for tests.
+
+Install: bun add @021.is/spine-auth
+
+## Imports
+- `import { JwksVerifier, requireRoles, requireScopes } from "@021.is/spine-auth"` — verifier + guards
+- `import { makeVerifier, withAuth, requireUser } from "@021.is/spine-auth/next"` — Next.js helpers (peer: `next`)
+
+## API
+Root (`.`):
+- `JwksVerifier` — `new JwksVerifier(options)`. Methods: `verify(token)` (raw token, no "Bearer ") and `verifyFromHeaders(headers)`; both resolve a `VerifiedPrincipal` or throw `UnauthorizedException`
+- `VerifierOptions` — `{ jwksUri; issuer?; audience?; cacheTtlMs?` (default 1h)`; cooldownMs? }`
+- `VerifiedPrincipal extends JWTPayload` — `{ sub; roles?; scopes?; memberships? }`
+- `requireRoles(principal, roles)` / `requireScopes(principal, scopes)` — throw `ForbiddenException` if any are missing
+
+`./next`:
+- `makeVerifier(options)` — construct a `JwksVerifier` (singleton at startup)
+- `withAuth(verifier, handler, { roles?, scopes? }?)` — wrap a route handler; injects `ctx.principal`
+- `requireUser(verifier, headers)` — verify inside a server action; returns `VerifiedPrincipal`
+
+## Example
+```ts
+import { JwksVerifier, requireRoles } from "@021.is/spine-auth";
+
+const verifier = new JwksVerifier({ jwksUri: env.JWKS_URI, issuer: env.JWKS_ISSUER, audience: env.JWKS_AUDIENCE });
+const principal = await verifier.verifyFromHeaders(req.headers);
+requireRoles(principal, ["admin"]);
+```
+
+## Notes
+- Deps: `jose` + `@021.is/spine-errors`. JWKS cached `cacheTtlMs`, force-refreshed on unknown `kid` (rotation-safe).
+- `next` is an optional peer dep. Bad token → 401, missing role/scope → 403.

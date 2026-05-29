@@ -1,0 +1,40 @@
+# @021.is/spine-i18n — LLM usage
+
+> Hexagonal i18n: domain + ports + R2/fs/memory catalog adapters, CLDR plurals via Intl.PluralRules, React + server runtimes.
+
+Install: bun add @021.is/spine-i18n
+
+## Imports
+- `import { makeLocale, negotiateLocale, makeMemoryCatalogStore } from "@021.is/spine-i18n"` — core
+- `import { LocaleProvider, useT, useLocale, useFmt } from "@021.is/spine-i18n/react"` — React (peer: `react`)
+- `import { getServerLocaleRuntime } from "@021.is/spine-i18n/server"` — server runtime
+- `import { makeFsCatalogStore } from "@021.is/spine-i18n/fs"` / `makeR2CatalogStore` from `@021.is/spine-i18n/r2`
+
+## API
+Root (`.`):
+- `makeLocale(tag)`, `normalizeTag(tag)`, `languageOf(locale)`; types `Locale`, `Catalog`, `PluralCategory`
+- `negotiateLocale(input)` — pick a locale from urlLocale → cookieLocale → acceptLanguage → fallback
+- `loadRuntime(store, locale, fallback?)` / `buildRuntime(primary, fallback)` → a `Runtime`
+- `makeMemoryCatalogStore(...)` — in-memory `CatalogStore`; `validateCatalogs(input)`; `DEFAULT_POLICY`
+- `Runtime` — `t(key, params?)`, `fmtNumber`, `fmtDate`, `fmtCurrency`, `locale`
+
+`./react`:
+- `LocaleProvider({ initial, children })`, `useT()` (bound `t`), `useLocale()`, `useFmt()`, `switchLocale(payload)`, `useRuntime()`
+
+`./server`:
+- `getServerLocaleRuntime(store, locale, fallback?)` — per-request `Runtime`
+
+## Example
+```ts
+import { getServerLocaleRuntime } from "@021.is/spine-i18n/server";
+import { makeFsCatalogStore } from "@021.is/spine-i18n/fs";
+
+const store = makeFsCatalogStore("./src/i18n");
+const rt = await getServerLocaleRuntime(store, "de", "en");
+rt.t("auth.signin.title");                 // "Anmelden"
+rt.t("auth.messages.unread", { count: 1 }); // uses the 'one' plural form
+```
+
+## Notes
+- `react` + `@aws-sdk/client-s3` (for `/r2`) are optional peers. Ships a `spine-i18n` CLI bin.
+- Catalogs: one JSON per BCP-47 locale (`en.json`, `pt-BR.json`) with `namespaces` + plural forms.
