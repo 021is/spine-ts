@@ -1,13 +1,14 @@
 name: Publish
 
-# Publishes any package whose package.json version was bumped since the last
-# main commit. Run manually via workflow_dispatch, or auto on tag push.
+# Publishes any package whose package.json version isn't yet on the public npm
+# registry (@021.is scope). Run manually via workflow_dispatch, or auto on tag push.
+# Idempotent: versions already on npm are skipped, so re-tagging is safe.
 
 on:
   workflow_dispatch:
     inputs:
       packages:
-        description: "Comma-separated package names to publish (default: all changed)"
+        description: "Comma-separated package dirs to publish (default: all not-yet-published)"
         required: false
         default: ""
   push:
@@ -18,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
+      id-token: write # npm provenance
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
@@ -26,30 +27,38 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-          registry-url: "https://npm.pkg.github.com"
-          scope: "@021"
+          registry-url: "https://registry.npmjs.org"
+          scope: "@021.is"
       - run: bun install --frozen-lockfile
       - run: bun run build
-      - name: Publish changed packages
+      - name: Publish not-yet-published packages
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           set -e
           INPUT_PACKAGES="${{ inputs.packages }}"
           if [ -n "$INPUT_PACKAGES" ]; then
             IFS=',' read -ra PKGS <<< "$INPUT_PACKAGES"
           else
-            # all packages — publish what hasn't been published yet
+            # all packages — publish what isn't on npmjs yet
             PKGS=()
             for d in packages/*/; do
               name=$(jq -r .name "$d/package.json")
               version=$(jq -r .version "$d/package.json")
-              if ! npm view "$name@$version" --registry https://npm.pkg.github.com >/dev/null 2>&1; then
+              if ! npm view "$name@$version" version --registry https://registry.npmjs.org >/dev/null 2>&1; then
                 PKGS+=("${d%/}")
               fi
             done
           fi
+          if [ "${#PKGS[@]}" -eq 0 ]; then
+            echo "Nothing to publish — every package version is already on npm."
+            exit 0
+          fi
+          if [ -z "${NODE_AUTH_TOKEN}" ]; then
+            echo "::error::NPM_TOKEN secret is not set — cannot publish: ${PKGS[*]}"
+            exit 1
+          fi
           for p in "${PKGS[@]}"; do
             echo "Publishing $p ..."
-            (cd "$p" && npm publish --access restricted)
+            (cd "$p" && npm publish --access public --provenance)
           done
