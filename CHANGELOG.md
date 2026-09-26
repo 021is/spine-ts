@@ -4,7 +4,8 @@ All notable changes to Spine-TS packages. Format follows [Keep a Changelog](http
 
 ## [Unreleased]
 
-(empty)
+### Fixed
+- **`@021.is/spine-lint` `spine/enum-over-string`** counted the string in `typeof x === "string"` / `typeof window === "undefined"` as a domain literal, so two independent `typeof` guards in one file produced an "extract to a const enum" warning. Those strings are JavaScript type tags, not values a const enum could name. Comparisons whose other side is a `typeof` expression are no longer counted.
 
 ## [0.4.3] — 2026-05-28
 
