@@ -44,4 +44,18 @@ function isActive(s: string) {
     expect(r.errorCount).toBe(0);
     expect(r.warningCount).toBe(0);
   });
+
+  it("doesn't flag typeof checks — their strings are JS type tags, not domain values", async () => {
+    writeFileSync(
+      join(dir, "src/guards.ts"),
+      `
+export const onServer = () => typeof window === "undefined";
+export const hasDocument = () => typeof document !== "undefined";
+export const isStr = (v: unknown) => typeof v === "string";
+export const isStr2 = (v: unknown) => "string" === typeof v;
+`,
+    );
+    const r = await run({ cwd: dir, ruleIds: ["spine/enum-over-string"] });
+    expect(r.warningCount).toBe(0);
+  });
 });

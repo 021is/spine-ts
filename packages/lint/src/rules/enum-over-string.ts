@@ -39,7 +39,11 @@ export const enumOverStringRule: Rule = {
         node.type === "BinaryExpression" &&
         (node.operator === "===" || node.operator === "!==")
       ) {
-        for (const side of [node.left, node.right]) {
+        // `typeof x === "string"` compares against a JS type tag, not a domain value.
+        const isTypeofCheck = [node.left, node.right].some(
+          (s) => s?.type === "UnaryExpression" && s.operator === "typeof",
+        );
+        for (const side of isTypeofCheck ? [] : [node.left, node.right]) {
           if (
             side?.type === "Literal" &&
             typeof side.value === "string" &&
