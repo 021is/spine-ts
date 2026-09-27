@@ -58,4 +58,26 @@ export const isStr2 = (v: unknown) => "string" === typeof v;
     const r = await run({ cwd: dir, ruleIds: ["spine/enum-over-string"] });
     expect(r.warningCount).toBe(0);
   });
+
+  it("doesn't flag Pick/Omit key lists — they name properties, not domain values", async () => {
+    writeFileSync(
+      join(dir, "src/keys.ts"),
+      `
+type User = { id: string; email: string; name: string };
+export type Slim = Pick<User, "id" | "email">;
+export type Rest = Omit<User, "id" | "email">;
+`,
+    );
+    const r = await run({ cwd: dir, ruleIds: ["spine/enum-over-string"] });
+    expect(r.errorCount).toBe(0);
+  });
+
+  it("still flags a literal union nested inside a Pick/Omit type argument", async () => {
+    writeFileSync(
+      join(dir, "src/nested.ts"),
+      `export type T = Omit<{ role: "admin" | "user" }, "id" | "email">;`,
+    );
+    const r = await run({ cwd: dir, ruleIds: ["spine/enum-over-string"] });
+    expect(r.errorCount).toBe(1);
+  });
 });
