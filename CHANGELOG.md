@@ -4,6 +4,10 @@ All notable changes to Spine-TS packages. Format follows [Keep a Changelog](http
 
 ## [Unreleased]
 
+## [0.4.4] — 2026-09-27
+
+> `@021.is/spine-lint` only; every other package stays on `0.4.3`.
+
 ### Fixed
 - **`@021.is/spine-lint` `spine/enum-over-string`** counted the string in `typeof x === "string"` / `typeof window === "undefined"` as a domain literal, so two independent `typeof` guards in one file produced an "extract to a const enum" warning. Those strings are JavaScript type tags, not values a const enum could name. Comparisons whose other side is a `typeof` expression are no longer counted.
 - **`@021.is/spine-lint` `spine/enum-over-string`** flagged the key list of `Pick<T, "a" | "b">` / `Omit<T, "a" | "b">` as an inline string-literal union. Those literals are property keys of `T`, not domain values, and a const enum of them would only duplicate `keyof T`. The key argument of `Pick`/`Omit` is now exempt; literal unions nested inside `T` are still flagged.
