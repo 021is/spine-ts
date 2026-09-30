@@ -16,8 +16,25 @@ export const enumOverStringRule: Rule = {
   id: "spine/enum-over-string",
   description: "Forbid inline string-literal unions and repeated string-literal comparisons.",
   run(ctx) {
+    // `Pick<T, "a" | "b">` / `Omit<T, …>` name property keys of T, not domain values.
+    const keySelections = new Set<unknown>();
     walk(ctx.ast, (node) => {
-      if (isStringLiteralUnion(node) && countStringLiteralChildren(node) >= 2) {
+      if (
+        node.type === "TSTypeReference" &&
+        node.typeName?.type === "Identifier" &&
+        KEY_SELECTORS.has(node.typeName.name)
+      ) {
+        const keys = (node.typeArguments ?? node.typeParameters)?.params?.[1];
+        if (keys) keySelections.add(keys);
+      }
+    });
+
+    walk(ctx.ast, (node) => {
+      if (
+        !keySelections.has(node) &&
+        isStringLiteralUnion(node) &&
+        countStringLiteralChildren(node) >= 2
+      ) {
         const loc = node.loc?.start ?? { line: 1, column: 0 };
         ctx.report({
           ruleId: "spine/enum-over-string",
@@ -39,7 +56,11 @@ export const enumOverStringRule: Rule = {
         node.type === "BinaryExpression" &&
         (node.operator === "===" || node.operator === "!==")
       ) {
-        for (const side of [node.left, node.right]) {
+        // `typeof x === "string"` compares against a JS type tag, not a domain value.
+        const isTypeofCheck = [node.left, node.right].some(
+          (s) => s?.type === "UnaryExpression" && s.operator === "typeof",
+        );
+        for (const side of isTypeofCheck ? [] : [node.left, node.right]) {
           if (
             side?.type === "Literal" &&
             typeof side.value === "string" &&
@@ -83,6 +104,8 @@ export const enumOverStringRule: Rule = {
     }
   },
 };
+
+const KEY_SELECTORS = new Set(["Pick", "Omit"]);
 
 function isStringLiteralUnion(node: any): boolean {
   if (node.type !== "TSUnionType") return false;
