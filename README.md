@@ -1,5 +1,7 @@
 # Spine-TS
 
+Coding rules: 021is/code-rules v0.6.0 (PRINCIPLES, then ts/), then STRUCTURE.md (this library's own shape).
+
 The universal TypeScript service doctrine + 15 shared packages for every product.
 
 Render `knowledge/code.md` concrete for Next.js + Node:

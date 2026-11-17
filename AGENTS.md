@@ -1,5 +1,7 @@
 # AGENTS.md — spine-ts
 
+Coding rules: 021is/code-rules v0.6.0 (PRINCIPLES, then ts/), then STRUCTURE.md (this library's own shape).
+
 The universal TypeScript service doctrine for every product. Read [STRUCTURE.md](./STRUCTURE.md) before touching anything here.
 
 ## Hard rules (this repo)
